@@ -252,9 +252,12 @@ export class IntegrationsPage {
         if (!ok) {
           return;
         }
-        this.api.revokeApiKey(key.id).subscribe((revoked) => {
-          this.apiKeys.update((list) => list.map((k) => (k.id === revoked.id ? revoked : k)));
-          this.toast.success('admin.integrations.revoked', { name: key.name });
+        this.api.revokeApiKey(key.id).subscribe({
+          next: (revoked) => {
+            this.apiKeys.update((list) => list.map((k) => (k.id === revoked.id ? revoked : k)));
+            this.toast.success('admin.integrations.revoked', { name: key.name });
+          },
+          error: (error: unknown) => this.fail(error),
         });
       });
   }
@@ -276,7 +279,10 @@ export class IntegrationsPage {
   }
 
   test(webhook: WebhookResponse): void {
-    this.api.testWebhook(webhook.id).subscribe(() => this.toast.success('admin.integrations.testQueued', { name: webhook.name }));
+    this.api.testWebhook(webhook.id).subscribe({
+      next: () => this.toast.success('admin.integrations.testQueued', { name: webhook.name }),
+      error: (error: unknown) => this.fail(error),
+    });
   }
 
   deliveries(webhook: WebhookResponse): void {
@@ -290,9 +296,11 @@ export class IntegrationsPage {
         if (!ok) {
           return;
         }
-        this.api.rotateWebhookSecret(webhook.id).subscribe((result) =>
-          this.showSecret({ title: 'admin.integrations.secretRotated', message: 'admin.integrations.webhookSecretHint', secret: result.secret }),
-        );
+        this.api.rotateWebhookSecret(webhook.id).subscribe({
+          next: (result) =>
+            this.showSecret({ title: 'admin.integrations.secretRotated', message: 'admin.integrations.webhookSecretHint', secret: result.secret }),
+          error: (error: unknown) => this.fail(error),
+        });
       });
   }
 
@@ -303,14 +311,22 @@ export class IntegrationsPage {
         if (!ok) {
           return;
         }
-        this.api.deleteWebhook(webhook.id).subscribe(() => {
-          this.webhooks.update((list) => list.filter((w) => w.id !== webhook.id));
-          this.toast.success('core.states.deleted');
+        this.api.deleteWebhook(webhook.id).subscribe({
+          next: () => {
+            this.webhooks.update((list) => list.filter((w) => w.id !== webhook.id));
+            this.toast.success('core.states.deleted');
+          },
+          error: (error: unknown) => this.fail(error),
         });
       });
   }
 
   private showSecret(data: SecretDialogData): void {
     this.dialogs.open<SecretDialogComponent, SecretDialogData, boolean>(SecretDialogComponent, data, '560px', { disableClose: true }).subscribe();
+  }
+
+  /** Admin rule codes (API_KEY_NOT_FOUND, WEBHOOK_NOT_FOUND, ...) are shown with their admin.errors text. */
+  private fail(error: unknown): void {
+    this.toast.error(adminErrorMessage(error, this.translations));
   }
 }

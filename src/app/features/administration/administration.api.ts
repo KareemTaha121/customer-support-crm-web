@@ -184,7 +184,7 @@ export class AdministrationApi {
   }
 
   revokeApiKey(id: string): Observable<ApiKeyResponse> {
-    return this.api.post<ApiKeyResponse>(`/integrations/api-keys/${id}/revoke`, {});
+    return this.api.post<ApiKeyResponse>(`/integrations/api-keys/${id}/revoke`, {}, SILENT);
   }
 
   listWebhooks(): Observable<WebhookResponse[]> {
@@ -200,15 +200,15 @@ export class AdministrationApi {
   }
 
   rotateWebhookSecret(id: string): Observable<WebhookWithSecretResponse> {
-    return this.api.post<WebhookWithSecretResponse>(`/integrations/webhooks/${id}/rotate-secret`, {});
+    return this.api.post<WebhookWithSecretResponse>(`/integrations/webhooks/${id}/rotate-secret`, {}, SILENT);
   }
 
   deleteWebhook(id: string): Observable<null> {
-    return this.api.delete<null>(`/integrations/webhooks/${id}`);
+    return this.api.delete<null>(`/integrations/webhooks/${id}`, SILENT);
   }
 
   testWebhook(id: string): Observable<null> {
-    return this.api.post<null>(`/integrations/webhooks/${id}/test`, {});
+    return this.api.post<null>(`/integrations/webhooks/${id}/test`, {}, SILENT);
   }
 
   listDeliveries(webhookId: string): Observable<WebhookDeliveryResponse[]> {
@@ -216,7 +216,7 @@ export class AdministrationApi {
   }
 
   retryDelivery(id: string): Observable<null> {
-    return this.api.post<null>(`/integrations/deliveries/${id}/retry`, {});
+    return this.api.post<null>(`/integrations/deliveries/${id}/retry`, {}, SILENT);
   }
 
   // ---------- Audit ----------

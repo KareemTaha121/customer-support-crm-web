@@ -153,7 +153,10 @@ export class DeliveriesDialogComponent {
         this.toast.success('admin.integrations.retryQueued');
         this.load();
       },
-      error: () => this.retrying.set(null),
+      error: (error: unknown) => {
+        this.retrying.set(null);
+        this.toast.error(adminErrorMessage(error, this.translations));
+      },
     });
   }
 }
