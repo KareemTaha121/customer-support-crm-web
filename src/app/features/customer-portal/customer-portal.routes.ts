@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { portalAuthGuard, portalGuestGuard } from '../../core/guards/auth.guards';
-import { ComingSoonComponent } from '../../core/layout/status-pages.component';
 import { translationResolver } from '../../core/localization/translation.resolver';
 import { PortalShellComponent } from './portal-shell.component';
 
@@ -16,8 +15,24 @@ export const PORTAL_ROUTES: Routes = [
       { path: 'register', canActivate: [portalGuestGuard], loadComponent: () => import('./auth/portal-register.page').then((m) => m.PortalRegisterPage) },
       { path: 'verify', loadComponent: () => import('./auth/portal-verify.page').then((m) => m.PortalVerifyPage) },
       { path: 'profile', canActivate: [portalAuthGuard], loadComponent: () => import('./auth/portal-profile.page').then((m) => m.PortalProfilePage) },
-      // Tickets, history, chat widget, chatbot and web form: story FE-10.
-      { path: 'tickets', canActivate: [portalAuthGuard], component: ComingSoonComponent },
+
+      // Signed-in customer: tickets and activity history.
+      {
+        path: 'tickets',
+        canActivate: [portalAuthGuard],
+        children: [
+          { path: '', loadComponent: () => import('./tickets/portal-tickets.page').then((m) => m.PortalTicketsPage) },
+          { path: 'new', loadComponent: () => import('./tickets/portal-new-ticket.page').then((m) => m.PortalNewTicketPage) },
+          { path: ':id', loadComponent: () => import('./tickets/portal-ticket-detail.page').then((m) => m.PortalTicketDetailPage) },
+        ],
+      },
+      { path: 'history', canActivate: [portalAuthGuard], loadComponent: () => import('./tickets/portal-history.page').then((m) => m.PortalHistoryPage) },
+
+      // Anonymous channels (each page shows an "unavailable" state when its flag is off).
+      { path: 'contact', loadComponent: () => import('./channels/portal-contact.page').then((m) => m.PortalContactPage) },
+      { path: 'chat', loadComponent: () => import('./channels/portal-chat.page').then((m) => m.PortalChatPage) },
+      { path: 'assistant', loadComponent: () => import('./channels/portal-chatbot.page').then((m) => m.PortalChatbotPage) },
+
       { path: '**', redirectTo: 'tickets' },
     ],
   },

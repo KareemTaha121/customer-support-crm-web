@@ -4,7 +4,11 @@
     "help": "Help center",
     "profile": "My profile",
     "login": "Sign in",
-    "logout": "Sign out"
+    "logout": "Sign out",
+    "history": "Activity",
+    "assistant": "Virtual assistant",
+    "chat": "Live chat",
+    "contact": "Contact us"
   },
   "fields": {
     "name": "Full name",
@@ -15,10 +19,20 @@
     "confirmPassword": "Confirm password",
     "currentPassword": "Current password",
     "newPassword": "New password",
-    "code": "Verification code"
+    "code": "Verification code",
+    "subject": "Subject",
+    "message": "Message",
+    "category": "Category",
+    "status": "Status",
+    "number": "Number",
+    "createdAt": "Created",
+    "updatedAt": "Last updated",
+    "lastReply": "Last reply from us",
+    "agent": "Handled by"
   },
   "actions": {
-    "save": "Save"
+    "save": "Save",
+    "submit": "Submit"
   },
   "auth": {
     "loginTitle": "Customer sign in",
@@ -49,5 +63,157 @@
     "updatePassword": "Update password",
     "passwordChanged": "Your password has been changed.",
     "wrongPassword": "The current password is incorrect."
+  },
+  "status": {
+    "New": "New",
+    "Open": "Open",
+    "PendingCustomer": "Awaiting your reply",
+    "PendingInternal": "In progress",
+    "Escalated": "In progress",
+    "Resolved": "Resolved",
+    "Closed": "Closed"
+  },
+  "chatStatus": {
+    "Waiting": "Waiting for an agent",
+    "Active": "Connected",
+    "Closed": "Ended"
+  },
+  "tickets": {
+    "title": "My tickets",
+    "subtitle": "Follow up on your support requests.",
+    "new": "New ticket",
+    "filter": "Show tickets",
+    "empty": "You have no tickets here yet.",
+    "filters": {
+      "open": "Open",
+      "closed": "Closed",
+      "all": "All"
+    }
+  },
+  "newTicket": {
+    "title": "New ticket",
+    "subtitle": "Tell us how we can help. We will reply by email and here in the portal.",
+    "noCategory": "Not sure / other",
+    "messageHint": "Describe the issue with as much detail as you can.",
+    "submit": "Submit ticket",
+    "attachmentsMessage": "Attached files.",
+    "attachmentsFailed": "Your ticket was created, but some files could not be attached. You can attach them in a reply.",
+    "created": "Ticket {{number}} has been created."
+  },
+  "ticket": {
+    "title": "Ticket",
+    "conversation": "Conversation",
+    "you": "You",
+    "replyTitle": "Add a reply",
+    "sendReply": "Send reply",
+    "replySent": "Your reply has been sent.",
+    "closedNote": "This ticket is closed. Open a new ticket if you need more help.",
+    "details": "Details",
+    "noCategory": "Not set",
+    "unassigned": "Not assigned yet",
+    "resolve": "Mark as resolved",
+    "resolveTitle": "Mark as resolved?",
+    "resolveMessage": "Let us know your issue is solved. You can still reply if you need more help.",
+    "resolved": "The ticket is marked as resolved.",
+    "close": "Close ticket",
+    "closeTitle": "Close this ticket?",
+    "closeMessage": "A closed ticket cannot receive new replies.",
+    "closed": "The ticket has been closed."
+  },
+  "feedback": {
+    "title": "Rate our support",
+    "prompt": "How satisfied are you with how we handled your request?",
+    "rating": "Rating",
+    "stars": "{{count}} out of 5 stars",
+    "comment": "Comment (optional)",
+    "submit": "Send feedback",
+    "update": "Update feedback",
+    "change": "Change rating",
+    "yourRating": "Your rating",
+    "ratingRequired": "Please choose a rating from 1 to 5 stars.",
+    "thanks": "Thank you for your feedback!"
+  },
+  "history": {
+    "title": "Activity",
+    "subtitle": "Your recent activity with our support team.",
+    "empty": "No activity yet.",
+    "viewTicket": "View ticket",
+    "types": {
+      "ticket_created": "Ticket created",
+      "ticket_status_changed": "Ticket status changed",
+      "ticket_message": "New message",
+      "ticket_feedback": "Feedback submitted",
+      "portal_sign_in": "Signed in to the portal",
+      "chat_started": "Live chat started",
+      "customer_created": "Account created",
+      "customer_updated": "Details updated",
+      "note_added": "Note added",
+      "attachment_added": "File added",
+      "other": "Activity"
+    }
+  },
+  "files": {
+    "add": "Attach files",
+    "limit": "Up to {{max}} files.",
+    "selected": "Selected files",
+    "remove": "Remove {{name}}"
+  },
+  "contact": {
+    "title": "Contact us",
+    "subtitle": "Send us a message and we will get back to you by email.",
+    "submit": "Send message",
+    "successTitle": "Message received",
+    "successMessage": "Thank you! Your request number is {{number}}. We will reply by email.",
+    "another": "Send another message",
+    "unavailable": "The contact form is not available right now"
+  },
+  "chat": {
+    "title": "Live chat",
+    "subtitle": "Chat with a member of our support team.",
+    "firstMessage": "How can we help?",
+    "start": "Start chat",
+    "unavailable": "Live chat is not available right now",
+    "expired": "Your previous chat is no longer available. You can start a new one.",
+    "reference": "Reference {{number}}",
+    "refresh": "Refresh conversation",
+    "end": "End chat",
+    "endTitle": "End this chat?",
+    "endMessage": "You will not be able to send more messages in this conversation.",
+    "ended": "This chat has ended.",
+    "newChat": "Start a new chat",
+    "waiting": "Please wait, an agent will join shortly.",
+    "you": "You",
+    "agent": "Support",
+    "placeholder": "Type your message",
+    "live": {
+      "connected": "Live",
+      "connecting": "Connecting…",
+      "offline": "Offline"
+    }
+  },
+  "chatbot": {
+    "title": "Virtual assistant",
+    "subtitle": "Get instant answers from our help center.",
+    "unavailable": "The virtual assistant is not available right now",
+    "reset": "New conversation",
+    "welcome": "Hi! Ask me a question and I will look for the answer in our help center.",
+    "suggestions": {
+      "password": "How do I reset my password?",
+      "track": "How can I track my request?",
+      "hours": "What are your support hours?"
+    },
+    "sources": "Related articles",
+    "handoff": "Need more help? Talk to our team.",
+    "toLiveChat": "Chat with an agent",
+    "toTicket": "Open a ticket",
+    "toWebForm": "Contact us",
+    "toLogin": "Sign in to open a ticket",
+    "thinking": "Looking for an answer…",
+    "placeholder": "Ask a question",
+    "ask": "Ask",
+    "disclaimer": "Answers are generated automatically and may not be accurate."
+  },
+  "unavailable": {
+    "message": "You can still reach us through one of these options:"
   }
 }

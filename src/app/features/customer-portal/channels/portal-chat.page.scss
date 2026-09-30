@@ -1,0 +1,134 @@
+.start {
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.window {
+  display: flex;
+  flex-direction: column;
+  max-width: 760px;
+  margin-inline: auto;
+  padding: 0;
+  overflow: hidden;
+  height: calc(100dvh - 140px);
+  min-height: 420px;
+}
+
+.window__bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--mat-sys-outline-variant);
+}
+
+.window__title {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.live {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: var(--mat-sys-label-small);
+  color: var(--mat-sys-on-surface-variant);
+}
+
+.live__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--mat-sys-outline);
+}
+
+.live--on .live__dot {
+  background: #2e7d32;
+}
+
+.window__thread {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  background: var(--mat-sys-surface-container-lowest);
+}
+
+.notice {
+  align-self: center;
+  margin: 0;
+  padding: 6px 12px;
+  border-radius: 12px;
+  background: var(--mat-sys-surface-container);
+  font: var(--mat-sys-body-small);
+  text-align: center;
+}
+
+.msg {
+  align-self: flex-start;
+  max-width: 80%;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border-start-start-radius: 4px;
+  background: var(--mat-sys-surface-container-high);
+}
+
+.msg--mine {
+  align-self: flex-end;
+  border-radius: 12px;
+  border-start-end-radius: 4px;
+  background: var(--mat-sys-primary-container);
+}
+
+.msg--system {
+  align-self: center;
+  background: var(--mat-sys-surface-container);
+}
+
+.msg__meta {
+  display: block;
+  font: var(--mat-sys-label-small);
+  color: var(--mat-sys-on-surface-variant);
+  margin-bottom: 2px;
+}
+
+.msg__body {
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.window__composer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-top: 1px solid var(--mat-sys-outline-variant);
+
+  mat-form-field {
+    flex: 1;
+  }
+}
+
+.window__footer {
+  display: flex;
+  justify-content: center;
+  padding: 12px 16px;
+  border-top: 1px solid var(--mat-sys-outline-variant);
+}
+
+@media (max-width: 599.98px) {
+  .live__text {
+    display: none;
+  }
+
+  .msg {
+    max-width: 92%;
+  }
+}

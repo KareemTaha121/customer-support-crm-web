@@ -1,0 +1,138 @@
+.bot {
+  display: flex;
+  flex-direction: column;
+  max-width: 760px;
+  margin-inline: auto;
+  padding: 0;
+  overflow: hidden;
+  height: calc(100dvh - 200px);
+  min-height: 420px;
+}
+
+.bot__thread {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  background: var(--mat-sys-surface-container-lowest);
+}
+
+.bot__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin: auto 0;
+  text-align: center;
+
+  p {
+    margin: 0;
+    max-width: 480px;
+  }
+}
+
+.bot__avatar {
+  font-size: 40px;
+  width: 40px;
+  height: 40px;
+  color: var(--mat-sys-primary);
+}
+
+.bot__suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.turn {
+  align-self: flex-start;
+  max-width: 85%;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border-start-start-radius: 4px;
+  background: var(--mat-sys-surface-container-high);
+}
+
+.turn--user {
+  align-self: flex-end;
+  border-radius: 12px;
+  border-start-end-radius: 4px;
+  background: var(--mat-sys-primary-container);
+}
+
+.turn--failed {
+  background: var(--mat-sys-error-container);
+  color: var(--mat-sys-on-error-container);
+}
+
+.turn--thinking {
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.turn__body {
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.turn__sources {
+  margin-top: 10px;
+
+  ul {
+    margin: 4px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--mat-sys-primary);
+  }
+
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.turn__handoff {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--mat-sys-outline-variant);
+}
+
+.turn__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.bot__composer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px 4px;
+  border-top: 1px solid var(--mat-sys-outline-variant);
+
+  mat-form-field {
+    flex: 1;
+  }
+}
+
+.bot__disclaimer {
+  margin: 0;
+  padding: 0 16px 10px;
+  font: var(--mat-sys-body-small);
+}

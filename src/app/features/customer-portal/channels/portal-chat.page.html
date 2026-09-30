@@ -1,0 +1,96 @@
+@if (!enabled()) {
+  <app-portal-unavailable [title]="'portal.chat.unavailable' | t" icon="forum" current="chat" />
+} @else if (!stored()) {
+  <app-page-header [title]="'portal.chat.title' | t" [subtitle]="'portal.chat.subtitle' | t" />
+  <form class="crm-card start" [formGroup]="startForm" (ngSubmit)="start()" novalidate>
+    <mat-form-field>
+      <mat-label>{{ 'portal.fields.name' | t }}</mat-label>
+      <input matInput formControlName="name" autocomplete="name" maxlength="200" />
+      <mat-error>{{ startForm.controls.name | formError }}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>{{ 'portal.fields.email' | t }}</mat-label>
+      <input matInput type="email" formControlName="email" autocomplete="email" />
+      <mat-error>{{ startForm.controls.email | formError }}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>{{ 'portal.chat.firstMessage' | t }}</mat-label>
+      <textarea matInput formControlName="message" rows="4" maxlength="5000"></textarea>
+      <mat-error>{{ startForm.controls.message | formError }}</mat-error>
+    </mat-form-field>
+    @if (starting()) {
+      <mat-progress-bar mode="indeterminate" />
+    }
+    <div class="crm-actions">
+      <button mat-flat-button type="submit" [disabled]="starting()">
+        <mat-icon>forum</mat-icon>
+        {{ 'portal.chat.start' | t }}
+      </button>
+    </div>
+  </form>
+} @else if (loading() && !chat()) {
+  <app-loading />
+} @else if (error(); as message) {
+  <app-page-header [title]="'portal.chat.title' | t" />
+  <app-error-state [message]="message" (retry)="resume()" />
+} @else if (chat(); as c) {
+  <section class="crm-card window">
+    <header class="window__bar">
+      <div class="window__title">
+        <strong>{{ c.agentName ?? ('portal.chat.title' | t) }}</strong>
+        <span class="crm-muted">
+          {{ 'portal.chatStatus.' + c.status | t }}
+          @if (stored()?.ticketNumber; as number) {
+            · {{ 'portal.chat.reference' | t: { number: number } }}
+          }
+        </span>
+      </div>
+      <span class="live" [class.live--on]="live() === 'connected'" [attr.title]="'portal.chat.live.' + live() | t">
+        <span class="live__dot"></span>
+        <span class="live__text">{{ 'portal.chat.live.' + live() | t }}</span>
+      </span>
+      <button mat-icon-button type="button" (click)="refresh()" [attr.aria-label]="'portal.chat.refresh' | t">
+        <mat-icon>refresh</mat-icon>
+      </button>
+      @if (!isClosed()) {
+        <button mat-stroked-button type="button" class="crm-danger" (click)="end()">{{ 'portal.chat.end' | t }}</button>
+      }
+    </header>
+
+    <div class="window__thread" #thread role="log" aria-live="polite">
+      @if (c.status === 'Waiting') {
+        <p class="notice">{{ 'portal.chat.waiting' | t }}</p>
+      }
+      @for (message of messages(); track message.id) {
+        <div class="msg" [class.msg--mine]="isMine(message)" [class.msg--system]="message.authorType === 'System'">
+          <span class="msg__meta">
+            {{ isMine(message) ? ('portal.chat.you' | t) : message.authorName || ('portal.chat.agent' | t) }}
+            · {{ message.createdAt | localDate: 'shortTime' }}
+          </span>
+          <p class="msg__body">{{ message.body }}</p>
+        </div>
+      }
+      @if (isClosed()) {
+        <p class="notice">{{ 'portal.chat.ended' | t }}</p>
+      }
+    </div>
+
+    @if (isClosed()) {
+      <div class="window__footer">
+        <button mat-flat-button type="button" (click)="newChat()">{{ 'portal.chat.newChat' | t }}</button>
+      </div>
+    } @else {
+      <form class="window__composer" [formGroup]="messageForm" (ngSubmit)="send()" novalidate>
+        <mat-form-field subscriptSizing="dynamic">
+          <mat-label>{{ 'portal.chat.placeholder' | t }}</mat-label>
+          <textarea matInput formControlName="body" rows="2" maxlength="5000" (keydown)="onComposerKey($event)"></textarea>
+          <mat-error>{{ messageForm.controls.body | formError }}</mat-error>
+        </mat-form-field>
+        <button mat-flat-button type="submit" [disabled]="sending()">
+          <mat-icon class="rtl-flip">send</mat-icon>
+          {{ 'core.actions.send' | t }}
+        </button>
+      </form>
+    }
+  </section>
+}

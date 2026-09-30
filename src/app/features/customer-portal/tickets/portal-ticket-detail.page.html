@@ -1,0 +1,149 @@
+@if (loading() && !ticket()) {
+  <app-loading />
+} @else if (error(); as message) {
+  <app-page-header [title]="'portal.ticket.title' | t" backLink="/portal/tickets" />
+  <app-error-state [message]="message" (retry)="load()" />
+} @else if (ticket(); as t) {
+  <app-page-header [title]="t.subject" [subtitle]="t.number" backLink="/portal/tickets">
+    @if (t.canReply) {
+      <button mat-stroked-button type="button" (click)="close()" [disabled]="closing()">
+        <mat-icon>{{ isResolved() ? 'lock' : 'task_alt' }}</mat-icon>
+        {{ (isResolved() ? 'portal.ticket.close' : 'portal.ticket.resolve') | t }}
+      </button>
+    }
+  </app-page-header>
+
+  <div class="detail">
+    <div class="detail__main">
+      <section class="thread" [attr.aria-label]="'portal.ticket.conversation' | t">
+        <article class="bubble bubble--mine">
+          <header>
+            <strong>{{ 'portal.ticket.you' | t }}</strong>
+            <span class="crm-muted">{{ t.createdAt | localDate }}</span>
+          </header>
+          <p class="bubble__body">{{ t.description }}</p>
+        </article>
+
+        @for (message of messages(); track message.id) {
+          <article class="bubble" [class.bubble--mine]="isMine(message)" [class.bubble--system]="message.authorType === 'System'">
+            <header>
+              <strong>{{ isMine(message) ? ('portal.ticket.you' | t) : message.authorName }}</strong>
+              <span class="crm-muted">{{ message.createdAt | localDate }}</span>
+            </header>
+            <p class="bubble__body">{{ message.body }}</p>
+            @if (message.attachments.length) {
+              <ul class="files">
+                @for (file of message.attachments; track file.id) {
+                  <li>
+                    <button mat-stroked-button type="button" (click)="download(file)" [disabled]="downloading() === file.id">
+                      <mat-icon>download</mat-icon>
+                      <span class="files__name">{{ file.fileName }}</span>
+                      <span class="crm-muted">({{ file.size | fileSize }})</span>
+                    </button>
+                  </li>
+                }
+              </ul>
+            }
+          </article>
+        }
+      </section>
+
+      @if (t.canReply) {
+        <form class="crm-card reply" [formGroup]="replyForm" (ngSubmit)="reply()" novalidate>
+          <h2>{{ 'portal.ticket.replyTitle' | t }}</h2>
+          <mat-form-field>
+            <mat-label>{{ 'portal.fields.message' | t }}</mat-label>
+            <textarea matInput formControlName="body" rows="5" maxlength="10000"></textarea>
+            <mat-error>{{ replyForm.controls.body | formError }}</mat-error>
+          </mat-form-field>
+          <app-portal-file-picker [(files)]="files" [disabled]="sending()" />
+          @if (sending()) {
+            <mat-progress-bar mode="indeterminate" />
+          }
+          <div class="crm-actions">
+            <button mat-flat-button type="submit" [disabled]="sending()">
+              <mat-icon class="rtl-flip">send</mat-icon>
+              {{ 'portal.ticket.sendReply' | t }}
+            </button>
+          </div>
+        </form>
+      } @else {
+        <p class="crm-card crm-muted closed-note">{{ 'portal.ticket.closedNote' | t }}</p>
+      }
+    </div>
+
+    <aside class="detail__side">
+      <section class="crm-card">
+        <h2>{{ 'portal.ticket.details' | t }}</h2>
+        <dl>
+          <dt>{{ 'portal.fields.status' | t }}</dt>
+          <dd><span class="crm-pill" [class]="tone(t.status)">{{ 'portal.status.' + t.status | t }}</span></dd>
+          <dt>{{ 'portal.fields.category' | t }}</dt>
+          <dd>{{ t.categoryName ?? ('portal.ticket.noCategory' | t) }}</dd>
+          <dt>{{ 'portal.fields.agent' | t }}</dt>
+          <dd>{{ t.agentName ?? ('portal.ticket.unassigned' | t) }}</dd>
+          <dt>{{ 'portal.fields.createdAt' | t }}</dt>
+          <dd>{{ t.createdAt | localDate }}</dd>
+          @if (t.updatedAt) {
+            <dt>{{ 'portal.fields.updatedAt' | t }}</dt>
+            <dd>{{ t.updatedAt | localDate }}</dd>
+          }
+        </dl>
+      </section>
+
+      @if (showFeedbackForm()) {
+        <form class="crm-card feedback" [formGroup]="feedbackForm" (ngSubmit)="submitFeedback()" novalidate>
+          <h2>{{ 'portal.feedback.title' | t }}</h2>
+          <p class="crm-muted">{{ 'portal.feedback.prompt' | t }}</p>
+          <div class="stars" role="radiogroup" [attr.aria-label]="'portal.feedback.rating' | t">
+            @for (star of stars; track star) {
+              <button
+                mat-icon-button
+                type="button"
+                role="radio"
+                [attr.aria-checked]="rating() === star"
+                [attr.aria-label]="'portal.feedback.stars' | t: { count: star }"
+                (click)="setRating(star)"
+              >
+                <mat-icon [class.stars__on]="star <= rating()">{{ star <= rating() ? 'star' : 'star_border' }}</mat-icon>
+              </button>
+            }
+          </div>
+          <mat-form-field>
+            <mat-label>{{ 'portal.feedback.comment' | t }}</mat-label>
+            <textarea matInput formControlName="comment" rows="3" maxlength="2000"></textarea>
+            <mat-error>{{ feedbackForm.controls.comment | formError }}</mat-error>
+          </mat-form-field>
+          <div class="crm-actions">
+            @if (t.satisfactionRating !== null) {
+              <button mat-button type="button" (click)="cancelFeedback()" [disabled]="savingFeedback()">{{ 'core.actions.cancel' | t }}</button>
+            }
+            <button mat-flat-button type="submit" [disabled]="savingFeedback()">
+              {{ (t.satisfactionRating === null ? 'portal.feedback.submit' : 'portal.feedback.update') | t }}
+            </button>
+          </div>
+        </form>
+      } @else if (t.satisfactionRating !== null) {
+        <section class="crm-card feedback">
+          <h2>{{ 'portal.feedback.yourRating' | t }}</h2>
+          <div class="stars" role="img" [attr.aria-label]="'portal.feedback.stars' | t: { count: savedRating(t) }">
+            @for (star of stars; track star) {
+              <mat-icon [class.stars__on]="star <= savedRating(t)">{{ star <= savedRating(t) ? 'star' : 'star_border' }}</mat-icon>
+            }
+          </div>
+          @if (t.satisfactionComment) {
+            <p class="feedback__comment">{{ t.satisfactionComment }}</p>
+          }
+          @if (t.canGiveFeedback) {
+            <div class="crm-actions">
+              <button mat-button type="button" (click)="editFeedback()">
+                <mat-icon>edit</mat-icon>
+                {{ 'portal.feedback.change' | t }}
+              </button>
+            </div>
+          }
+        </section>
+      }
+    </aside>
+  </div>
+}

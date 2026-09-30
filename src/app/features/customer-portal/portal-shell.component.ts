@@ -27,7 +27,7 @@ import { PORTAL_NAV } from './portal-navigation';
       </a>
       <nav class="portal-bar__nav">
         @for (item of nav; track item.route) {
-          @if (!item.requiresAuth || portal.isAuthenticated()) {
+          @if ((!item.requiresAuth || portal.isAuthenticated()) && (!item.flag || branding.isEnabled(item.flag))) {
             <a mat-button [routerLink]="item.route" routerLinkActive="portal-bar__link--active" [routerLinkActiveOptions]="{ exact: item.exact }">
               <mat-icon>{{ item.icon }}</mat-icon>
               <span class="portal-bar__label">{{ item.label | t }}</span>

@@ -1,0 +1,101 @@
+@if (!enabled()) {
+  <app-portal-unavailable [title]="'portal.chatbot.unavailable' | t" icon="smart_toy" current="assistant" />
+} @else {
+  <app-page-header [title]="'portal.chatbot.title' | t" [subtitle]="'portal.chatbot.subtitle' | t">
+    @if (entries().length) {
+      <button mat-stroked-button type="button" (click)="reset()">
+        <mat-icon>restart_alt</mat-icon>
+        {{ 'portal.chatbot.reset' | t }}
+      </button>
+    }
+  </app-page-header>
+
+  <section class="crm-card bot">
+    <div class="bot__thread" #thread role="log" aria-live="polite">
+      @if (!entries().length) {
+        <div class="bot__intro">
+          <mat-icon class="bot__avatar">smart_toy</mat-icon>
+          <p>{{ 'portal.chatbot.welcome' | t }}</p>
+          <div class="bot__suggestions">
+            @for (key of ['portal.chatbot.suggestions.password', 'portal.chatbot.suggestions.track', 'portal.chatbot.suggestions.hours']; track key) {
+              <button mat-stroked-button type="button" (click)="askSuggestion(key)">{{ key | t }}</button>
+            }
+          </div>
+        </div>
+      }
+      @for (entry of entries(); track entry.id) {
+        <div class="turn" [class.turn--user]="entry.role === 'user'" [class.turn--failed]="entry.failed">
+          <p class="turn__body">{{ entry.content }}</p>
+          @if (entry.sources.length) {
+            <div class="turn__sources">
+              <span class="crm-muted">{{ 'portal.chatbot.sources' | t }}</span>
+              <ul>
+                @for (source of entry.sources; track source.articleId) {
+                  <li>
+                    <a [routerLink]="['/help/articles', source.slug]" target="_blank" rel="noopener">
+                      <mat-icon>article</mat-icon>
+                      {{ source.title }}
+                    </a>
+                  </li>
+                }
+              </ul>
+            </div>
+          }
+          @if (entry.failed) {
+            <button mat-button type="button" (click)="retry()">
+              <mat-icon>refresh</mat-icon>
+              {{ 'core.actions.retry' | t }}
+            </button>
+          }
+          @if (entry.handoff) {
+            <div class="turn__handoff">
+              <span>{{ 'portal.chatbot.handoff' | t }}</span>
+              <div class="turn__actions">
+                @if (liveChatEnabled()) {
+                  <a mat-flat-button routerLink="/portal/chat">
+                    <mat-icon>forum</mat-icon>
+                    {{ 'portal.chatbot.toLiveChat' | t }}
+                  </a>
+                }
+                @if (signedIn()) {
+                  <a mat-stroked-button routerLink="/portal/tickets/new">
+                    <mat-icon>confirmation_number</mat-icon>
+                    {{ 'portal.chatbot.toTicket' | t }}
+                  </a>
+                } @else if (webFormEnabled()) {
+                  <a mat-stroked-button routerLink="/portal/contact">
+                    <mat-icon>mail</mat-icon>
+                    {{ 'portal.chatbot.toWebForm' | t }}
+                  </a>
+                } @else {
+                  <a mat-stroked-button routerLink="/portal/login">
+                    <mat-icon>login</mat-icon>
+                    {{ 'portal.chatbot.toLogin' | t }}
+                  </a>
+                }
+              </div>
+            </div>
+          }
+        </div>
+      }
+      @if (thinking()) {
+        <div class="turn turn--thinking">
+          <span>{{ 'portal.chatbot.thinking' | t }}</span>
+          <mat-progress-bar mode="indeterminate" />
+        </div>
+      }
+    </div>
+
+    <form class="bot__composer" [formGroup]="form" (ngSubmit)="ask()" novalidate>
+      <mat-form-field subscriptSizing="dynamic">
+        <mat-label>{{ 'portal.chatbot.placeholder' | t }}</mat-label>
+        <textarea matInput formControlName="content" rows="2" maxlength="2000" (keydown)="onKey($event)"></textarea>
+      </mat-form-field>
+      <button mat-flat-button type="submit" [disabled]="thinking()">
+        <mat-icon class="rtl-flip">send</mat-icon>
+        {{ 'portal.chatbot.ask' | t }}
+      </button>
+    </form>
+    <p class="bot__disclaimer crm-muted">{{ 'portal.chatbot.disclaimer' | t }}</p>
+  </section>
+}
