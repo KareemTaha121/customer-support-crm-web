@@ -167,7 +167,11 @@ export class TicketCategoriesPage {
   }
 
   parentName(category: TicketCategory): string {
-    return category.parentId ? (this.byId().get(category.parentId)?.name ?? '—') : '—';
+    const parent = category.parentId ? this.byId().get(category.parentId) : undefined;
+    if (!parent) {
+      return '—';
+    }
+    return this.translations.language() === 'ar' && parent.nameAr ? parent.nameAr : parent.name;
   }
 
   open(category: TicketCategory | null): void {
