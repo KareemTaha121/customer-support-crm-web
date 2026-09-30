@@ -44,7 +44,14 @@
     "empty": "لا توجد أدوار بعد.",
     "system": "نظام",
     "permissions": "الصلاحيات",
-    "permissionCount": "{{count}} صلاحية",
+    "permissionCount": {
+      "zero": "بدون صلاحيات",
+      "one": "صلاحية واحدة",
+      "two": "صلاحيتان",
+      "few": "{{count}} صلاحيات",
+      "many": "{{count}} صلاحية",
+      "other": "{{count}} صلاحية"
+    },
     "selectedCount": "تم اختيار {{count}} من {{total}}",
     "users": "المستخدمون",
     "createTitle": "دور جديد",
@@ -174,7 +181,14 @@
     "editBranch": "تعديل الفرع",
     "newDepartment": "قسم جديد",
     "editDepartment": "تعديل القسم",
-    "departmentCount": "{{count}} قسم",
+    "departmentCount": {
+      "zero": "بدون أقسام",
+      "one": "قسم واحد",
+      "two": "قسمان",
+      "few": "{{count}} أقسام",
+      "many": "{{count}} قسمًا",
+      "other": "{{count}} قسم"
+    },
     "noBranches": "لا توجد فروع بعد.",
     "noDepartments": "لا توجد أقسام في هذا الفرع.",
     "code": "الرمز",

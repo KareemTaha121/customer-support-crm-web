@@ -28,6 +28,7 @@ export class TranslationService {
 
   readonly language = signal<Language>(this.initialLanguage());
   readonly direction = computed(() => (this.language() === 'ar' ? 'rtl' : 'ltr'));
+  private readonly pluralRules = computed(() => new Intl.PluralRules(this.language()));
   readonly isRtl = computed(() => this.direction() === 'rtl');
 
   /** Loads the given scopes for the current language (cached). */
@@ -57,9 +58,19 @@ export class TranslationService {
     }
   }
 
-  /** Translates `key`; returns the key itself when missing so gaps are visible. */
+  /**
+   * Translates `key`; returns the key itself when missing so gaps are visible. When `params.count`
+   * is a number and `key` is an object of plural forms (`{ "one": ..., "other": ... }`, plus `zero`,
+   * `two`, `few`, `many` for Arabic), the form for the current language is used.
+   */
   translate(key: string, params?: Record<string, string | number | null | undefined>): string {
-    const value = this.dictionary()[key] ?? key;
+    const dictionary = this.dictionary();
+    const count = params?.['count'];
+    const plural =
+      !(key in dictionary) && typeof count === 'number'
+        ? (dictionary[`${key}.${this.pluralRules().select(count)}`] ?? dictionary[`${key}.other`])
+        : undefined;
+    const value = plural ?? dictionary[key] ?? key;
     return params ? value.replace(/\{\{\s*(\w+)\s*\}\}/g, (_, name: string) => String(params[name] ?? '')) : value;
   }
 

@@ -119,7 +119,14 @@
   },
   "attachments": {
     "upload": "Upload files",
-    "uploaded": "{{count}} file(s) uploaded.",
+    "uploaded": {
+      "zero": "{{count}} files uploaded.",
+      "one": "1 file uploaded.",
+      "two": "{{count}} files uploaded.",
+      "few": "{{count}} files uploaded.",
+      "many": "{{count}} files uploaded.",
+      "other": "{{count}} files uploaded."
+    },
     "empty": "No attachments yet.",
     "deleteTitle": "Delete this attachment?",
     "deleteMessage": "{{name}} will be permanently removed."

@@ -44,7 +44,14 @@
     "empty": "No roles yet.",
     "system": "System",
     "permissions": "Permissions",
-    "permissionCount": "{{count}} permissions",
+    "permissionCount": {
+      "zero": "{{count}} permissions",
+      "one": "1 permission",
+      "two": "{{count}} permissions",
+      "few": "{{count}} permissions",
+      "many": "{{count}} permissions",
+      "other": "{{count}} permissions"
+    },
     "selectedCount": "{{count}} of {{total}} selected",
     "users": "Users",
     "createTitle": "New role",
@@ -174,7 +181,14 @@
     "editBranch": "Edit branch",
     "newDepartment": "New department",
     "editDepartment": "Edit department",
-    "departmentCount": "{{count}} departments",
+    "departmentCount": {
+      "zero": "{{count}} departments",
+      "one": "1 department",
+      "two": "{{count}} departments",
+      "few": "{{count}} departments",
+      "many": "{{count}} departments",
+      "other": "{{count}} departments"
+    },
     "noBranches": "No branches yet.",
     "noDepartments": "No departments in this branch.",
     "code": "Code",

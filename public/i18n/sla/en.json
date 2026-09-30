@@ -48,7 +48,14 @@
     "toPriority": "Raise to {{name}}",
     "reassign": "Reassign to {{name}}",
     "reassignHint": "Optional. Leave empty to keep the current assignee.",
-    "notifyCount": "Notify {{count}} user(s)",
+    "notifyCount": {
+      "zero": "Notify {{count}} users",
+      "one": "Notify 1 user",
+      "two": "Notify {{count}} users",
+      "few": "Notify {{count}} users",
+      "many": "Notify {{count}} users",
+      "other": "Notify {{count}} users"
+    },
     "deleteTitle": "Delete escalation rule?",
     "deleteMessage": "\"{{name}}\" will be deleted."
   },

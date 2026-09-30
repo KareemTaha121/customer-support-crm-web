@@ -22,7 +22,14 @@
     "editTitle": "Edit category",
     "deleteTitle": "Delete category",
     "deleteMessage": "Delete the category \"{{name}}\"? This cannot be undone.",
-    "deleteWithArticles": "Delete the category \"{{name}}\"? Its {{count}} article(s) will become uncategorized."
+    "deleteWithArticles": {
+      "zero": "Delete the category \"{{name}}\"? Its {{count}} articles will become uncategorized.",
+      "one": "Delete the category \"{{name}}\"? Its article will become uncategorized.",
+      "two": "Delete the category \"{{name}}\"? Its {{count}} articles will become uncategorized.",
+      "few": "Delete the category \"{{name}}\"? Its {{count}} articles will become uncategorized.",
+      "many": "Delete the category \"{{name}}\"? Its {{count}} articles will become uncategorized.",
+      "other": "Delete the category \"{{name}}\"? Its {{count}} articles will become uncategorized."
+    }
   },
   "delete": {
     "title": "Delete article",
@@ -75,10 +82,24 @@
     "heroSubtitle": "Search our articles or browse by category.",
     "searchPlaceholder": "Search for answers…",
     "resultsFor": "Results for \"{{query}}\"",
-    "resultCount": "{{count}} article(s) found",
+    "resultCount": {
+      "zero": "No articles found",
+      "one": "1 article found",
+      "two": "{{count}} articles found",
+      "few": "{{count}} articles found",
+      "many": "{{count}} articles found",
+      "other": "{{count}} articles found"
+    },
     "noResults": "No articles match your search.",
     "browseCategories": "Browse by category",
-    "articleCount": "{{count}} article(s)",
+    "articleCount": {
+      "zero": "{{count}} articles",
+      "one": "1 article",
+      "two": "{{count}} articles",
+      "few": "{{count}} articles",
+      "many": "{{count}} articles",
+      "other": "{{count}} articles"
+    },
     "noCategories": "No categories available.",
     "faqs": "Frequently asked questions",
     "latest": "Latest articles",

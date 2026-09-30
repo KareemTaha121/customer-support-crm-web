@@ -20,7 +20,14 @@
     "instructionsPlaceholder": "For example: offer a replacement",
     "instructionsTooLong": "Use at most 1000 characters.",
     "insert": "Insert into reply",
-    "basedOn": "Based on {{count}} knowledge base article(s):",
+    "basedOn": {
+      "zero": "Based on {{count}} knowledge base articles:",
+      "one": "Based on 1 knowledge base article:",
+      "two": "Based on {{count}} knowledge base articles:",
+      "few": "Based on {{count}} knowledge base articles:",
+      "many": "Based on {{count}} knowledge base articles:",
+      "other": "Based on {{count}} knowledge base articles:"
+    },
     "article": "Article {{n}}"
   },
   "tone": {

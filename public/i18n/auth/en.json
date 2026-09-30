@@ -21,7 +21,14 @@
     "account": "Account",
     "roles": "Roles",
     "permissions": "Permissions",
-    "permissionCount": "{{count}} permissions granted",
+    "permissionCount": {
+      "zero": "{{count}} permissions granted",
+      "one": "1 permission granted",
+      "two": "{{count}} permissions granted",
+      "few": "{{count}} permissions granted",
+      "many": "{{count}} permissions granted",
+      "other": "{{count}} permissions granted"
+    },
     "changePassword": "Change password",
     "passwordHint": "Use at least 12 characters. Other signed-in sessions will be signed out.",
     "updatePassword": "Update password",
