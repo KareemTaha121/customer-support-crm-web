@@ -333,7 +333,7 @@ export class ArticleListPage {
   }
 
   open(row: KbArticleListItem): void {
-    void this.router.navigate(['/knowledge-base', row.id]);
+    void this.router.navigate(['/knowledge-base', 'articles', row.id]);
   }
 
   change(row: KbArticleListItem, action: ArticleAction): void {

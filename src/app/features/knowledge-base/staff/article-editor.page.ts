@@ -239,7 +239,7 @@ type Loaded = { kind: 'article'; article: KbArticle } | { kind: 'new'; source: K
             <section class="crm-card">
               <h2>{{ 'kb.editor.translations' | t }}</h2>
               @for (translation of a.translations; track translation.id) {
-                <a class="translation" [routerLink]="['/knowledge-base', translation.id]">
+                <a class="translation" [routerLink]="['/knowledge-base', 'articles', translation.id]">
                   <span class="crm-pill">{{ 'kb.language.' + translation.language | t }}</span>
                   <span [attr.dir]="translation.language === 'ar' ? 'rtl' : 'ltr'">{{ translation.title }}</span>
                 </a>
@@ -405,7 +405,7 @@ export class ArticleEditorPage {
         this.toast.success(current ? 'core.states.saved' : 'kb.messages.created');
         this.apply({ kind: 'article', article: saved });
         if (!current) {
-          void this.router.navigate(['/knowledge-base', saved.id], { replaceUrl: true });
+          void this.router.navigate(['/knowledge-base', 'articles', saved.id], { replaceUrl: true });
         }
       },
       error: (error: unknown) => {

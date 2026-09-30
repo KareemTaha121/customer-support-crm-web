@@ -22,9 +22,10 @@ export const KNOWLEDGE_BASE_ROUTES: Routes = [
         canActivate: [requirePermission(Permissions.knowledgeManage)],
         loadComponent: () => import('./staff/article-editor.page').then((m) => m.ArticleEditorPage),
       },
-      // Deep link used by the AI panel (features/ai knowledgeArticleLink → /knowledge-base/articles/{id}).
+      // Canonical article URL (also used by the AI panel and ticket suggestions).
       { path: 'articles/:id', loadComponent: () => import('./staff/article-editor.page').then((m) => m.ArticleEditorPage) },
-      { path: ':id', loadComponent: () => import('./staff/article-editor.page').then((m) => m.ArticleEditorPage) },
+      // Older links.
+      { path: ':id', redirectTo: 'articles/:id' },
     ],
   },
 ];
