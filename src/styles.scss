@@ -1,1 +1,209 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+
+// Material 3 theme. Brand colors from GET /public/branding override the --mat-sys-* primary
+// and tertiary tokens at runtime (core/branding/branding.service.ts).
+html {
+  color-scheme: light;
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$azure-palette,
+        tertiary: mat.$orange-palette,
+      ),
+      typography: (
+        plain-family: var(--crm-font),
+        brand-family: var(--crm-font),
+      ),
+      density: 0,
+    )
+  );
+}
+
+:root {
+  --crm-font: 'Roboto', 'IBM Plex Sans Arabic', system-ui, sans-serif;
+  --crm-brand-primary: #1f4e79;
+  --crm-brand-accent: #f39c12;
+  --crm-success: #2e7d32;
+  --crm-warning: #ed6c02;
+  --crm-danger: #c62828;
+  --crm-info: #0277bd;
+  --crm-radius: 12px;
+  --crm-gap: 16px;
+}
+
+html[lang='ar'] {
+  --crm-font: 'IBM Plex Sans Arabic', 'Roboto', system-ui, sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--crm-font);
+  background: var(--mat-sys-surface-container-lowest);
+  color: var(--mat-sys-on-surface);
+}
+
+.app-root {
+  min-height: 100%;
+}
+
+// ---------- Layout helpers used across features ----------
+
+.crm-card {
+  display: block;
+  background: var(--mat-sys-surface);
+  border: 1px solid var(--mat-sys-outline-variant);
+  border-radius: var(--crm-radius);
+  padding: var(--crm-gap);
+}
+
+.crm-grid {
+  display: grid;
+  gap: var(--crm-gap);
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+
+.crm-form-grid {
+  display: grid;
+  gap: 4px 16px;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+
+  .crm-span-all {
+    grid-column: 1 / -1;
+  }
+}
+
+.crm-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin-bottom: var(--crm-gap);
+
+  .mat-mdc-form-field {
+    min-width: 180px;
+  }
+}
+
+.crm-spacer {
+  flex: 1 1 auto;
+}
+
+.crm-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: var(--crm-gap);
+}
+
+.crm-muted {
+  color: var(--mat-sys-on-surface-variant);
+}
+
+.crm-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--mat-sys-outline-variant);
+  border-radius: var(--crm-radius);
+  background: var(--mat-sys-surface);
+
+  table {
+    width: 100%;
+  }
+
+  tr.crm-row-link {
+    cursor: pointer;
+
+    &:hover {
+      background: var(--mat-sys-surface-container-low);
+    }
+  }
+}
+
+// Status/priority pills: <span class="crm-pill crm-pill--success">Resolved</span>
+.crm-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font: var(--mat-sys-label-medium);
+  white-space: nowrap;
+  background: var(--mat-sys-surface-container-high);
+  color: var(--mat-sys-on-surface);
+
+  &--success { background: #e8f5e9; color: var(--crm-success); }
+  &--warning { background: #fff3e0; color: var(--crm-warning); }
+  &--danger { background: #ffebee; color: var(--crm-danger); }
+  &--info { background: #e1f5fe; color: var(--crm-info); }
+  &--primary { background: var(--mat-sys-primary-container); color: var(--mat-sys-on-primary-container); }
+}
+
+.crm-status-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 64px 16px;
+  text-align: center;
+
+  mat-icon {
+    font-size: 56px;
+    width: 56px;
+    height: 56px;
+    color: var(--mat-sys-primary);
+  }
+
+  h1 {
+    margin: 0;
+    font: var(--mat-sys-headline-small);
+  }
+}
+
+// Mirror directional icons (arrows, chevrons) in RTL.
+[dir='rtl'] .rtl-flip {
+  transform: scaleX(-1);
+}
+
+// Destructive buttons: <button mat-flat-button class="crm-danger">
+.mat-mdc-unelevated-button.crm-danger,
+.mat-mdc-raised-button.crm-danger {
+  background-color: var(--crm-danger);
+  color: #fff;
+}
+
+.mat-mdc-snack-bar-container {
+  &.crm-toast-error { --mat-snack-bar-container-color: #b71c1c; --mat-snack-bar-supporting-text-color: #fff; --mat-snack-bar-button-color: #fff; }
+  &.crm-toast-success { --mat-snack-bar-container-color: #1b5e20; --mat-snack-bar-supporting-text-color: #fff; --mat-snack-bar-button-color: #fff; }
+}
+
+.crm-notification-menu {
+  max-width: 380px !important;
+
+  .bell-item {
+    height: auto !important;
+    min-height: 56px;
+    padding-block: 8px;
+
+    .mat-mdc-menu-item-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      white-space: normal;
+    }
+  }
+
+  .bell-item--unread .bell-item__title {
+    font-weight: 600;
+  }
+
+  .bell-item__body,
+  .bell-item__time {
+    font-size: 12px;
+    color: var(--mat-sys-on-surface-variant);
+  }
+}

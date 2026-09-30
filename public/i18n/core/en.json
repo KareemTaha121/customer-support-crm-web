@@ -1,0 +1,123 @@
+{
+  "appName": "Customer Support CRM",
+  "nav": {
+    "toggle": "Toggle navigation",
+    "dashboard": "Dashboard",
+    "tickets": "Tickets",
+    "customers": "Customers",
+    "chat": "Live chat",
+    "knowledgeBase": "Knowledge base",
+    "reports": "Reports",
+    "configuration": "Configuration",
+    "ticketCategories": "Ticket categories",
+    "sla": "SLA & automation",
+    "channels": "Channels",
+    "administration": "Administration",
+    "users": "Users",
+    "roles": "Roles",
+    "organization": "Organization",
+    "settings": "Settings",
+    "integrations": "Integrations",
+    "audit": "Audit log"
+  },
+  "user": {
+    "profile": "My profile",
+    "logout": "Sign out"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "markAllRead": "Mark all as read",
+    "empty": "You're all caught up."
+  },
+  "actions": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "add": "Add",
+    "close": "Close",
+    "back": "Back",
+    "search": "Search",
+    "clear": "Clear",
+    "filter": "Filter",
+    "refresh": "Refresh",
+    "retry": "Try again",
+    "dismiss": "Dismiss",
+    "download": "Download",
+    "upload": "Upload",
+    "export": "Export CSV",
+    "view": "View",
+    "send": "Send",
+    "yes": "Yes",
+    "no": "No",
+    "apply": "Apply",
+    "reset": "Reset",
+    "activate": "Activate",
+    "deactivate": "Deactivate",
+    "more": "More actions"
+  },
+  "states": {
+    "empty": "Nothing to show yet.",
+    "loading": "Loading…",
+    "saved": "Changes saved.",
+    "created": "Created successfully.",
+    "deleted": "Deleted.",
+    "active": "Active",
+    "inactive": "Inactive",
+    "none": "None",
+    "all": "All"
+  },
+  "fields": {
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "status": "Status",
+    "createdAt": "Created",
+    "updatedAt": "Updated",
+    "description": "Description",
+    "from": "From",
+    "to": "To"
+  },
+  "validation": {
+    "required": "This field is required.",
+    "email": "Enter a valid email address.",
+    "minlength": "Must be at least {{length}} characters.",
+    "maxlength": "Must be at most {{length}} characters.",
+    "min": "Must be at least {{min}}.",
+    "max": "Must be at most {{max}}.",
+    "pattern": "The format is not valid.",
+    "mismatch": "The values do not match.",
+    "invalid": "This value is not valid."
+  },
+  "errors": {
+    "network": "Cannot reach the server. Check your connection and try again.",
+    "validation": "Please correct the highlighted fields.",
+    "unknown": "Something went wrong. Please try again.",
+    "UNAUTHORIZED": "Your session has expired. Please sign in again.",
+    "FORBIDDEN": "You don't have permission to do that.",
+    "NOT_FOUND": "The requested item was not found.",
+    "CONFLICT": "This item was changed by someone else. Reload and try again.",
+    "BUSINESS_RULE_VIOLATION": "This action is not allowed in the current state.",
+    "RATE_LIMITED": "Too many requests. Please wait a moment.",
+    "PAYLOAD_TOO_LARGE": "The file is too large.",
+    "INTERNAL_ERROR": "The server encountered an error. Please try again later."
+  },
+  "status": {
+    "notFoundTitle": "Page not found",
+    "notFoundMessage": "The page you are looking for does not exist.",
+    "forbiddenTitle": "Access denied",
+    "forbiddenMessage": "You don't have permission to view this page.",
+    "home": "Go to dashboard",
+    "comingSoon": "This page is coming soon."
+  },
+  "paginator": {
+    "itemsPerPage": "Items per page",
+    "nextPage": "Next page",
+    "previousPage": "Previous page",
+    "firstPage": "First page",
+    "lastPage": "Last page",
+    "range": "{{start}} – {{end}} of {{total}}"
+  }
+}
