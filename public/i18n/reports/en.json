@@ -1,0 +1,154 @@
+{
+  "title": "Reports",
+  "subtitle": "Ticket volume, SLA, agent and satisfaction insights",
+  "tabs": {
+    "dashboard": "Management dashboard",
+    "ticketVolume": "Ticket volume",
+    "sla": "SLA performance",
+    "agents": "Agent performance",
+    "satisfaction": "Customer satisfaction"
+  },
+  "filters": {
+    "title": "Report filters",
+    "range": "Date range",
+    "from": "Start date",
+    "to": "End date",
+    "groupBy": "Group by",
+    "groupByOptions": {
+      "day": "Day",
+      "week": "Week",
+      "month": "Month"
+    },
+    "branch": "Branch",
+    "allBranches": "All branches",
+    "department": "Department",
+    "allDepartments": "All departments",
+    "errors": {
+      "inverted": "The end date must be on or after the start date.",
+      "tooLong": "The range can be at most {{max}} days."
+    }
+  },
+  "dashboard": {
+    "note": "Live figures; SLA, satisfaction and response times cover the last 30 days, the trend covers the last 14 days."
+  },
+  "kpi": {
+    "openTickets": "Open tickets",
+    "unassigned": "Unassigned",
+    "escalated": "Escalated",
+    "atRisk": "SLA at risk",
+    "createdToday": "Created today",
+    "resolvedToday": "Resolved today",
+    "slaCompliance30d": "SLA compliance (30 days)",
+    "satisfaction30d": "Satisfaction (30 days)",
+    "firstResponse30d": "Avg. first response (30 days)",
+    "resolution30d": "Avg. resolution (30 days)",
+    "totalCreated": "Tickets created",
+    "totalResolved": "Tickets resolved",
+    "resolutionRatio": "Resolved vs created",
+    "ticketsWithSla": "Tickets with SLA",
+    "firstResponseCompliance": "First response compliance",
+    "resolutionCompliance": "Resolution compliance",
+    "firstResponseBreached": "First response breaches",
+    "resolutionBreached": "Resolution breaches",
+    "avgFirstResponse": "Avg. first response",
+    "avgResolution": "Avg. resolution time",
+    "averageRating": "Average rating",
+    "responses": "Responses",
+    "positiveShare": "Positive ratings (4–5)"
+  },
+  "charts": {
+    "last14Days": "Created vs resolved — last 14 days",
+    "backlogByDepartment": "Open backlog by department",
+    "topCategories": "Top categories — last 30 days",
+    "volumeTrend": "Created vs resolved",
+    "byStatus": "Tickets by status",
+    "byPriority": "Tickets by priority",
+    "byChannel": "Tickets by channel",
+    "byCategory": "Tickets by category",
+    "slaByPriority": "SLA compliance by priority",
+    "slaByDepartment": "SLA compliance by department",
+    "agentWorkload": "Assigned vs resolved per agent",
+    "agentSla": "SLA compliance per agent",
+    "satisfactionTrend": "Average rating over time",
+    "ratingDistribution": "Rating distribution"
+  },
+  "series": {
+    "created": "Created",
+    "resolved": "Resolved",
+    "openTickets": "Open tickets",
+    "tickets": "Tickets",
+    "firstResponseCompliance": "First response %",
+    "resolutionCompliance": "Resolution %",
+    "averageRating": "Average rating"
+  },
+  "columns": {
+    "date": "Date",
+    "period": "Period",
+    "department": "Department",
+    "category": "Category",
+    "status": "Status",
+    "priority": "Priority",
+    "channel": "Channel",
+    "tickets": "Tickets",
+    "breached": "Breached",
+    "agent": "Agent",
+    "assigned": "Assigned",
+    "resolved": "Resolved",
+    "openNow": "Open now",
+    "avgFirstResponse": "Avg. first response",
+    "avgResolution": "Avg. resolution",
+    "slaCompliance": "SLA compliance",
+    "avgSatisfaction": "Avg. satisfaction",
+    "satisfactionResponses": "Ratings",
+    "rating": "Rating"
+  },
+  "agents": {
+    "topHint": "Showing the {{count}} agents with the most assigned tickets; the table lists everyone.",
+    "tableTitle": "All agents"
+  },
+  "comments": {
+    "title": "Recent comments",
+    "rating": "Rated {{rating}} out of 5",
+    "stars": "{{rating}} ★",
+    "empty": "No comments in this period."
+  },
+  "common": {
+    "none": "Not set",
+    "other": "Other",
+    "noData": "No data for the selected filters."
+  },
+  "units": {
+    "minutes": "{{m}}m",
+    "hoursMinutes": "{{h}}h {{m}}m",
+    "daysHours": "{{d}}d {{h}}h",
+    "weekOf": "Week of {{date}}"
+  },
+  "enums": {
+    "status": {
+      "New": "New",
+      "Open": "Open",
+      "PendingCustomer": "Pending customer",
+      "PendingInternal": "Pending internal",
+      "Escalated": "Escalated",
+      "Resolved": "Resolved",
+      "Closed": "Closed"
+    },
+    "priority": {
+      "Low": "Low",
+      "Medium": "Medium",
+      "High": "High",
+      "Urgent": "Urgent"
+    },
+    "channel": {
+      "Agent": "Agent",
+      "Portal": "Customer portal",
+      "WebForm": "Web form",
+      "Email": "Email",
+      "WhatsApp": "WhatsApp",
+      "Sms": "SMS",
+      "Chat": "Live chat",
+      "Phone": "Phone",
+      "Api": "API"
+    }
+  }
+}

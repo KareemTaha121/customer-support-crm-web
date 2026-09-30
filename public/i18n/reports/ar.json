@@ -1,0 +1,154 @@
+{
+  "title": "التقارير",
+  "subtitle": "مؤشرات حجم التذاكر واتفاقيات مستوى الخدمة وأداء الموظفين ورضا العملاء",
+  "tabs": {
+    "dashboard": "لوحة الإدارة",
+    "ticketVolume": "حجم التذاكر",
+    "sla": "أداء اتفاقية مستوى الخدمة",
+    "agents": "أداء الموظفين",
+    "satisfaction": "رضا العملاء"
+  },
+  "filters": {
+    "title": "عوامل تصفية التقرير",
+    "range": "الفترة الزمنية",
+    "from": "تاريخ البداية",
+    "to": "تاريخ النهاية",
+    "groupBy": "التجميع حسب",
+    "groupByOptions": {
+      "day": "يوم",
+      "week": "أسبوع",
+      "month": "شهر"
+    },
+    "branch": "الفرع",
+    "allBranches": "جميع الفروع",
+    "department": "القسم",
+    "allDepartments": "جميع الأقسام",
+    "errors": {
+      "inverted": "يجب أن يكون تاريخ النهاية مساويًا لتاريخ البداية أو بعده.",
+      "tooLong": "لا يمكن أن تتجاوز الفترة {{max}} يومًا."
+    }
+  },
+  "dashboard": {
+    "note": "أرقام مباشرة؛ تغطي مؤشرات الالتزام بالاتفاقية والرضا وأوقات الاستجابة آخر 30 يومًا، ويغطي الاتجاه آخر 14 يومًا."
+  },
+  "kpi": {
+    "openTickets": "التذاكر المفتوحة",
+    "unassigned": "غير المسندة",
+    "escalated": "المصعّدة",
+    "atRisk": "معرّضة لخرق الاتفاقية",
+    "createdToday": "أُنشئت اليوم",
+    "resolvedToday": "حُلّت اليوم",
+    "slaCompliance30d": "الالتزام بالاتفاقية (30 يومًا)",
+    "satisfaction30d": "الرضا (30 يومًا)",
+    "firstResponse30d": "متوسط أول رد (30 يومًا)",
+    "resolution30d": "متوسط الحل (30 يومًا)",
+    "totalCreated": "التذاكر المنشأة",
+    "totalResolved": "التذاكر المحلولة",
+    "resolutionRatio": "المحلولة مقابل المنشأة",
+    "ticketsWithSla": "تذاكر خاضعة للاتفاقية",
+    "firstResponseCompliance": "الالتزام بوقت أول رد",
+    "resolutionCompliance": "الالتزام بوقت الحل",
+    "firstResponseBreached": "خروقات أول رد",
+    "resolutionBreached": "خروقات الحل",
+    "avgFirstResponse": "متوسط وقت أول رد",
+    "avgResolution": "متوسط وقت الحل",
+    "averageRating": "متوسط التقييم",
+    "responses": "الاستجابات",
+    "positiveShare": "التقييمات الإيجابية (4–5)"
+  },
+  "charts": {
+    "last14Days": "المنشأة مقابل المحلولة — آخر 14 يومًا",
+    "backlogByDepartment": "التذاكر المفتوحة حسب القسم",
+    "topCategories": "أكثر التصنيفات — آخر 30 يومًا",
+    "volumeTrend": "المنشأة مقابل المحلولة",
+    "byStatus": "التذاكر حسب الحالة",
+    "byPriority": "التذاكر حسب الأولوية",
+    "byChannel": "التذاكر حسب القناة",
+    "byCategory": "التذاكر حسب التصنيف",
+    "slaByPriority": "الالتزام بالاتفاقية حسب الأولوية",
+    "slaByDepartment": "الالتزام بالاتفاقية حسب القسم",
+    "agentWorkload": "المسندة مقابل المحلولة لكل موظف",
+    "agentSla": "الالتزام بالاتفاقية لكل موظف",
+    "satisfactionTrend": "متوسط التقييم عبر الزمن",
+    "ratingDistribution": "توزيع التقييمات"
+  },
+  "series": {
+    "created": "المنشأة",
+    "resolved": "المحلولة",
+    "openTickets": "التذاكر المفتوحة",
+    "tickets": "التذاكر",
+    "firstResponseCompliance": "نسبة أول رد %",
+    "resolutionCompliance": "نسبة الحل %",
+    "averageRating": "متوسط التقييم"
+  },
+  "columns": {
+    "date": "التاريخ",
+    "period": "الفترة",
+    "department": "القسم",
+    "category": "التصنيف",
+    "status": "الحالة",
+    "priority": "الأولوية",
+    "channel": "القناة",
+    "tickets": "التذاكر",
+    "breached": "المخروقة",
+    "agent": "الموظف",
+    "assigned": "المسندة",
+    "resolved": "المحلولة",
+    "openNow": "المفتوحة حاليًا",
+    "avgFirstResponse": "متوسط أول رد",
+    "avgResolution": "متوسط الحل",
+    "slaCompliance": "الالتزام بالاتفاقية",
+    "avgSatisfaction": "متوسط الرضا",
+    "satisfactionResponses": "التقييمات",
+    "rating": "التقييم"
+  },
+  "agents": {
+    "topHint": "يُعرض أكثر {{count}} موظفًا من حيث التذاكر المسندة؛ ويضم الجدول جميع الموظفين.",
+    "tableTitle": "جميع الموظفين"
+  },
+  "comments": {
+    "title": "أحدث التعليقات",
+    "rating": "التقييم {{rating}} من 5",
+    "stars": "{{rating}} ★",
+    "empty": "لا توجد تعليقات في هذه الفترة."
+  },
+  "common": {
+    "none": "غير محدد",
+    "other": "أخرى",
+    "noData": "لا توجد بيانات لعوامل التصفية المحددة."
+  },
+  "units": {
+    "minutes": "{{m}} د",
+    "hoursMinutes": "{{h}} س {{m}} د",
+    "daysHours": "{{d}} ي {{h}} س",
+    "weekOf": "أسبوع {{date}}"
+  },
+  "enums": {
+    "status": {
+      "New": "جديدة",
+      "Open": "مفتوحة",
+      "PendingCustomer": "بانتظار العميل",
+      "PendingInternal": "بانتظار إجراء داخلي",
+      "Escalated": "مصعّدة",
+      "Resolved": "محلولة",
+      "Closed": "مغلقة"
+    },
+    "priority": {
+      "Low": "منخفضة",
+      "Medium": "متوسطة",
+      "High": "عالية",
+      "Urgent": "عاجلة"
+    },
+    "channel": {
+      "Agent": "موظف",
+      "Portal": "بوابة العملاء",
+      "WebForm": "نموذج ويب",
+      "Email": "البريد الإلكتروني",
+      "WhatsApp": "واتساب",
+      "Sms": "رسائل نصية",
+      "Chat": "المحادثة المباشرة",
+      "Phone": "الهاتف",
+      "Api": "واجهة برمجية"
+    }
+  }
+}
