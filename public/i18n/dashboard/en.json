@@ -1,0 +1,137 @@
+{
+  "nav": {
+    "tasks": "Tasks",
+    "quickReplies": "Quick replies"
+  },
+  "home": {
+    "greetingMorning": "Good morning, {{name}}",
+    "greetingAfternoon": "Good afternoon, {{name}}",
+    "greetingEvening": "Good evening, {{name}}",
+    "subtitle": "Here is what needs your attention today.",
+    "noTicketAccess": "You don't have access to tickets, so the ticket overview is hidden. You can still manage your tasks and quick replies.",
+    "unread": "You have {{count}} unread notifications.",
+    "lastUpdated": "Updated at {{time}}"
+  },
+  "kpi": {
+    "myOpen": "My open tickets",
+    "myPendingCustomer": "Waiting on customer",
+    "myAtRisk": "My tickets at SLA risk",
+    "myResolvedToday": "Resolved today",
+    "unassignedInScope": "Unassigned tickets",
+    "escalatedInScope": "Escalated tickets",
+    "openTasks": "Open tasks",
+    "overdueTasks": "Overdue tasks",
+    "unreadNotifications": "Unread notifications"
+  },
+  "lists": {
+    "myTickets": "My tickets",
+    "myTicketsEmpty": "No open tickets are assigned to you.",
+    "myTasks": "My tasks",
+    "myTasksEmpty": "No open tasks. Nice work!",
+    "viewAll": "View all",
+    "slaAtRisk": "SLA at risk",
+    "slaAtRiskEmpty": "No tickets are at risk of breaching SLA.",
+    "escalations": "Pending escalations",
+    "escalationsEmpty": "No escalated tickets.",
+    "recentCustomers": "Recent customers",
+    "recentCustomersEmpty": "No recent customer interactions."
+  },
+  "priority": {
+    "Low": "Low",
+    "Medium": "Medium",
+    "High": "High",
+    "Urgent": "Urgent"
+  },
+  "ticketStatus": {
+    "New": "New",
+    "Open": "Open",
+    "PendingCustomer": "Pending customer",
+    "PendingInternal": "Pending internal",
+    "Escalated": "Escalated",
+    "Resolved": "Resolved",
+    "Closed": "Closed"
+  },
+  "sla": {
+    "ok": "On track",
+    "warning": "SLA warning",
+    "breached": "SLA breached",
+    "none": "No SLA"
+  },
+  "tasks": {
+    "title": "Tasks & reminders",
+    "subtitle": "Follow-ups and reminders for your work.",
+    "new": "New task",
+    "count": "{{count}} tasks",
+    "empty": "No tasks match this filter.",
+    "markComplete": "Mark as complete",
+    "reopen": "Reopen",
+    "completed": "Task completed.",
+    "reopened": "Task reopened.",
+    "dueAt": "Due {{date}}",
+    "overdueSince": "Overdue since {{date}}",
+    "completedAt": "Completed {{date}}",
+    "createTitle": "New task",
+    "editTitle": "Edit task",
+    "unlinkTicket": "Remove related ticket",
+    "ticketSearchHint": "Type a ticket number or subject",
+    "deleteTitle": "Delete task?",
+    "deleteMessage": "\"{{title}}\" will be permanently deleted.",
+    "filters": {
+      "open": "Open",
+      "overdue": "Overdue",
+      "dueToday": "Due today",
+      "completed": "Completed",
+      "all": "All"
+    },
+    "fields": {
+      "title": "Title",
+      "notes": "Notes",
+      "dueAt": "Due date",
+      "remindAt": "Reminder",
+      "remindHint": "You will get a notification at this time.",
+      "relatedTicket": "Related ticket"
+    }
+  },
+  "quickReplies": {
+    "title": "Quick replies",
+    "subtitle": "Saved responses you can insert into ticket and chat replies.",
+    "new": "New quick reply",
+    "searchHint": "Title, text or /shortcut",
+    "empty": "No quick replies found.",
+    "shared": "Shared",
+    "personal": "Personal",
+    "usage": "Used {{count}} times",
+    "createTitle": "New quick reply",
+    "editTitle": "Edit quick reply",
+    "deleteTitle": "Delete quick reply?",
+    "deleteMessage": "\"{{title}}\" will be permanently deleted.",
+    "deleteSharedMessage": "\"{{title}}\" is shared with the whole team and will be deleted for everyone.",
+    "scopes": {
+      "all": "All",
+      "personal": "Personal",
+      "shared": "Shared"
+    },
+    "languages": {
+      "en": "English",
+      "ar": "Arabic"
+    },
+    "fields": {
+      "title": "Title",
+      "shortcut": "Shortcut",
+      "shortcutHint": "Letters, numbers, - and _ (e.g. /thanks)",
+      "language": "Language",
+      "body": "Reply text",
+      "bodyHint": "Click a placeholder below to insert customer or ticket details.",
+      "shared": "Share with the whole team",
+      "sharedHint": "Shared replies are visible to every agent; only managers can change them.",
+      "sharedLocked": "Sharing cannot be changed after the reply is created."
+    }
+  },
+  "picker": {
+    "open": "Insert quick reply",
+    "title": "Quick replies",
+    "search": "Search quick replies…",
+    "empty": "No quick replies found.",
+    "error": "Quick replies could not be loaded."
+  }
+}

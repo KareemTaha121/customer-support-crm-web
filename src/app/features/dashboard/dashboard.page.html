@@ -1,0 +1,145 @@
+<app-page-header [title]="greetingKey() | t: { name: userName() }" [subtitle]="'dashboard.home.subtitle' | t">
+  <a mat-stroked-button routerLink="tasks">
+    <mat-icon>checklist</mat-icon>{{ 'dashboard.nav.tasks' | t }}
+  </a>
+  <a mat-stroked-button routerLink="quick-replies">
+    <mat-icon>quickreply</mat-icon>{{ 'dashboard.nav.quickReplies' | t }}
+  </a>
+  <button
+    mat-icon-button
+    type="button"
+    (click)="load(true)"
+    [disabled]="loading() || refreshing()"
+    [matTooltip]="'core.actions.refresh' | t"
+    [attr.aria-label]="'core.actions.refresh' | t"
+  >
+    <mat-icon>refresh</mat-icon>
+  </button>
+</app-page-header>
+
+<div class="refresh-bar">
+  @if (refreshing()) {
+    <mat-progress-bar mode="indeterminate" />
+  }
+</div>
+
+@if (loading()) {
+  <app-loading />
+} @else if (forbidden()) {
+  <section class="crm-card notice" role="status">
+    <mat-icon aria-hidden="true">lock</mat-icon>
+    <p>{{ 'dashboard.home.noTicketAccess' | t }}</p>
+    <div class="notice__actions">
+      <a mat-flat-button routerLink="tasks">{{ 'dashboard.nav.tasks' | t }}</a>
+      <a mat-stroked-button routerLink="quick-replies">{{ 'dashboard.nav.quickReplies' | t }}</a>
+    </div>
+  </section>
+} @else if (error()) {
+  <app-error-state [message]="error()" (retry)="load()" />
+} @else if (data(); as dashboard) {
+  <div class="kpis">
+    @for (kpi of kpis; track kpi.key) {
+      <a class="kpi crm-card" [class]="'kpi--' + kpi.tone" [routerLink]="kpi.link">
+        <mat-icon class="kpi__icon" aria-hidden="true">{{ kpi.icon }}</mat-icon>
+        <span class="kpi__value">{{ count(kpi.key) }}</span>
+        <span class="kpi__label">{{ 'dashboard.kpi.' + kpi.key | t }}</span>
+      </a>
+    }
+  </div>
+
+  @if (unread() > 0) {
+    <p class="unread crm-muted">
+      <mat-icon aria-hidden="true">notifications_active</mat-icon>
+      {{ 'dashboard.home.unread' | t: { count: unread() } }}
+    </p>
+  }
+
+  <div class="widgets">
+    <app-dashboard-ticket-list
+      class="widgets__wide"
+      icon="assignment_ind"
+      [title]="'dashboard.lists.myTickets' | t"
+      [emptyText]="'dashboard.lists.myTicketsEmpty' | t"
+      [tickets]="dashboard.myTickets"
+    />
+
+    <section class="crm-card widget">
+      <header class="widget__head">
+        <mat-icon aria-hidden="true">checklist</mat-icon>
+        <h2>{{ 'dashboard.lists.myTasks' | t }}</h2>
+        <a mat-button routerLink="tasks">{{ 'dashboard.lists.viewAll' | t }}</a>
+      </header>
+      @if (dashboard.myTasks.length) {
+        <ul class="simple-list">
+          @for (task of dashboard.myTasks; track task.id) {
+            <li class="task">
+              <mat-checkbox
+                [checked]="false"
+                [disabled]="busyTaskId() === task.id"
+                (change)="complete(task)"
+                [aria-label]="'dashboard.tasks.markComplete' | t"
+              />
+              <div class="task__body">
+                <span class="task__title">{{ task.title }}</span>
+                <span class="task__meta">
+                  @if (task.dueAt) {
+                    <span [class.overdue]="isOverdue(task)">
+                      {{ (isOverdue(task) ? 'dashboard.tasks.overdueSince' : 'dashboard.tasks.dueAt') | t: { date: (task.dueAt | localDate: 'short') } }}
+                    </span>
+                  }
+                  @if (task.ticketId) {
+                    <a [routerLink]="['/tickets', task.ticketId]">{{ task.ticketNumber }}</a>
+                  }
+                </span>
+              </div>
+            </li>
+          }
+        </ul>
+      } @else {
+        <p class="crm-muted empty">{{ 'dashboard.lists.myTasksEmpty' | t }}</p>
+      }
+    </section>
+
+    <app-dashboard-ticket-list
+      icon="warning"
+      [title]="'dashboard.lists.slaAtRisk' | t"
+      [emptyText]="'dashboard.lists.slaAtRiskEmpty' | t"
+      [tickets]="dashboard.slaAtRisk"
+    />
+
+    <app-dashboard-ticket-list
+      icon="trending_up"
+      [title]="'dashboard.lists.escalations' | t"
+      [emptyText]="'dashboard.lists.escalationsEmpty' | t"
+      [tickets]="dashboard.pendingEscalations"
+    />
+
+    <section class="crm-card widget">
+      <header class="widget__head">
+        <mat-icon aria-hidden="true">group</mat-icon>
+        <h2>{{ 'dashboard.lists.recentCustomers' | t }}</h2>
+      </header>
+      @if (dashboard.recentCustomers.length) {
+        <ul class="simple-list">
+          @for (customer of dashboard.recentCustomers; track customer.id) {
+            <li>
+              <a class="customer" [routerLink]="['/customers', customer.id]">
+                <span class="customer__avatar" aria-hidden="true">{{ customer.name.charAt(0) }}</span>
+                <span class="customer__body">
+                  <span>{{ customer.name }}</span>
+                  <span class="crm-muted">{{ customer.number }} · {{ customer.lastInteractionAt | localDate: 'relative' }}</span>
+                </span>
+              </a>
+            </li>
+          }
+        </ul>
+      } @else {
+        <p class="crm-muted empty">{{ 'dashboard.lists.recentCustomersEmpty' | t }}</p>
+      }
+    </section>
+  </div>
+
+  @if (lastUpdated(); as updated) {
+    <p class="updated crm-muted">{{ 'dashboard.home.lastUpdated' | t: { time: (updated | localDate: 'shortTime') } }}</p>
+  }
+}

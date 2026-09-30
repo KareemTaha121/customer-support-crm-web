@@ -1,0 +1,137 @@
+{
+  "nav": {
+    "tasks": "المهام",
+    "quickReplies": "الردود السريعة"
+  },
+  "home": {
+    "greetingMorning": "صباح الخير، {{name}}",
+    "greetingAfternoon": "مساء الخير، {{name}}",
+    "greetingEvening": "مساء الخير، {{name}}",
+    "subtitle": "إليك ما يحتاج إلى اهتمامك اليوم.",
+    "noTicketAccess": "ليست لديك صلاحية الوصول إلى التذاكر، لذا تم إخفاء ملخص التذاكر. لا يزال بإمكانك إدارة مهامك وردودك السريعة.",
+    "unread": "لديك {{count}} إشعارات غير مقروءة.",
+    "lastUpdated": "آخر تحديث {{time}}"
+  },
+  "kpi": {
+    "myOpen": "تذاكري المفتوحة",
+    "myPendingCustomer": "بانتظار العميل",
+    "myAtRisk": "تذاكري المعرضة لخرق اتفاقية الخدمة",
+    "myResolvedToday": "تم حلها اليوم",
+    "unassignedInScope": "تذاكر غير مسندة",
+    "escalatedInScope": "تذاكر مصعّدة",
+    "openTasks": "المهام المفتوحة",
+    "overdueTasks": "المهام المتأخرة",
+    "unreadNotifications": "إشعارات غير مقروءة"
+  },
+  "lists": {
+    "myTickets": "تذاكري",
+    "myTicketsEmpty": "لا توجد تذاكر مفتوحة مسندة إليك.",
+    "myTasks": "مهامي",
+    "myTasksEmpty": "لا توجد مهام مفتوحة. عمل رائع!",
+    "viewAll": "عرض الكل",
+    "slaAtRisk": "معرضة لخرق اتفاقية الخدمة",
+    "slaAtRiskEmpty": "لا توجد تذاكر معرضة لخرق اتفاقية مستوى الخدمة.",
+    "escalations": "التصعيدات المعلقة",
+    "escalationsEmpty": "لا توجد تذاكر مصعّدة.",
+    "recentCustomers": "العملاء الأخيرون",
+    "recentCustomersEmpty": "لا توجد تفاعلات حديثة مع العملاء."
+  },
+  "priority": {
+    "Low": "منخفضة",
+    "Medium": "متوسطة",
+    "High": "عالية",
+    "Urgent": "عاجلة"
+  },
+  "ticketStatus": {
+    "New": "جديدة",
+    "Open": "مفتوحة",
+    "PendingCustomer": "بانتظار العميل",
+    "PendingInternal": "بانتظار إجراء داخلي",
+    "Escalated": "مصعّدة",
+    "Resolved": "محلولة",
+    "Closed": "مغلقة"
+  },
+  "sla": {
+    "ok": "ضمن المهلة",
+    "warning": "تحذير اتفاقية الخدمة",
+    "breached": "خرق اتفاقية الخدمة",
+    "none": "بلا اتفاقية"
+  },
+  "tasks": {
+    "title": "المهام والتذكيرات",
+    "subtitle": "المتابعات والتذكيرات الخاصة بعملك.",
+    "new": "مهمة جديدة",
+    "count": "عدد المهام: {{count}}",
+    "empty": "لا توجد مهام مطابقة لهذا التصفية.",
+    "markComplete": "تحديد كمكتملة",
+    "reopen": "إعادة فتح",
+    "completed": "تم إكمال المهمة.",
+    "reopened": "تمت إعادة فتح المهمة.",
+    "dueAt": "تستحق {{date}}",
+    "overdueSince": "متأخرة منذ {{date}}",
+    "completedAt": "اكتملت {{date}}",
+    "createTitle": "مهمة جديدة",
+    "editTitle": "تعديل المهمة",
+    "unlinkTicket": "إزالة التذكرة المرتبطة",
+    "ticketSearchHint": "اكتب رقم التذكرة أو موضوعها",
+    "deleteTitle": "حذف المهمة؟",
+    "deleteMessage": "سيتم حذف \"{{title}}\" نهائيًا.",
+    "filters": {
+      "open": "مفتوحة",
+      "overdue": "متأخرة",
+      "dueToday": "مستحقة اليوم",
+      "completed": "مكتملة",
+      "all": "الكل"
+    },
+    "fields": {
+      "title": "العنوان",
+      "notes": "ملاحظات",
+      "dueAt": "تاريخ الاستحقاق",
+      "remindAt": "التذكير",
+      "remindHint": "ستتلقى إشعارًا في هذا الوقت.",
+      "relatedTicket": "التذكرة المرتبطة"
+    }
+  },
+  "quickReplies": {
+    "title": "الردود السريعة",
+    "subtitle": "ردود محفوظة يمكنك إدراجها في ردود التذاكر والمحادثات.",
+    "new": "رد سريع جديد",
+    "searchHint": "العنوان أو النص أو /الاختصار",
+    "empty": "لم يتم العثور على ردود سريعة.",
+    "shared": "مشترك",
+    "personal": "شخصي",
+    "usage": "عدد مرات الاستخدام: {{count}}",
+    "createTitle": "رد سريع جديد",
+    "editTitle": "تعديل الرد السريع",
+    "deleteTitle": "حذف الرد السريع؟",
+    "deleteMessage": "سيتم حذف \"{{title}}\" نهائيًا.",
+    "deleteSharedMessage": "الرد \"{{title}}\" مشترك مع الفريق بأكمله وسيُحذف لدى الجميع.",
+    "scopes": {
+      "all": "الكل",
+      "personal": "شخصية",
+      "shared": "مشتركة"
+    },
+    "languages": {
+      "en": "الإنجليزية",
+      "ar": "العربية"
+    },
+    "fields": {
+      "title": "العنوان",
+      "shortcut": "الاختصار",
+      "shortcutHint": "أحرف وأرقام و - و _ (مثال: thanks/)",
+      "language": "اللغة",
+      "body": "نص الرد",
+      "bodyHint": "انقر على أحد المتغيرات أدناه لإدراج بيانات العميل أو التذكرة.",
+      "shared": "مشاركة مع الفريق بأكمله",
+      "sharedHint": "الردود المشتركة مرئية لجميع الموظفين، ويمكن للمديرين فقط تعديلها.",
+      "sharedLocked": "لا يمكن تغيير المشاركة بعد إنشاء الرد."
+    }
+  },
+  "picker": {
+    "open": "إدراج رد سريع",
+    "title": "الردود السريعة",
+    "search": "ابحث في الردود السريعة…",
+    "empty": "لم يتم العثور على ردود سريعة.",
+    "error": "تعذر تحميل الردود السريعة."
+  }
+}
