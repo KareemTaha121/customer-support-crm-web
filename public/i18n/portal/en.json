@@ -1,0 +1,53 @@
+{
+  "nav": {
+    "tickets": "My tickets",
+    "help": "Help center",
+    "profile": "My profile",
+    "login": "Sign in",
+    "logout": "Sign out"
+  },
+  "fields": {
+    "name": "Full name",
+    "email": "Email",
+    "phone": "Mobile number (optional)",
+    "language": "Preferred language",
+    "password": "Password",
+    "confirmPassword": "Confirm password",
+    "currentPassword": "Current password",
+    "newPassword": "New password",
+    "code": "Verification code"
+  },
+  "actions": {
+    "save": "Save"
+  },
+  "auth": {
+    "loginTitle": "Customer sign in",
+    "loginSubtitle": "Track your requests and talk to our support team.",
+    "login": "Sign in",
+    "invalidCredentials": "The email or password is incorrect, or the account is not verified yet.",
+    "noAccount": "Create an account",
+    "haveAccount": "Already have an account? Sign in",
+    "haveCode": "I have a verification code",
+    "registerTitle": "Create your account",
+    "registerSubtitle": "We'll email you a code to verify your address.",
+    "register": "Create account",
+    "registrationDisabled": "Online registration is currently unavailable. Please contact support.",
+    "passwordHint": "At least 12 characters.",
+    "verifyTitle": "Verify your email",
+    "verifySubtitle": "Enter the code we sent to your email address.",
+    "verify": "Verify and sign in",
+    "verified": "Your email is verified. Welcome!",
+    "resend": "Resend code",
+    "codeSent": "If the address is registered, a new code has been sent.",
+    "backToLogin": "Back to sign in"
+  },
+  "profile": {
+    "title": "My profile",
+    "details": "Personal details",
+    "saved": "Your profile has been updated.",
+    "changePassword": "Change password",
+    "updatePassword": "Update password",
+    "passwordChanged": "Your password has been changed.",
+    "wrongPassword": "The current password is incorrect."
+  }
+}

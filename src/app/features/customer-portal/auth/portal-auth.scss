@@ -1,0 +1,49 @@
+.portal-auth {
+  max-width: 440px;
+  margin: 32px auto;
+  padding: 28px;
+
+  h1 {
+    margin: 0 0 4px;
+    font: var(--mat-sys-headline-small);
+  }
+
+  p {
+    margin: 0 0 20px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    button[type='submit'] {
+      height: 44px;
+      margin-top: 8px;
+    }
+  }
+}
+
+.portal-auth__error {
+  padding: 10px 12px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  background: var(--mat-sys-error-container);
+  color: var(--mat-sys-on-error-container);
+}
+
+.portal-auth__info {
+  padding: 10px 12px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  background: var(--mat-sys-secondary-container);
+  color: var(--mat-sys-on-secondary-container);
+}
+
+.portal-auth__links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 16px;
+}
