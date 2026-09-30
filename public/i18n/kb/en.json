@@ -1,0 +1,138 @@
+{
+  "actions": {
+    "publish": "Publish",
+    "unpublish": "Unpublish",
+    "archive": "Archive",
+    "restore": "Restore"
+  },
+  "categories": {
+    "title": "Categories",
+    "subtitle": "Organize knowledge base articles into categories.",
+    "add": "Add category",
+    "empty": "No categories yet.",
+    "name": "Name",
+    "nameAr": "Arabic name",
+    "parent": "Parent category",
+    "noParent": "None (top level)",
+    "sortOrder": "Sort order",
+    "articles": "Articles",
+    "isPublic": "Show in the public help center",
+    "isPublicHint": "Internal categories are visible to staff only.",
+    "newTitle": "New category",
+    "editTitle": "Edit category",
+    "deleteTitle": "Delete category",
+    "deleteMessage": "Delete the category \"{{name}}\"? This cannot be undone.",
+    "deleteWithArticles": "Delete the category \"{{name}}\"? Its {{count}} article(s) will become uncategorized."
+  },
+  "delete": {
+    "title": "Delete article",
+    "message": "Delete \"{{title}}\" permanently? This cannot be undone."
+  },
+  "editor": {
+    "newTitle": "New article",
+    "write": "Write",
+    "preview": "Preview",
+    "emptyPreview": "Nothing to preview yet.",
+    "markdownHint": "Markdown supported: headings, lists, links, code and quotes.",
+    "slugHint": "Leave empty to generate it from the title.",
+    "tagsHint": "Separate tags with commas.",
+    "noCategory": "No category",
+    "saveDraft": "Save draft",
+    "saveFirst": "Save your changes before publishing.",
+    "statusTitle": "Status",
+    "translations": "Translations",
+    "noTranslations": "No translations yet.",
+    "addTranslation": "Add {{language}} translation",
+    "translationOf": "Translation of \"{{title}}\"",
+    "archivedNotice": "This article is archived. Restore it to edit.",
+    "readOnlyNotice": "You have read-only access to this article.",
+    "viewPublic": "View in help center"
+  },
+  "errors": {
+    "slugTaken": "This slug is already used by another article.",
+    "categoryNotFound": "The selected category no longer exists."
+  },
+  "fields": {
+    "title": "Title",
+    "slug": "Slug",
+    "summary": "Summary",
+    "body": "Content",
+    "type": "Type",
+    "language": "Language",
+    "category": "Category",
+    "tags": "Tags",
+    "visibility": "Visibility",
+    "status": "Status",
+    "publishedAt": "Published",
+    "stats": "Statistics",
+    "views": "Views",
+    "helpful": "Helpful",
+    "notHelpful": "Not helpful"
+  },
+  "help": {
+    "title": "Help center",
+    "heroTitle": "How can we help?",
+    "heroSubtitle": "Search our articles or browse by category.",
+    "searchPlaceholder": "Search for answers…",
+    "resultsFor": "Results for \"{{query}}\"",
+    "resultCount": "{{count}} article(s) found",
+    "noResults": "No articles match your search.",
+    "browseCategories": "Browse by category",
+    "articleCount": "{{count}} article(s)",
+    "noCategories": "No categories available.",
+    "faqs": "Frequently asked questions",
+    "latest": "Latest articles",
+    "noArticles": "No articles published yet.",
+    "noArticlesInCategory": "No articles in this category yet.",
+    "breadcrumb": "Breadcrumb",
+    "updated": "Updated {{date}}",
+    "otherLanguages": "Also available in",
+    "wasHelpful": "Was this article helpful?",
+    "feedbackThanks": "Thanks for your feedback!",
+    "feedbackContact": "Still need help?",
+    "contact": "Contact support",
+    "portal": "Customer portal",
+    "articleNotFound": "This article could not be found.",
+    "backHome": "Back to help center"
+  },
+  "list": {
+    "title": "Knowledge base",
+    "subtitle": "Articles, FAQs and guides for staff and customers.",
+    "newArticle": "New article",
+    "openHelpCenter": "Open help center",
+    "searchPlaceholder": "Search articles",
+    "empty": "No articles yet.",
+    "noResults": "No articles match the filters."
+  },
+  "messages": {
+    "created": "Article created.",
+    "deleted": "Article deleted.",
+    "publish": "Article published.",
+    "unpublish": "Article unpublished.",
+    "archive": "Article archived.",
+    "restore": "Article restored."
+  },
+  "type": {
+    "Faq": "FAQ",
+    "Article": "Article",
+    "Guide": "Guide",
+    "Solution": "Solution"
+  },
+  "status": {
+    "Draft": "Draft",
+    "Published": "Published",
+    "Archived": "Archived"
+  },
+  "visibility": {
+    "Public": "Public",
+    "Internal": "Internal"
+  },
+  "visibilityHint": {
+    "Public": "Visible in the public help center once published.",
+    "Internal": "Visible to staff only."
+  },
+  "language": {
+    "en": "English",
+    "ar": "Arabic"
+  }
+}

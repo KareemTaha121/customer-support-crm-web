@@ -1,0 +1,138 @@
+{
+  "actions": {
+    "publish": "نشر",
+    "unpublish": "إلغاء النشر",
+    "archive": "أرشفة",
+    "restore": "استعادة"
+  },
+  "categories": {
+    "title": "التصنيفات",
+    "subtitle": "نظّم مقالات قاعدة المعرفة ضمن تصنيفات.",
+    "add": "إضافة تصنيف",
+    "empty": "لا توجد تصنيفات بعد.",
+    "name": "الاسم",
+    "nameAr": "الاسم بالعربية",
+    "parent": "التصنيف الأب",
+    "noParent": "بدون (مستوى أعلى)",
+    "sortOrder": "ترتيب العرض",
+    "articles": "المقالات",
+    "isPublic": "إظهار في مركز المساعدة العام",
+    "isPublicHint": "التصنيفات الداخلية تظهر للموظفين فقط.",
+    "newTitle": "تصنيف جديد",
+    "editTitle": "تعديل التصنيف",
+    "deleteTitle": "حذف التصنيف",
+    "deleteMessage": "هل تريد حذف التصنيف \"{{name}}\"؟ لا يمكن التراجع عن ذلك.",
+    "deleteWithArticles": "هل تريد حذف التصنيف \"{{name}}\"؟ ستصبح مقالاته ({{count}}) بدون تصنيف."
+  },
+  "delete": {
+    "title": "حذف المقالة",
+    "message": "هل تريد حذف \"{{title}}\" نهائيًا؟ لا يمكن التراجع عن ذلك."
+  },
+  "editor": {
+    "newTitle": "مقالة جديدة",
+    "write": "كتابة",
+    "preview": "معاينة",
+    "emptyPreview": "لا يوجد محتوى للمعاينة بعد.",
+    "markdownHint": "يدعم تنسيق Markdown: العناوين والقوائم والروابط والشيفرة والاقتباسات.",
+    "slugHint": "اتركه فارغًا لإنشائه تلقائيًا من العنوان.",
+    "tagsHint": "افصل الوسوم بفواصل.",
+    "noCategory": "بدون تصنيف",
+    "saveDraft": "حفظ كمسودة",
+    "saveFirst": "احفظ التغييرات قبل النشر.",
+    "statusTitle": "الحالة",
+    "translations": "الترجمات",
+    "noTranslations": "لا توجد ترجمات بعد.",
+    "addTranslation": "إضافة ترجمة ({{language}})",
+    "translationOf": "ترجمة للمقالة \"{{title}}\"",
+    "archivedNotice": "هذه المقالة مؤرشفة. استعدها لتتمكن من تعديلها.",
+    "readOnlyNotice": "لديك صلاحية القراءة فقط لهذه المقالة.",
+    "viewPublic": "عرض في مركز المساعدة"
+  },
+  "errors": {
+    "slugTaken": "هذا المعرّف مستخدم بالفعل في مقالة أخرى.",
+    "categoryNotFound": "التصنيف المحدد لم يعد موجودًا."
+  },
+  "fields": {
+    "title": "العنوان",
+    "slug": "المعرّف في الرابط",
+    "summary": "الملخص",
+    "body": "المحتوى",
+    "type": "النوع",
+    "language": "اللغة",
+    "category": "التصنيف",
+    "tags": "الوسوم",
+    "visibility": "الظهور",
+    "status": "الحالة",
+    "publishedAt": "تاريخ النشر",
+    "stats": "الإحصاءات",
+    "views": "المشاهدات",
+    "helpful": "مفيد",
+    "notHelpful": "غير مفيد"
+  },
+  "help": {
+    "title": "مركز المساعدة",
+    "heroTitle": "كيف يمكننا مساعدتك؟",
+    "heroSubtitle": "ابحث في مقالاتنا أو تصفّحها حسب التصنيف.",
+    "searchPlaceholder": "ابحث عن إجابات…",
+    "resultsFor": "نتائج البحث عن \"{{query}}\"",
+    "resultCount": "تم العثور على {{count}} مقالة",
+    "noResults": "لا توجد مقالات تطابق بحثك.",
+    "browseCategories": "تصفّح حسب التصنيف",
+    "articleCount": "{{count}} مقالة",
+    "noCategories": "لا توجد تصنيفات متاحة.",
+    "faqs": "الأسئلة الشائعة",
+    "latest": "أحدث المقالات",
+    "noArticles": "لا توجد مقالات منشورة بعد.",
+    "noArticlesInCategory": "لا توجد مقالات في هذا التصنيف بعد.",
+    "breadcrumb": "مسار التنقل",
+    "updated": "آخر تحديث {{date}}",
+    "otherLanguages": "متوفرة أيضًا بـ",
+    "wasHelpful": "هل كانت هذه المقالة مفيدة؟",
+    "feedbackThanks": "شكرًا على ملاحظاتك!",
+    "feedbackContact": "هل ما زلت بحاجة إلى مساعدة؟",
+    "contact": "تواصل مع الدعم",
+    "portal": "بوابة العملاء",
+    "articleNotFound": "تعذّر العثور على هذه المقالة.",
+    "backHome": "العودة إلى مركز المساعدة"
+  },
+  "list": {
+    "title": "قاعدة المعرفة",
+    "subtitle": "المقالات والأسئلة الشائعة والأدلة للموظفين والعملاء.",
+    "newArticle": "مقالة جديدة",
+    "openHelpCenter": "فتح مركز المساعدة",
+    "searchPlaceholder": "البحث في المقالات",
+    "empty": "لا توجد مقالات بعد.",
+    "noResults": "لا توجد مقالات تطابق عوامل التصفية."
+  },
+  "messages": {
+    "created": "تم إنشاء المقالة.",
+    "deleted": "تم حذف المقالة.",
+    "publish": "تم نشر المقالة.",
+    "unpublish": "تم إلغاء نشر المقالة.",
+    "archive": "تمت أرشفة المقالة.",
+    "restore": "تمت استعادة المقالة."
+  },
+  "type": {
+    "Faq": "سؤال شائع",
+    "Article": "مقالة",
+    "Guide": "دليل",
+    "Solution": "حل"
+  },
+  "status": {
+    "Draft": "مسودة",
+    "Published": "منشورة",
+    "Archived": "مؤرشفة"
+  },
+  "visibility": {
+    "Public": "عامة",
+    "Internal": "داخلية"
+  },
+  "visibilityHint": {
+    "Public": "تظهر في مركز المساعدة العام بعد نشرها.",
+    "Internal": "تظهر للموظفين فقط."
+  },
+  "language": {
+    "en": "الإنجليزية",
+    "ar": "العربية"
+  }
+}
