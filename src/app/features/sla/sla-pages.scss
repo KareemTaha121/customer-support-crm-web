@@ -1,0 +1,55 @@
+// Shared by the three SLA list pages.
+.intro {
+  margin: 0;
+  max-width: 72ch;
+}
+
+.name-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 160px;
+
+  strong {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+  }
+
+  small {
+    overflow-wrap: anywhere;
+  }
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  min-width: 160px;
+}
+
+.targets {
+  display: grid;
+  grid-template-columns: max-content max-content max-content;
+  gap: 2px 12px;
+  align-items: center;
+  font: var(--mat-sys-body-small);
+  white-space: nowrap;
+}
+
+.row-actions {
+  display: flex;
+  justify-content: flex-end;
+  white-space: nowrap;
+}
+
+th.mat-mdc-header-cell,
+td.mat-mdc-cell {
+  padding-inline: 12px;
+  vertical-align: middle;
+}
+
+td.mat-mdc-cell {
+  padding-block: 8px;
+}

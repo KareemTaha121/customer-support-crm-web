@@ -1,0 +1,38 @@
+// Shared by the three SLA edit dialogs.
+.dialog-form {
+  display: flex;
+  flex-direction: column;
+}
+
+h3 {
+  margin: 16px 0 8px;
+  font: var(--mat-sys-title-small);
+  color: var(--mat-sys-primary);
+}
+
+.checks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 24px;
+  margin-bottom: 8px;
+}
+
+.duration {
+  display: grid;
+  grid-template-columns: minmax(80px, 1fr) minmax(110px, 1fr);
+  gap: 8px;
+}
+
+.form-error {
+  margin: 0 0 8px;
+  color: var(--mat-sys-error);
+  font: var(--mat-sys-body-small);
+}
+
+.hint {
+  margin: 0 0 12px;
+}
+
+mat-form-field {
+  width: 100%;
+}

@@ -1,0 +1,172 @@
+{
+  "title": "SLA & automation",
+  "subtitle": "Service level targets, auto-assignment and escalation rules.",
+  "tabs": {
+    "policies": "SLA policies",
+    "assignment": "Assignment rules",
+    "escalation": "Escalation rules"
+  },
+  "policies": {
+    "intro": "Response and resolution targets per priority. The most specific active policy applies to each ticket.",
+    "create": "New SLA policy",
+    "edit": "Edit SLA policy",
+    "empty": "No SLA policies yet.",
+    "appliesTo": "Applies to",
+    "schedule": "Schedule",
+    "allHours": "24/7",
+    "targets": "Targets",
+    "scopeHint": "Leave category and department empty to apply to all tickets.",
+    "businessHoursHint": "SLA time only counts during the working days and hours below.",
+    "calendarHint": "SLA time counts around the clock, every day.",
+    "targetsHint": "Enable the priorities this policy covers. Resolution must not be shorter than first response.",
+    "deleteTitle": "Delete SLA policy?",
+    "deleteMessage": "\"{{name}}\" will be deleted. Tickets that already have due dates keep them."
+  },
+  "assignment": {
+    "intro": "Rules are checked in order; the first active rule that matches a new ticket is applied.",
+    "create": "New assignment rule",
+    "edit": "Edit assignment rule",
+    "empty": "No assignment rules yet.",
+    "conditions": "Conditions",
+    "conditionsHint": "All filled conditions must match. Leave everything empty to match every ticket.",
+    "actions": "Actions",
+    "orderHint": "Lower numbers are checked first.",
+    "keywordHint": "Matches when the ticket subject or description contains this text.",
+    "toDepartment": "Department: {{name}}",
+    "toPriority": "Priority: {{name}}",
+    "deleteTitle": "Delete assignment rule?",
+    "deleteMessage": "\"{{name}}\" will be deleted. Existing ticket assignments are not changed."
+  },
+  "escalation": {
+    "intro": "Escalation rules run automatically when a ticket nears or breaches its SLA or waits too long.",
+    "create": "New escalation rule",
+    "edit": "Edit escalation rule",
+    "empty": "No escalation rules yet.",
+    "when": "When",
+    "then": "Then",
+    "after": "After {{time}}",
+    "toPriority": "Raise to {{name}}",
+    "reassign": "Reassign to {{name}}",
+    "reassignHint": "Optional. Leave empty to keep the current assignee.",
+    "notifyCount": "Notify {{count}} user(s)",
+    "deleteTitle": "Delete escalation rule?",
+    "deleteMessage": "\"{{name}}\" will be deleted."
+  },
+  "fields": {
+    "name": "Name",
+    "description": "Description",
+    "active": "Active",
+    "default": "Default",
+    "isDefault": "Default policy",
+    "category": "Category",
+    "department": "Department",
+    "channel": "Channel",
+    "priority": "Priority",
+    "keyword": "Keyword",
+    "order": "Order",
+    "allTickets": "All tickets",
+    "anyCategory": "Any category",
+    "anyDepartment": "Any department",
+    "anyChannel": "Any channel",
+    "anyPriority": "Any priority",
+    "businessHoursOnly": "Business hours only",
+    "workDays": "Working days",
+    "workStart": "Work starts",
+    "workEnd": "Work ends",
+    "firstResponse": "First response",
+    "resolution": "Resolution",
+    "unit": "Unit",
+    "setDepartment": "Move to department",
+    "setPriority": "Set priority",
+    "noChange": "No change",
+    "strategy": "Assignment",
+    "agent": "Agent",
+    "trigger": "Trigger",
+    "target": "SLA target",
+    "afterTime": "After",
+    "escalateTicket": "Mark ticket as escalated",
+    "raisePriorityTo": "Raise priority to",
+    "reassignTo": "Reassign to agent",
+    "notifyAssignee": "Notify assignee",
+    "notifyManagers": "Notify managers",
+    "notifyUsers": "Notify users",
+    "searchUsers": "Search users…",
+    "noUsers": "No users found",
+    "unknownUser": "Unknown user"
+  },
+  "priority": {
+    "Low": "Low",
+    "Medium": "Medium",
+    "High": "High",
+    "Urgent": "Urgent"
+  },
+  "channel": {
+    "Agent": "Agent",
+    "Portal": "Portal",
+    "WebForm": "Web form",
+    "Email": "Email",
+    "WhatsApp": "WhatsApp",
+    "Sms": "SMS",
+    "Chat": "Live chat",
+    "Phone": "Phone",
+    "Api": "API"
+  },
+  "strategy": {
+    "None": "Do not assign",
+    "SpecificAgent": "Specific agent",
+    "RoundRobin": "Round robin",
+    "LeastLoaded": "Least loaded agent"
+  },
+  "strategyHint": {
+    "None": "The ticket is left unassigned (department and priority changes still apply).",
+    "SpecificAgent": "Always assign to the selected agent.",
+    "RoundRobin": "Rotate between available agents in turn.",
+    "LeastLoaded": "Assign to the agent with the fewest open tickets."
+  },
+  "trigger": {
+    "SlaWarning": "SLA warning",
+    "SlaBreached": "SLA breached",
+    "Unassigned": "Unassigned for",
+    "NoAgentReply": "No agent reply for"
+  },
+  "triggerHint": {
+    "SlaWarning": "Runs when an SLA target is about to be missed.",
+    "SlaBreached": "Runs when an SLA target has been missed.",
+    "Unassigned": "Runs when a ticket stays unassigned longer than the delay.",
+    "NoAgentReply": "Runs when the customer waits longer than the delay for an agent reply."
+  },
+  "target": {
+    "any": "Either target",
+    "FirstResponse": "First response",
+    "Resolution": "Resolution"
+  },
+  "weekdays": {
+    "0": "Sun",
+    "1": "Mon",
+    "2": "Tue",
+    "3": "Wed",
+    "4": "Thu",
+    "5": "Fri",
+    "6": "Sat"
+  },
+  "units": {
+    "minutes": "Minutes",
+    "hours": "Hours",
+    "days": "Days"
+  },
+  "duration": {
+    "days": "{{n}} d",
+    "hours": "{{n}} h",
+    "minutes": "{{n}} min"
+  },
+  "validation": {
+    "noWorkDays": "Select at least one working day.",
+    "hoursOrder": "Work end must be after work start.",
+    "noTargets": "Enable at least one priority target.",
+    "resolutionBeforeFirst": "Resolution time must not be shorter than first response time.",
+    "firstTooLong": "First response can be at most 60 days.",
+    "resolutionTooLong": "Resolution can be at most 365 days.",
+    "afterTooLong": "The delay can be at most 30 days.",
+    "agentRequired": "Select the agent to assign."
+  }
+}
