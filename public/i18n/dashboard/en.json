@@ -9,7 +9,6 @@
     "greetingEvening": "Good evening, {{name}}",
     "subtitle": "Here is what needs your attention today.",
     "noTicketAccess": "You don't have access to tickets, so the ticket overview is hidden. You can still manage your tasks and quick replies.",
-    "unread": "You have {{count}} unread notifications.",
     "lastUpdated": "Updated at {{time}}"
   },
   "kpi": {
@@ -61,7 +60,14 @@
     "title": "Tasks & reminders",
     "subtitle": "Follow-ups and reminders for your work.",
     "new": "New task",
-    "count": "{{count}} tasks",
+    "count": {
+      "zero": "{{count}} tasks",
+      "one": "1 task",
+      "two": "{{count}} tasks",
+      "few": "{{count}} tasks",
+      "many": "{{count}} tasks",
+      "other": "{{count}} tasks"
+    },
     "empty": "No tasks match this filter.",
     "markComplete": "Mark as complete",
     "reopen": "Reopen",
@@ -100,7 +106,14 @@
     "empty": "No quick replies found.",
     "shared": "Shared",
     "personal": "Personal",
-    "usage": "Used {{count}} times",
+    "usage": {
+      "zero": "Not used yet",
+      "one": "Used once",
+      "two": "Used {{count}} times",
+      "few": "Used {{count}} times",
+      "many": "Used {{count}} times",
+      "other": "Used {{count}} times"
+    },
     "createTitle": "New quick reply",
     "editTitle": "Edit quick reply",
     "deleteTitle": "Delete quick reply?",

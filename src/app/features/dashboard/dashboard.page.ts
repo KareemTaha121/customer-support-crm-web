@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, DestroyRef, computed, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
@@ -24,7 +25,8 @@ interface Kpi {
   key: keyof AgentDashboardCounts;
   icon: string;
   tone: 'primary' | 'warning' | 'danger' | 'success' | 'info';
-  link: string;
+  /** `null` for counts without a list page (notifications open from the toolbar bell). */
+  link: string | null;
 }
 
 const KPIS: readonly Kpi[] = [
@@ -36,12 +38,14 @@ const KPIS: readonly Kpi[] = [
   { key: 'escalatedInScope', icon: 'trending_up', tone: 'danger', link: '/tickets' },
   { key: 'openTasks', icon: 'checklist', tone: 'primary', link: '/dashboard/tasks' },
   { key: 'overdueTasks', icon: 'alarm', tone: 'danger', link: '/dashboard/tasks' },
+  { key: 'unreadNotifications', icon: 'notifications_active', tone: 'info', link: null },
 ];
 
 /** Agent home screen (`/dashboard`): live counts, ticket lists, recent customers and tasks. */
 @Component({
   selector: 'app-dashboard-page',
   imports: [
+    NgTemplateOutlet,
     RouterLink,
     MatButtonModule,
     MatIconModule,
@@ -81,7 +85,6 @@ export class DashboardPage {
     const hour = new Date().getHours();
     return hour < 12 ? 'dashboard.home.greetingMorning' : hour < 18 ? 'dashboard.home.greetingAfternoon' : 'dashboard.home.greetingEvening';
   });
-  readonly unread = computed(() => this.data()?.counts.unreadNotifications ?? 0);
 
   private request: Subscription | null = null;
 

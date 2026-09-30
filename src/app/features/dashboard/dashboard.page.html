@@ -39,20 +39,18 @@
 } @else if (data(); as dashboard) {
   <div class="kpis">
     @for (kpi of kpis; track kpi.key) {
-      <a class="kpi crm-card" [class]="'kpi--' + kpi.tone" [routerLink]="kpi.link">
+      <ng-template #kpiBody>
         <mat-icon class="kpi__icon" aria-hidden="true">{{ kpi.icon }}</mat-icon>
         <span class="kpi__value">{{ count(kpi.key) }}</span>
         <span class="kpi__label">{{ 'dashboard.kpi.' + kpi.key | t }}</span>
-      </a>
+      </ng-template>
+      @if (kpi.link) {
+        <a class="kpi crm-card" [class]="'kpi--' + kpi.tone" [routerLink]="kpi.link"><ng-container [ngTemplateOutlet]="kpiBody" /></a>
+      } @else {
+        <div class="kpi crm-card" [class]="'kpi--' + kpi.tone"><ng-container [ngTemplateOutlet]="kpiBody" /></div>
+      }
     }
   </div>
-
-  @if (unread() > 0) {
-    <p class="unread crm-muted">
-      <mat-icon aria-hidden="true">notifications_active</mat-icon>
-      {{ 'dashboard.home.unread' | t: { count: unread() } }}
-    </p>
-  }
 
   <div class="widgets">
     <app-dashboard-ticket-list
