@@ -1,0 +1,74 @@
+{
+  "panel": {
+    "title": "AI assistant",
+    "hint": "Suggestions for this ticket. Review before using them.",
+    "working": "The assistant is working…",
+    "regenerate": "Regenerate",
+    "disclaimer": "AI suggestions can be wrong. Nothing is sent or changed until you do it."
+  },
+  "summary": {
+    "title": "Summary",
+    "run": "Summarize ticket",
+    "keyPoints": "Key points",
+    "nextStep": "Suggested next step"
+  },
+  "reply": {
+    "title": "Suggested reply",
+    "run": "Suggest a reply",
+    "tone": "Tone",
+    "instructions": "Instructions (optional)",
+    "instructionsPlaceholder": "For example: offer a replacement",
+    "instructionsTooLong": "Use at most 1000 characters.",
+    "insert": "Insert into reply",
+    "basedOn": "Based on {{count}} knowledge base article(s):",
+    "article": "Article {{n}}"
+  },
+  "tone": {
+    "friendly": "Friendly",
+    "formal": "Formal",
+    "empathetic": "Empathetic"
+  },
+  "categorize": {
+    "title": "Categorize",
+    "run": "Suggest category and priority",
+    "category": "Category",
+    "noCategory": "No matching category",
+    "priority": "Priority",
+    "confidence": "Confidence",
+    "percent": "{{value}}%",
+    "tags": "Suggested tags",
+    "apply": "Apply to ticket"
+  },
+  "priority": {
+    "Low": "Low",
+    "Medium": "Medium",
+    "High": "High",
+    "Urgent": "Urgent"
+  },
+  "sentiment": {
+    "label": "Sentiment",
+    "positive": "Positive",
+    "neutral": "Neutral",
+    "negative": "Negative",
+    "frustrated": "Frustrated"
+  },
+  "solutions": {
+    "title": "Suggested solutions",
+    "run": "Find solutions",
+    "empty": "No matching knowledge base articles were found."
+  },
+  "feedback": {
+    "question": "Was this helpful?",
+    "helpful": "Helpful",
+    "notHelpful": "Not helpful",
+    "thanks": "Thanks for your feedback"
+  },
+  "errors": {
+    "AI_NOT_CONFIGURED": "The AI assistant is not configured.",
+    "AI_REFUSED": "The AI assistant declined this request.",
+    "AI_INVALID_OUTPUT": "The AI assistant returned an unusable answer. Try again.",
+    "AI_SUGGESTION_NOT_FOUND": "This suggestion can no longer be rated.",
+    "FEATURE_DISABLED": "AI assistance is turned off by an administrator.",
+    "RATE_LIMITED": "Too many AI requests. Please wait a moment and try again."
+  }
+}

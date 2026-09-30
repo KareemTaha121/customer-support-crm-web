@@ -1,0 +1,203 @@
+@if (visible()) {
+  <section class="ai-panel" [attr.aria-label]="'ai.panel.title' | t">
+    <header class="ai-head">
+      <mat-icon class="ai-head__icon">auto_awesome</mat-icon>
+      <div>
+        <h3>{{ 'ai.panel.title' | t }}</h3>
+        <p class="crm-muted">{{ 'ai.panel.hint' | t }}</p>
+      </div>
+    </header>
+
+    <mat-accordion multi displayMode="flat">
+      <!-- Summary -->
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title><mat-icon>summarize</mat-icon>{{ 'ai.summary.title' | t }}</mat-panel-title>
+        </mat-expansion-panel-header>
+        @let s = summary();
+        @if (s.status === 'loading') {
+          <mat-progress-bar mode="indeterminate" [attr.aria-label]="'ai.panel.working' | t" />
+        }
+        @if (s.error) {
+          <p class="ai-error" role="alert"><mat-icon>error_outline</mat-icon>{{ s.error }}</p>
+        }
+        @if (s.data; as data) {
+          <div class="ai-result">
+            <span class="crm-pill" [class]="sentimentClass(data.sentiment)">
+              {{ 'ai.sentiment.label' | t }}: {{ label('ai.sentiment', data.sentiment) }}
+            </span>
+            <p class="ai-text">{{ data.summary }}</p>
+            @if (data.keyPoints.length) {
+              <h4>{{ 'ai.summary.keyPoints' | t }}</h4>
+              <ul>
+                @for (point of data.keyPoints; track $index) {
+                  <li>{{ point }}</li>
+                }
+              </ul>
+            }
+            @if (data.nextStep) {
+              <h4>{{ 'ai.summary.nextStep' | t }}</h4>
+              <p class="ai-text">{{ data.nextStep }}</p>
+            }
+            <app-ai-feedback [suggestionId]="data.suggestionId" />
+          </div>
+        }
+        <div class="ai-actions">
+          <button mat-stroked-button type="button" [disabled]="s.status === 'loading'" (click)="runSummary()">
+            <mat-icon>{{ s.data ? 'refresh' : 'auto_awesome' }}</mat-icon>
+            {{ (s.data ? 'ai.panel.regenerate' : 'ai.summary.run') | t }}
+          </button>
+        </div>
+      </mat-expansion-panel>
+
+      <!-- Suggested reply -->
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title><mat-icon>edit_note</mat-icon>{{ 'ai.reply.title' | t }}</mat-panel-title>
+        </mat-expansion-panel-header>
+        @let r = reply();
+        <form class="ai-form" [formGroup]="replyForm" (ngSubmit)="runReply()">
+          <mat-form-field subscriptSizing="dynamic">
+            <mat-label>{{ 'ai.reply.tone' | t }}</mat-label>
+            <mat-select formControlName="tone">
+              @for (tone of tones; track tone) {
+                <mat-option [value]="tone">{{ 'ai.tone.' + tone | t }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field subscriptSizing="dynamic">
+            <mat-label>{{ 'ai.reply.instructions' | t }}</mat-label>
+            <textarea matInput formControlName="instructions" rows="2" maxlength="1000" [placeholder]="'ai.reply.instructionsPlaceholder' | t"></textarea>
+            @if (replyForm.controls.instructions.hasError('maxlength')) {
+              <mat-error>{{ 'ai.reply.instructionsTooLong' | t }}</mat-error>
+            }
+          </mat-form-field>
+          <div class="ai-actions">
+            <button mat-stroked-button type="submit" [disabled]="r.status === 'loading'">
+              <mat-icon>{{ r.data ? 'refresh' : 'auto_awesome' }}</mat-icon>
+              {{ (r.data ? 'ai.panel.regenerate' : 'ai.reply.run') | t }}
+            </button>
+          </div>
+        </form>
+        @if (r.status === 'loading') {
+          <mat-progress-bar mode="indeterminate" [attr.aria-label]="'ai.panel.working' | t" />
+        }
+        @if (r.error) {
+          <p class="ai-error" role="alert"><mat-icon>error_outline</mat-icon>{{ r.error }}</p>
+        }
+        @if (r.data; as data) {
+          <div class="ai-result">
+            <p class="ai-reply" [attr.dir]="data.language === 'ar' ? 'rtl' : 'ltr'" [attr.lang]="data.language">{{ data.reply }}</p>
+            @if (data.usedArticleIds.length) {
+              <p class="crm-muted ai-small">
+                {{ 'ai.reply.basedOn' | t: { count: data.usedArticleIds.length } }}
+                @for (articleId of data.usedArticleIds; track articleId; let i = $index) {
+                  <a [routerLink]="articleLink(articleId)">{{ 'ai.reply.article' | t: { n: i + 1 } }}</a>
+                }
+              </p>
+            }
+            <div class="ai-actions">
+              @if (canInsertReply()) {
+                <button mat-flat-button type="button" (click)="insertReply()">
+                  <mat-icon>input</mat-icon>{{ 'ai.reply.insert' | t }}
+                </button>
+              }
+            </div>
+            <app-ai-feedback [suggestionId]="data.suggestionId" />
+          </div>
+        }
+      </mat-expansion-panel>
+
+      <!-- Categorize -->
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title><mat-icon>label</mat-icon>{{ 'ai.categorize.title' | t }}</mat-panel-title>
+        </mat-expansion-panel-header>
+        @let c = category();
+        @if (c.status === 'loading') {
+          <mat-progress-bar mode="indeterminate" [attr.aria-label]="'ai.panel.working' | t" />
+        }
+        @if (c.error) {
+          <p class="ai-error" role="alert"><mat-icon>error_outline</mat-icon>{{ c.error }}</p>
+        }
+        @if (c.data; as data) {
+          <div class="ai-result">
+            <dl class="ai-facts">
+              <dt>{{ 'ai.categorize.category' | t }}</dt>
+              <dd>{{ data.categoryName || ('ai.categorize.noCategory' | t) }}</dd>
+              <dt>{{ 'ai.categorize.priority' | t }}</dt>
+              <dd><span class="crm-pill" [class]="priorityClass(data.priority)">{{ label('ai.priority', data.priority) }}</span></dd>
+              <dt>{{ 'ai.categorize.confidence' | t }}</dt>
+              <dd>{{ 'ai.categorize.percent' | t: { value: confidencePercent() } }}</dd>
+            </dl>
+            @if (data.tags.length) {
+              <div class="ai-tags" [attr.aria-label]="'ai.categorize.tags' | t">
+                @for (tag of data.tags; track tag) {
+                  <span class="crm-pill">{{ tag }}</span>
+                }
+              </div>
+            }
+            @if (data.reasoning) {
+              <p class="crm-muted ai-small">{{ data.reasoning }}</p>
+            }
+            <div class="ai-actions">
+              @if (canApplyCategory()) {
+                <button mat-flat-button type="button" (click)="applyCategory()">
+                  <mat-icon>done</mat-icon>{{ 'ai.categorize.apply' | t }}
+                </button>
+              }
+            </div>
+            <app-ai-feedback [suggestionId]="data.suggestionId" />
+          </div>
+        }
+        <div class="ai-actions">
+          <button mat-stroked-button type="button" [disabled]="c.status === 'loading'" (click)="runCategorize()">
+            <mat-icon>{{ c.data ? 'refresh' : 'auto_awesome' }}</mat-icon>
+            {{ (c.data ? 'ai.panel.regenerate' : 'ai.categorize.run') | t }}
+          </button>
+        </div>
+      </mat-expansion-panel>
+
+      <!-- Suggested solutions -->
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title><mat-icon>lightbulb</mat-icon>{{ 'ai.solutions.title' | t }}</mat-panel-title>
+        </mat-expansion-panel-header>
+        @let k = solutions();
+        @if (k.status === 'loading') {
+          <mat-progress-bar mode="indeterminate" [attr.aria-label]="'ai.panel.working' | t" />
+        }
+        @if (k.error) {
+          <p class="ai-error" role="alert"><mat-icon>error_outline</mat-icon>{{ k.error }}</p>
+        }
+        @if (k.data; as data) {
+          <div class="ai-result">
+            @if (data.solutions.length) {
+              <ul class="ai-solutions">
+                @for (item of data.solutions; track item.articleId) {
+                  <li>
+                    <a [routerLink]="articleLink(item.articleId)">
+                      <mat-icon>article</mat-icon><span>{{ item.title }}</span>
+                    </a>
+                    <p class="crm-muted ai-small">{{ item.reason }}</p>
+                  </li>
+                }
+              </ul>
+            } @else {
+              <p class="crm-muted ai-small">{{ 'ai.solutions.empty' | t }}</p>
+            }
+            <app-ai-feedback [suggestionId]="data.suggestionId" />
+          </div>
+        }
+        <div class="ai-actions">
+          <button mat-stroked-button type="button" [disabled]="k.status === 'loading'" (click)="runSolutions()">
+            <mat-icon>{{ k.data ? 'refresh' : 'auto_awesome' }}</mat-icon>
+            {{ (k.data ? 'ai.panel.regenerate' : 'ai.solutions.run') | t }}
+          </button>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <p class="crm-muted ai-small ai-disclaimer">{{ 'ai.panel.disclaimer' | t }}</p>
+  </section>
+}
