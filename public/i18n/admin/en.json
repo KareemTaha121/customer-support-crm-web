@@ -1,0 +1,369 @@
+{
+  "status": {
+    "Active": "Active",
+    "Disabled": "Disabled",
+    "Inactive": "Inactive"
+  },
+  "users": {
+    "title": "Users",
+    "subtitle": "Staff accounts, their roles and branch access",
+    "new": "New user",
+    "searchHint": "Name or email",
+    "displayName": "Display name",
+    "roles": "Roles",
+    "lastLogin": "Last sign-in",
+    "never": "Never",
+    "empty": "No users match the filters.",
+    "createTitle": "New user",
+    "editTitle": "Edit user",
+    "created": "User created.",
+    "password": "Password",
+    "newPassword": "New password",
+    "passwordHint": "{{min}} to {{max}} characters",
+    "lockedOut": "Locked out",
+    "scopes": "Branch and department access",
+    "scopesHint": "Limits the tickets and customers the user sees. Leave empty when a role grants access to all branches.",
+    "addScope": "Add scope",
+    "wholeBranch": "Whole branch",
+    "resetPassword": "Reset password",
+    "resetPasswordHint": "Sets a new password and signs the user out of every session.",
+    "resetPasswordTitle": "Reset password?",
+    "resetPasswordMessage": "{{name}} will have to sign in again with the new password.",
+    "passwordReset": "Password reset.",
+    "activateTitle": "Activate user?",
+    "activateMessage": "{{name}} will be able to sign in again.",
+    "deactivateTitle": "Deactivate user?",
+    "deactivateMessage": "{{name}} will be signed out and can no longer sign in.",
+    "activated": "{{name}} was activated.",
+    "deactivated": "{{name}} was deactivated."
+  },
+  "roles": {
+    "title": "Roles",
+    "subtitle": "Permission sets assigned to users",
+    "new": "New role",
+    "empty": "No roles yet.",
+    "system": "System",
+    "permissions": "Permissions",
+    "permissionCount": "{{count}} permissions",
+    "selectedCount": "{{count}} of {{total}} selected",
+    "users": "Users",
+    "createTitle": "New role",
+    "editTitle": "Edit role",
+    "viewTitle": "Role details",
+    "deleteTitle": "Delete role?",
+    "deleteMessage": "The role \"{{name}}\" will be deleted permanently."
+  },
+  "permissionGroups": {
+    "tickets": "Tickets",
+    "customers": "Customers",
+    "kb": "Knowledge base",
+    "sla": "SLA",
+    "automation": "Automation",
+    "chat": "Live chat",
+    "channels": "Channels",
+    "quickreplies": "Quick replies",
+    "reports": "Reports",
+    "ai": "AI assistant",
+    "users": "Users",
+    "roles": "Roles",
+    "audit": "Audit log",
+    "organization": "Organization",
+    "settings": "Settings",
+    "integrations": "Integrations",
+    "data": "Data access"
+  },
+  "permissions": {
+    "tickets": {
+      "view": "View tickets",
+      "create": "Create tickets",
+      "update": "Update tickets",
+      "assign": "Assign tickets",
+      "escalate": "Escalate tickets",
+      "delete": "Delete tickets",
+      "categories_manage": "Manage ticket categories"
+    },
+    "customers": {
+      "view": "View customers",
+      "create": "Create customers",
+      "update": "Update customers",
+      "delete": "Delete customers",
+      "notes_manage": "Manage customer notes",
+      "attachments_manage": "Manage customer attachments"
+    },
+    "kb": {
+      "view": "View articles",
+      "manage": "Manage articles",
+      "publish": "Publish articles"
+    },
+    "sla": {
+      "manage": "Manage SLA policies"
+    },
+    "automation": {
+      "manage": "Manage automation rules"
+    },
+    "chat": {
+      "handle": "Handle live chats"
+    },
+    "channels": {
+      "manage": "Manage channels"
+    },
+    "quickreplies": {
+      "manage": "Manage quick replies"
+    },
+    "reports": {
+      "view": "View reports",
+      "export": "Export reports"
+    },
+    "ai": {
+      "use": "Use the AI assistant"
+    },
+    "users": {
+      "manage": "Manage users"
+    },
+    "roles": {
+      "manage": "Manage roles"
+    },
+    "audit": {
+      "view": "View audit log",
+      "export": "Export audit log"
+    },
+    "organization": {
+      "manage": "Manage branches and departments"
+    },
+    "settings": {
+      "manage": "Manage settings and branding"
+    },
+    "integrations": {
+      "manage": "Manage integrations"
+    },
+    "data": {
+      "all_branches": "Access all branches"
+    }
+  },
+  "organization": {
+    "title": "Organization",
+    "subtitle": "Profile, branding and branch structure",
+    "profile": "Profile",
+    "profileReadOnly": "You can view the profile and branding. Changing them needs the settings permission.",
+    "supportEmail": "Support email",
+    "supportPhone": "Support phone",
+    "defaultCulture": "Default language",
+    "cultures": {
+      "en": "English",
+      "ar": "Arabic"
+    },
+    "timeZone": "Time zone",
+    "branding": "Branding",
+    "primaryColor": "Primary color",
+    "accentColor": "Accent color",
+    "colorFormat": "Use the format #RRGGBB.",
+    "saveColors": "Save colors",
+    "brandingSaved": "Branding updated.",
+    "logo": "Logo",
+    "noLogo": "No logo",
+    "uploadLogo": "Upload logo",
+    "logoHint": "PNG, JPG, GIF or WebP, up to 2 MB.",
+    "logoType": "The logo must be a PNG, JPG, GIF or WebP image.",
+    "logoTooLarge": "The logo must be 2 MB or smaller.",
+    "logoUploaded": "Logo uploaded.",
+    "branches": "Branches and departments",
+    "branchesReadOnly": "Read only: changing branches needs the organization permission.",
+    "branch": "Branch",
+    "department": "Department",
+    "newBranch": "New branch",
+    "editBranch": "Edit branch",
+    "newDepartment": "New department",
+    "editDepartment": "Edit department",
+    "departmentCount": "{{count}} departments",
+    "noBranches": "No branches yet.",
+    "noDepartments": "No departments in this branch.",
+    "code": "Code",
+    "codeHint": "Letters, digits, - and _",
+    "address": "Address",
+    "deactivateTitle": "Deactivate?",
+    "deactivateBranchMessage": "The branch \"{{name}}\" will no longer be available for new tickets and users.",
+    "deactivateDepartmentMessage": "The department \"{{name}}\" will no longer be available for new tickets and users."
+  },
+  "settings": {
+    "title": "Settings",
+    "subtitle": "Feature toggles and system limits",
+    "public": "Public",
+    "publicHint": "Visible to the login page and the customer portal.",
+    "default": "Default: {{value}}",
+    "useDefault": "Use default",
+    "on": "On",
+    "off": "Off",
+    "numberRange": "Enter a whole number from 0 to {{max}}.",
+    "keys": {
+      "portal": {
+        "registration_enabled": "Customer self-registration"
+      },
+      "chat": {
+        "enabled": "Live chat"
+      },
+      "webform": {
+        "enabled": "Web contact form"
+      },
+      "chatbot": {
+        "enabled": "Chatbot"
+      },
+      "ai": {
+        "agent_assist_enabled": "AI agent assist"
+      },
+      "tickets": {
+        "auto_close_resolved_days": "Auto-close resolved tickets after (days)"
+      }
+    },
+    "help": {
+      "portal": {
+        "registration_enabled": "Customers can create their own portal account."
+      },
+      "chat": {
+        "enabled": "Shows the live chat widget to customers."
+      },
+      "webform": {
+        "enabled": "Accepts tickets from the public contact form."
+      },
+      "chatbot": {
+        "enabled": "Answers customers automatically before a human joins."
+      },
+      "ai": {
+        "agent_assist_enabled": "Suggested replies, summaries and categories for agents."
+      },
+      "tickets": {
+        "auto_close_resolved_days": "0 turns auto-close off."
+      }
+    }
+  },
+  "integrations": {
+    "title": "Integrations",
+    "subtitle": "API keys for external systems and outgoing webhooks",
+    "apiKeys": "API keys",
+    "apiKeysHint": "External systems authenticate with these keys. Grant only the scopes they need.",
+    "newApiKey": "New API key",
+    "noApiKeys": "No API keys yet.",
+    "scopesTitle": "Scopes",
+    "scopeRequired": "Select at least one scope.",
+    "expiresAt": "Expires",
+    "expiresHint": "Leave empty for a key that never expires.",
+    "neverExpires": "Never",
+    "lastUsed": "Last used",
+    "keyStatus": {
+      "Active": "Active",
+      "Revoked": "Revoked",
+      "Expired": "Expired"
+    },
+    "revoke": "Revoke",
+    "revokeTitle": "Revoke API key?",
+    "revokeMessage": "Systems using \"{{name}}\" will stop working immediately. This cannot be undone.",
+    "revoked": "\"{{name}}\" was revoked.",
+    "apiKeyCreated": "API key created",
+    "apiKeySecretHint": "Store this key securely in the external system.",
+    "webhooks": "Webhooks",
+    "webhooksHint": "Events are sent as signed HTTPS POST requests.",
+    "newWebhook": "New webhook",
+    "editWebhook": "Edit webhook",
+    "noWebhooks": "No webhooks yet.",
+    "url": "Endpoint URL",
+    "urlHttps": "Enter an https:// URL.",
+    "active": "Active",
+    "eventsTitle": "Events",
+    "eventRequired": "Select at least one event.",
+    "event": "Event",
+    "webhookCreated": "Webhook created",
+    "webhookSecretHint": "Use this signing secret to verify the signature of each delivery.",
+    "secretRotated": "New signing secret",
+    "rotateSecret": "Rotate secret",
+    "rotateTitle": "Rotate signing secret?",
+    "rotateMessage": "The current secret of \"{{name}}\" stops working immediately. Update the receiver with the new one.",
+    "sendTest": "Send test",
+    "testQueued": "Test event queued for \"{{name}}\".",
+    "deleteWebhookTitle": "Delete webhook?",
+    "deleteWebhookMessage": "\"{{name}}\" and its delivery history will be deleted.",
+    "deliveries": "Deliveries",
+    "deliveriesTitle": "Deliveries: {{name}}",
+    "noDeliveries": "No deliveries yet.",
+    "deliveryStatus": {
+      "Delivered": "Delivered",
+      "Failed": "Failed",
+      "Pending": "Pending"
+    },
+    "attempts": "Attempts",
+    "response": "Last response",
+    "retryQueued": "Delivery queued for retry.",
+    "secretOnce": "This value is shown only once. Copy it now; it cannot be displayed again.",
+    "copy": "Copy",
+    "copied": "Copied",
+    "copyFailed": "Could not copy. Select the text and copy it manually.",
+    "secretSaved": "I have saved it",
+    "scopes": {
+      "customers_read": "Read customers",
+      "customers_write": "Write customers",
+      "tickets_read": "Read tickets",
+      "tickets_write": "Write tickets"
+    },
+    "events": {
+      "ticket_created": "Ticket created",
+      "ticket_status_changed": "Ticket status changed",
+      "ticket_assigned": "Ticket assigned",
+      "ticket_message_added": "Ticket message added",
+      "ticket_feedback": "Ticket feedback",
+      "customer_created": "Customer created"
+    }
+  },
+  "audit": {
+    "title": "Audit log",
+    "subtitle": "Who changed what and when",
+    "occurredAt": "Time",
+    "actor": "User",
+    "actorHint": "Search by name or email",
+    "system": "System",
+    "action": "Action",
+    "entity": "Entity",
+    "entityType": "Entity type",
+    "entityId": "Entity ID",
+    "empty": "No audit entries match the filters.",
+    "exportHint": "The CSV export applies only the date range and action filters.",
+    "detailTitle": "Audit entry",
+    "ipAddress": "IP address",
+    "userAgent": "User agent",
+    "correlationId": "Correlation ID",
+    "oldValues": "Old values",
+    "newValues": "New values"
+  },
+  "errors": {
+    "LAST_ADMINISTRATOR": "At least one active administrator must remain.",
+    "CANNOT_DISABLE_SELF": "You cannot deactivate your own account.",
+    "EMAIL_TAKEN": "This email is already used by another user.",
+    "USER_NOT_FOUND": "The user was not found.",
+    "UNKNOWN_ROLE": "One of the selected roles no longer exists.",
+    "ROLE_IS_SYSTEM": "System roles are built in and cannot be changed or deleted.",
+    "ROLE_IN_USE": "This role is assigned to users. Unassign it from all users first.",
+    "ROLE_NAME_TAKEN": "A role with this name already exists.",
+    "ROLE_NOT_FOUND": "The role was not found.",
+    "INVALID_ROLE_NAME": "Enter a valid role name.",
+    "UNKNOWN_PERMISSION": "One of the selected permissions is not recognized.",
+    "BRANCH_CODE_TAKEN": "A branch with this code already exists.",
+    "DEPARTMENT_CODE_TAKEN": "A department with this code already exists in this branch.",
+    "BRANCH_NOT_FOUND": "The branch was not found.",
+    "DEPARTMENT_NOT_FOUND": "The department was not found.",
+    "DEPARTMENT_NOT_IN_BRANCH": "The department does not belong to the selected branch.",
+    "INVALID_BRANCH": "Check the branch details.",
+    "INVALID_DEPARTMENT": "Check the department details.",
+    "ORGANIZATION_UNIT_INACTIVE": "The selected branch or department is inactive.",
+    "INVALID_ORGANIZATION": "Check the organization details.",
+    "ORGANIZATION_NOT_CONFIGURED": "The organization profile is not configured yet.",
+    "OUT_OF_SCOPE": "This record is outside your branch access.",
+    "UNKNOWN_SETTING": "One of the settings is not recognized.",
+    "FEATURE_DISABLED": "This feature is turned off in settings.",
+    "INVALID_API_KEY": "The API key needs a name and at least one valid scope.",
+    "API_KEY_NOT_FOUND": "The API key was not found.",
+    "INVALID_WEBHOOK": "Webhooks need a name, an https URL and at least one event.",
+    "WEBHOOK_NOT_FOUND": "The webhook was not found.",
+    "WEBHOOK_DELIVERY_NOT_FOUND": "The delivery was not found.",
+    "FILE_EMPTY": "The file is empty.",
+    "FILE_TOO_LARGE": "The file is too large.",
+    "FILE_TYPE_NOT_ALLOWED": "This file type is not allowed.",
+    "FILE_SIGNATURE_MISMATCH": "The file content does not match its type."
+  }
+}

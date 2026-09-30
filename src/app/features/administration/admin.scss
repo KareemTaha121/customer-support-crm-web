@@ -1,0 +1,65 @@
+// Shared by administration pages (imported via styleUrl). Keep small.
+:host {
+  display: block;
+}
+
+.admin-section + .admin-section {
+  margin-top: var(--crm-gap);
+}
+
+.admin-section h2 {
+  margin: 0 0 12px;
+  font: var(--mat-sys-title-large);
+}
+
+.admin-section__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 12px;
+
+  h2 {
+    margin: 0;
+  }
+}
+
+.admin-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.admin-actions-cell {
+  white-space: nowrap;
+  text-align: end;
+}
+
+.admin-mono {
+  font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.admin-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  background: #ffebee;
+  color: var(--crm-danger);
+
+  &--info {
+    background: var(--mat-sys-surface-container-high);
+    color: var(--mat-sys-on-surface);
+  }
+}
+
+.admin-hint {
+  margin: 0 0 12px;
+  color: var(--mat-sys-on-surface-variant);
+  font: var(--mat-sys-body-small);
+}

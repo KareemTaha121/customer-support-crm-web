@@ -1,0 +1,369 @@
+{
+  "status": {
+    "Active": "نشط",
+    "Disabled": "معطّل",
+    "Inactive": "غير نشط"
+  },
+  "users": {
+    "title": "المستخدمون",
+    "subtitle": "حسابات الموظفين وأدوارهم وصلاحيات الوصول إلى الفروع",
+    "new": "مستخدم جديد",
+    "searchHint": "الاسم أو البريد الإلكتروني",
+    "displayName": "الاسم المعروض",
+    "roles": "الأدوار",
+    "lastLogin": "آخر تسجيل دخول",
+    "never": "أبدًا",
+    "empty": "لا يوجد مستخدمون مطابقون لعوامل التصفية.",
+    "createTitle": "مستخدم جديد",
+    "editTitle": "تعديل المستخدم",
+    "created": "تم إنشاء المستخدم.",
+    "password": "كلمة المرور",
+    "newPassword": "كلمة المرور الجديدة",
+    "passwordHint": "من {{min}} إلى {{max}} حرفًا",
+    "lockedOut": "مقفل مؤقتًا",
+    "scopes": "الوصول إلى الفروع والأقسام",
+    "scopesHint": "يحدّد التذاكر والعملاء الذين يراهم المستخدم. اتركه فارغًا إذا منحه أحد الأدوار الوصول إلى جميع الفروع.",
+    "addScope": "إضافة نطاق",
+    "wholeBranch": "الفرع بالكامل",
+    "resetPassword": "إعادة تعيين كلمة المرور",
+    "resetPasswordHint": "يعيّن كلمة مرور جديدة ويسجّل خروج المستخدم من جميع الجلسات.",
+    "resetPasswordTitle": "إعادة تعيين كلمة المرور؟",
+    "resetPasswordMessage": "سيتعيّن على {{name}} تسجيل الدخول مجددًا بكلمة المرور الجديدة.",
+    "passwordReset": "تمت إعادة تعيين كلمة المرور.",
+    "activateTitle": "تفعيل المستخدم؟",
+    "activateMessage": "سيتمكن {{name}} من تسجيل الدخول مجددًا.",
+    "deactivateTitle": "تعطيل المستخدم؟",
+    "deactivateMessage": "سيتم تسجيل خروج {{name}} ولن يتمكن من تسجيل الدخول.",
+    "activated": "تم تفعيل {{name}}.",
+    "deactivated": "تم تعطيل {{name}}."
+  },
+  "roles": {
+    "title": "الأدوار",
+    "subtitle": "مجموعات الصلاحيات المسندة إلى المستخدمين",
+    "new": "دور جديد",
+    "empty": "لا توجد أدوار بعد.",
+    "system": "نظام",
+    "permissions": "الصلاحيات",
+    "permissionCount": "{{count}} صلاحية",
+    "selectedCount": "تم اختيار {{count}} من {{total}}",
+    "users": "المستخدمون",
+    "createTitle": "دور جديد",
+    "editTitle": "تعديل الدور",
+    "viewTitle": "تفاصيل الدور",
+    "deleteTitle": "حذف الدور؟",
+    "deleteMessage": "سيتم حذف الدور \"{{name}}\" نهائيًا."
+  },
+  "permissionGroups": {
+    "tickets": "التذاكر",
+    "customers": "العملاء",
+    "kb": "قاعدة المعرفة",
+    "sla": "اتفاقيات مستوى الخدمة",
+    "automation": "الأتمتة",
+    "chat": "الدردشة المباشرة",
+    "channels": "القنوات",
+    "quickreplies": "الردود السريعة",
+    "reports": "التقارير",
+    "ai": "المساعد الذكي",
+    "users": "المستخدمون",
+    "roles": "الأدوار",
+    "audit": "سجل التدقيق",
+    "organization": "المنشأة",
+    "settings": "الإعدادات",
+    "integrations": "التكاملات",
+    "data": "الوصول إلى البيانات"
+  },
+  "permissions": {
+    "tickets": {
+      "view": "عرض التذاكر",
+      "create": "إنشاء التذاكر",
+      "update": "تحديث التذاكر",
+      "assign": "إسناد التذاكر",
+      "escalate": "تصعيد التذاكر",
+      "delete": "حذف التذاكر",
+      "categories_manage": "إدارة تصنيفات التذاكر"
+    },
+    "customers": {
+      "view": "عرض العملاء",
+      "create": "إنشاء العملاء",
+      "update": "تحديث العملاء",
+      "delete": "حذف العملاء",
+      "notes_manage": "إدارة ملاحظات العملاء",
+      "attachments_manage": "إدارة مرفقات العملاء"
+    },
+    "kb": {
+      "view": "عرض المقالات",
+      "manage": "إدارة المقالات",
+      "publish": "نشر المقالات"
+    },
+    "sla": {
+      "manage": "إدارة سياسات مستوى الخدمة"
+    },
+    "automation": {
+      "manage": "إدارة قواعد الأتمتة"
+    },
+    "chat": {
+      "handle": "التعامل مع الدردشات المباشرة"
+    },
+    "channels": {
+      "manage": "إدارة القنوات"
+    },
+    "quickreplies": {
+      "manage": "إدارة الردود السريعة"
+    },
+    "reports": {
+      "view": "عرض التقارير",
+      "export": "تصدير التقارير"
+    },
+    "ai": {
+      "use": "استخدام المساعد الذكي"
+    },
+    "users": {
+      "manage": "إدارة المستخدمين"
+    },
+    "roles": {
+      "manage": "إدارة الأدوار"
+    },
+    "audit": {
+      "view": "عرض سجل التدقيق",
+      "export": "تصدير سجل التدقيق"
+    },
+    "organization": {
+      "manage": "إدارة الفروع والأقسام"
+    },
+    "settings": {
+      "manage": "إدارة الإعدادات والهوية"
+    },
+    "integrations": {
+      "manage": "إدارة التكاملات"
+    },
+    "data": {
+      "all_branches": "الوصول إلى جميع الفروع"
+    }
+  },
+  "organization": {
+    "title": "المنشأة",
+    "subtitle": "الملف التعريفي والهوية وهيكل الفروع",
+    "profile": "الملف التعريفي",
+    "profileReadOnly": "يمكنك عرض الملف التعريفي والهوية. يتطلب تعديلهما صلاحية الإعدادات.",
+    "supportEmail": "بريد الدعم",
+    "supportPhone": "هاتف الدعم",
+    "defaultCulture": "اللغة الافتراضية",
+    "cultures": {
+      "en": "الإنجليزية",
+      "ar": "العربية"
+    },
+    "timeZone": "المنطقة الزمنية",
+    "branding": "الهوية",
+    "primaryColor": "اللون الأساسي",
+    "accentColor": "اللون الثانوي",
+    "colorFormat": "استخدم الصيغة #RRGGBB.",
+    "saveColors": "حفظ الألوان",
+    "brandingSaved": "تم تحديث الهوية.",
+    "logo": "الشعار",
+    "noLogo": "لا يوجد شعار",
+    "uploadLogo": "رفع الشعار",
+    "logoHint": "PNG أو JPG أو GIF أو WebP، بحد أقصى 2 ميجابايت.",
+    "logoType": "يجب أن يكون الشعار صورة PNG أو JPG أو GIF أو WebP.",
+    "logoTooLarge": "يجب ألا يتجاوز حجم الشعار 2 ميجابايت.",
+    "logoUploaded": "تم رفع الشعار.",
+    "branches": "الفروع والأقسام",
+    "branchesReadOnly": "للعرض فقط: يتطلب تعديل الفروع صلاحية المنشأة.",
+    "branch": "الفرع",
+    "department": "القسم",
+    "newBranch": "فرع جديد",
+    "editBranch": "تعديل الفرع",
+    "newDepartment": "قسم جديد",
+    "editDepartment": "تعديل القسم",
+    "departmentCount": "{{count}} قسم",
+    "noBranches": "لا توجد فروع بعد.",
+    "noDepartments": "لا توجد أقسام في هذا الفرع.",
+    "code": "الرمز",
+    "codeHint": "أحرف وأرقام و - و _",
+    "address": "العنوان",
+    "deactivateTitle": "إلغاء التفعيل؟",
+    "deactivateBranchMessage": "لن يكون الفرع \"{{name}}\" متاحًا للتذاكر والمستخدمين الجدد.",
+    "deactivateDepartmentMessage": "لن يكون القسم \"{{name}}\" متاحًا للتذاكر والمستخدمين الجدد."
+  },
+  "settings": {
+    "title": "الإعدادات",
+    "subtitle": "تفعيل الميزات وحدود النظام",
+    "public": "عام",
+    "publicHint": "ظاهر لصفحة تسجيل الدخول وبوابة العملاء.",
+    "default": "الافتراضي: {{value}}",
+    "useDefault": "استخدام الافتراضي",
+    "on": "مفعّل",
+    "off": "معطّل",
+    "numberRange": "أدخل عددًا صحيحًا من 0 إلى {{max}}.",
+    "keys": {
+      "portal": {
+        "registration_enabled": "التسجيل الذاتي للعملاء"
+      },
+      "chat": {
+        "enabled": "الدردشة المباشرة"
+      },
+      "webform": {
+        "enabled": "نموذج التواصل عبر الموقع"
+      },
+      "chatbot": {
+        "enabled": "روبوت الدردشة"
+      },
+      "ai": {
+        "agent_assist_enabled": "مساعدة الموظفين بالذكاء الاصطناعي"
+      },
+      "tickets": {
+        "auto_close_resolved_days": "الإغلاق التلقائي للتذاكر المحلولة بعد (أيام)"
+      }
+    },
+    "help": {
+      "portal": {
+        "registration_enabled": "يمكن للعملاء إنشاء حساب في البوابة بأنفسهم."
+      },
+      "chat": {
+        "enabled": "يعرض أداة الدردشة المباشرة للعملاء."
+      },
+      "webform": {
+        "enabled": "يستقبل التذاكر من نموذج التواصل العام."
+      },
+      "chatbot": {
+        "enabled": "يجيب على العملاء تلقائيًا قبل انضمام موظف."
+      },
+      "ai": {
+        "agent_assist_enabled": "ردود مقترحة وملخصات وتصنيفات للموظفين."
+      },
+      "tickets": {
+        "auto_close_resolved_days": "القيمة 0 توقف الإغلاق التلقائي."
+      }
+    }
+  },
+  "integrations": {
+    "title": "التكاملات",
+    "subtitle": "مفاتيح API للأنظمة الخارجية وخطافات الويب الصادرة",
+    "apiKeys": "مفاتيح API",
+    "apiKeysHint": "تستخدم الأنظمة الخارجية هذه المفاتيح للمصادقة. امنح النطاقات اللازمة فقط.",
+    "newApiKey": "مفتاح API جديد",
+    "noApiKeys": "لا توجد مفاتيح API بعد.",
+    "scopesTitle": "النطاقات",
+    "scopeRequired": "اختر نطاقًا واحدًا على الأقل.",
+    "expiresAt": "تاريخ الانتهاء",
+    "expiresHint": "اتركه فارغًا لمفتاح لا تنتهي صلاحيته.",
+    "neverExpires": "لا ينتهي",
+    "lastUsed": "آخر استخدام",
+    "keyStatus": {
+      "Active": "نشط",
+      "Revoked": "ملغى",
+      "Expired": "منتهي"
+    },
+    "revoke": "إلغاء",
+    "revokeTitle": "إلغاء مفتاح API؟",
+    "revokeMessage": "ستتوقف الأنظمة التي تستخدم \"{{name}}\" عن العمل فورًا. لا يمكن التراجع عن ذلك.",
+    "revoked": "تم إلغاء \"{{name}}\".",
+    "apiKeyCreated": "تم إنشاء مفتاح API",
+    "apiKeySecretHint": "احفظ هذا المفتاح بشكل آمن في النظام الخارجي.",
+    "webhooks": "خطافات الويب",
+    "webhooksHint": "تُرسل الأحداث كطلبات HTTPS POST موقّعة.",
+    "newWebhook": "خطاف ويب جديد",
+    "editWebhook": "تعديل خطاف الويب",
+    "noWebhooks": "لا توجد خطافات ويب بعد.",
+    "url": "عنوان نقطة الاستقبال",
+    "urlHttps": "أدخل عنوانًا يبدأ بـ https://",
+    "active": "نشط",
+    "eventsTitle": "الأحداث",
+    "eventRequired": "اختر حدثًا واحدًا على الأقل.",
+    "event": "الحدث",
+    "webhookCreated": "تم إنشاء خطاف الويب",
+    "webhookSecretHint": "استخدم سر التوقيع هذا للتحقق من توقيع كل عملية إرسال.",
+    "secretRotated": "سر توقيع جديد",
+    "rotateSecret": "تجديد السر",
+    "rotateTitle": "تجديد سر التوقيع؟",
+    "rotateMessage": "سيتوقف السر الحالي لـ \"{{name}}\" عن العمل فورًا. حدّث الجهة المستقبلة بالسر الجديد.",
+    "sendTest": "إرسال تجريبي",
+    "testQueued": "تمت جدولة حدث تجريبي لـ \"{{name}}\".",
+    "deleteWebhookTitle": "حذف خطاف الويب؟",
+    "deleteWebhookMessage": "سيتم حذف \"{{name}}\" وسجل عمليات الإرسال الخاص به.",
+    "deliveries": "عمليات الإرسال",
+    "deliveriesTitle": "عمليات الإرسال: {{name}}",
+    "noDeliveries": "لا توجد عمليات إرسال بعد.",
+    "deliveryStatus": {
+      "Delivered": "تم التسليم",
+      "Failed": "فشل",
+      "Pending": "قيد الانتظار"
+    },
+    "attempts": "المحاولات",
+    "response": "آخر استجابة",
+    "retryQueued": "تمت جدولة إعادة الإرسال.",
+    "secretOnce": "تُعرض هذه القيمة مرة واحدة فقط. انسخها الآن، فلا يمكن عرضها مجددًا.",
+    "copy": "نسخ",
+    "copied": "تم النسخ",
+    "copyFailed": "تعذّر النسخ. حدّد النص وانسخه يدويًا.",
+    "secretSaved": "لقد حفظته",
+    "scopes": {
+      "customers_read": "قراءة العملاء",
+      "customers_write": "تعديل العملاء",
+      "tickets_read": "قراءة التذاكر",
+      "tickets_write": "تعديل التذاكر"
+    },
+    "events": {
+      "ticket_created": "إنشاء تذكرة",
+      "ticket_status_changed": "تغيير حالة التذكرة",
+      "ticket_assigned": "إسناد التذكرة",
+      "ticket_message_added": "إضافة رسالة إلى التذكرة",
+      "ticket_feedback": "تقييم التذكرة",
+      "customer_created": "إنشاء عميل"
+    }
+  },
+  "audit": {
+    "title": "سجل التدقيق",
+    "subtitle": "من غيّر ماذا ومتى",
+    "occurredAt": "الوقت",
+    "actor": "المستخدم",
+    "actorHint": "ابحث بالاسم أو البريد الإلكتروني",
+    "system": "النظام",
+    "action": "الإجراء",
+    "entity": "الكيان",
+    "entityType": "نوع الكيان",
+    "entityId": "معرّف الكيان",
+    "empty": "لا توجد سجلات تدقيق مطابقة لعوامل التصفية.",
+    "exportHint": "يطبّق تصدير CSV عوامل التاريخ والإجراء فقط.",
+    "detailTitle": "سجل التدقيق",
+    "ipAddress": "عنوان IP",
+    "userAgent": "وكيل المستخدم",
+    "correlationId": "معرّف الارتباط",
+    "oldValues": "القيم السابقة",
+    "newValues": "القيم الجديدة"
+  },
+  "errors": {
+    "LAST_ADMINISTRATOR": "يجب أن يبقى مسؤول نشط واحد على الأقل.",
+    "CANNOT_DISABLE_SELF": "لا يمكنك تعطيل حسابك.",
+    "EMAIL_TAKEN": "هذا البريد الإلكتروني مستخدم من قبل مستخدم آخر.",
+    "USER_NOT_FOUND": "لم يتم العثور على المستخدم.",
+    "UNKNOWN_ROLE": "أحد الأدوار المختارة لم يعد موجودًا.",
+    "ROLE_IS_SYSTEM": "أدوار النظام مدمجة ولا يمكن تعديلها أو حذفها.",
+    "ROLE_IN_USE": "هذا الدور مسند إلى مستخدمين. ألغِ إسناده من جميع المستخدمين أولًا.",
+    "ROLE_NAME_TAKEN": "يوجد دور بهذا الاسم مسبقًا.",
+    "ROLE_NOT_FOUND": "لم يتم العثور على الدور.",
+    "INVALID_ROLE_NAME": "أدخل اسم دور صالحًا.",
+    "UNKNOWN_PERMISSION": "إحدى الصلاحيات المختارة غير معروفة.",
+    "BRANCH_CODE_TAKEN": "يوجد فرع بهذا الرمز مسبقًا.",
+    "DEPARTMENT_CODE_TAKEN": "يوجد قسم بهذا الرمز في هذا الفرع مسبقًا.",
+    "BRANCH_NOT_FOUND": "لم يتم العثور على الفرع.",
+    "DEPARTMENT_NOT_FOUND": "لم يتم العثور على القسم.",
+    "DEPARTMENT_NOT_IN_BRANCH": "القسم لا يتبع الفرع المختار.",
+    "INVALID_BRANCH": "تحقق من بيانات الفرع.",
+    "INVALID_DEPARTMENT": "تحقق من بيانات القسم.",
+    "ORGANIZATION_UNIT_INACTIVE": "الفرع أو القسم المختار غير نشط.",
+    "INVALID_ORGANIZATION": "تحقق من بيانات المنشأة.",
+    "ORGANIZATION_NOT_CONFIGURED": "لم يتم إعداد ملف المنشأة بعد.",
+    "OUT_OF_SCOPE": "هذا السجل خارج نطاق وصولك إلى الفروع.",
+    "UNKNOWN_SETTING": "أحد الإعدادات غير معروف.",
+    "FEATURE_DISABLED": "هذه الميزة معطّلة في الإعدادات.",
+    "INVALID_API_KEY": "يحتاج مفتاح API إلى اسم ونطاق صالح واحد على الأقل.",
+    "API_KEY_NOT_FOUND": "لم يتم العثور على مفتاح API.",
+    "INVALID_WEBHOOK": "تحتاج خطافات الويب إلى اسم وعنوان https وحدث واحد على الأقل.",
+    "WEBHOOK_NOT_FOUND": "لم يتم العثور على خطاف الويب.",
+    "WEBHOOK_DELIVERY_NOT_FOUND": "لم يتم العثور على عملية الإرسال.",
+    "FILE_EMPTY": "الملف فارغ.",
+    "FILE_TOO_LARGE": "الملف كبير جدًا.",
+    "FILE_TYPE_NOT_ALLOWED": "نوع الملف غير مسموح.",
+    "FILE_SIGNATURE_MISMATCH": "محتوى الملف لا يطابق نوعه."
+  }
+}
