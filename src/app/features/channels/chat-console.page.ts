@@ -211,7 +211,7 @@ export class ChatConsolePage {
     }
     this.messagesLoading.set(true);
     this.messagesError.set(null);
-    this.api.messages(conversation.ticketId).subscribe({
+    this.api.messages(conversation.id).subscribe({
       next: (items) => {
         if (this.current()?.id !== conversation.id) {
           return;
@@ -223,12 +223,9 @@ export class ChatConsolePage {
         if (this.current()?.id !== conversation.id) {
           return;
         }
-        const apiError = ApiError.from(error);
         this.messagesLoading.set(false);
         this.messages.set([]);
-        this.messagesError.set(
-          apiError.status === 403 ? this.translations.t('channels.chat.transcriptForbidden') : describeError(apiError, this.translations),
-        );
+        this.messagesError.set(describeError(ApiError.from(error), this.translations));
       },
     });
   }

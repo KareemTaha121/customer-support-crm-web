@@ -21,9 +21,9 @@ export class ChannelsApi {
     return this.api.get<ChatConversation[]>('/chat/conversations', { params: { status }, silent });
   }
 
-  /** The chat transcript: messages of the backing ticket (`tickets.view`). */
-  messages(ticketId: string): Observable<ChatMessage[]> {
-    return this.api.get<ChatMessage[]>(`/tickets/${ticketId}/messages`, { silent: true });
+  /** The chat transcript: public messages of the backing ticket (`chat.handle`, staff scope). */
+  messages(conversationId: string): Observable<ChatMessage[]> {
+    return this.api.get<ChatMessage[]>(`/chat/conversations/${conversationId}/messages`, { silent: true });
   }
 
   accept(conversationId: string): Observable<null> {

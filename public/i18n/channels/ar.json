@@ -30,8 +30,7 @@
     "closedNotice": "هذه المحادثة مغلقة.",
     "noMessages": "لا توجد رسائل بعد.",
     "replyLabel": "اكتب ردك",
-    "sendHint": "اضغط Ctrl+Enter للإرسال",
-    "transcriptForbidden": "تحتاج إلى صلاحية عرض التذاكر لرؤية سجل المحادثة. لا يزال بإمكانك الرد."
+    "sendHint": "اضغط Ctrl+Enter للإرسال"
   },
   "chatStatus": {
     "Waiting": "في الانتظار",

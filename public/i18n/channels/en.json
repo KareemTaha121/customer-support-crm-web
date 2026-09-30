@@ -30,8 +30,7 @@
     "closedNotice": "This chat is closed.",
     "noMessages": "No messages yet.",
     "replyLabel": "Type your reply",
-    "sendHint": "Press Ctrl+Enter to send",
-    "transcriptForbidden": "You need permission to view tickets to see this transcript. You can still reply."
+    "sendHint": "Press Ctrl+Enter to send"
   },
   "chatStatus": {
     "Waiting": "Waiting",
