@@ -85,6 +85,11 @@ export class PortalPublicApi {
     return this.api.post<WebFormTicketResponse>('/public/web-forms/tickets', request, { anonymous: true, silent: true });
   }
 
+  /** Active ticket categories for the anonymous contact form. */
+  webFormCategories(): Observable<PortalCategory[]> {
+    return this.api.get<PortalCategory[]>('/public/web-forms/categories', { anonymous: true, silent: true });
+  }
+
   startChat(request: StartChatRequest): Observable<ChatStarted> {
     return this.api.post<ChatStarted>('/public/chat/conversations', request, { anonymous: true, silent: true });
   }

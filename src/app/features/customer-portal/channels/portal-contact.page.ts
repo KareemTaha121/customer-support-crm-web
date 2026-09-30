@@ -5,6 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSelectModule } from '@angular/material/select';
 import { RouterLink } from '@angular/router';
 import { PortalAuthService } from '../../../core/auth/portal-auth.service';
 import { BrandingService } from '../../../core/branding/branding.service';
@@ -17,7 +18,7 @@ import { FormErrorPipe } from '../../../shared/form-error.pipe';
 import { applyServerErrors } from '../../../shared/form-errors';
 import { PageHeaderComponent } from '../../../shared/page-header.component';
 import { PortalPublicApi } from '../customer-portal.api';
-import { withoutFieldPrefix } from '../customer-portal.models';
+import { PortalCategory, withoutFieldPrefix } from '../customer-portal.models';
 import { PortalUnavailableComponent } from './portal-unavailable.component';
 
 /** Anonymous contact form (POST /public/web-forms/tickets), gated by `webform.enabled`. */
@@ -31,6 +32,7 @@ import { PortalUnavailableComponent } from './portal-unavailable.component';
     MatButtonModule,
     MatIconModule,
     MatProgressBarModule,
+    MatSelectModule,
     TranslatePipe,
     FormErrorPipe,
     PageHeaderComponent,
@@ -73,6 +75,17 @@ import { PortalUnavailableComponent } from './portal-unavailable.component';
           <input matInput formControlName="subject" maxlength="300" />
           <mat-error>{{ form.controls.subject | formError }}</mat-error>
         </mat-form-field>
+        @if (categories().length) {
+          <mat-form-field>
+            <mat-label>{{ 'portal.fields.category' | t }}</mat-label>
+            <mat-select formControlName="categoryId">
+              <mat-option [value]="null">{{ 'portal.newTicket.noCategory' | t }}</mat-option>
+              @for (category of categories(); track category.id) {
+                <mat-option [value]="category.id">{{ categoryName(category) }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        }
         <mat-form-field class="crm-span-all">
           <mat-label>{{ 'portal.fields.message' | t }}</mat-label>
           <textarea matInput formControlName="message" rows="7" maxlength="10000"></textarea>
@@ -113,6 +126,7 @@ export class PortalContactPage implements OnInit {
   readonly enabled = computed(() => this.branding.isEnabled(FeatureFlags.webForm));
   readonly busy = signal(false);
   readonly ticketNumber = signal<string | null>(null);
+  readonly categories = signal<PortalCategory[]>([]);
 
   readonly form = this.fb.group({
     name: ['', [Validators.required, Validators.maxLength(200)]],
@@ -120,11 +134,18 @@ export class PortalContactPage implements OnInit {
     phone: ['', Validators.maxLength(32)],
     subject: ['', [Validators.required, Validators.maxLength(300)]],
     message: ['', [Validators.required, Validators.maxLength(10000)]],
+    categoryId: this.fb.control<string | null>(null),
     website: [''],
   });
 
   ngOnInit(): void {
     this.prefill();
+    // Optional field: without categories (or on error) the form works as before.
+    this.api.webFormCategories().subscribe({ next: (categories) => this.categories.set(categories), error: () => this.categories.set([]) });
+  }
+
+  categoryName(category: PortalCategory): string {
+    return this.translations.language() === 'ar' && category.nameAr ? category.nameAr : category.name;
   }
 
   submit(formDirective: FormGroupDirective): void {
@@ -141,7 +162,7 @@ export class PortalContactPage implements OnInit {
         phone: value.phone.trim() || null,
         subject: value.subject.trim(),
         message: value.message.trim(),
-        categoryId: null,
+        categoryId: value.categoryId,
         language: this.translations.language(),
         website: value.website || null,
       })
