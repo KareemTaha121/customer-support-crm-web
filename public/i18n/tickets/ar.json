@@ -226,5 +226,17 @@
       "Closed": "تم إغلاق التذكرة.",
       "Reopen": "تمت إعادة فتح التذكرة."
     }
+  },
+  "kbSuggestions": {
+    "title": "مقالات مقترحة",
+    "empty": "لا توجد مقالات مطابقة.",
+    "error": "تعذّر تحميل الاقتراحات.",
+    "noCategory": "بدون تصنيف",
+    "insertLink": "إدراج الرابط في الرد",
+    "linkText": "{{title}}: {{url}}",
+    "visibility": {
+      "Public": "عام",
+      "Internal": "داخلي"
+    }
   }
 }

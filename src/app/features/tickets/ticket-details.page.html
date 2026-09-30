@@ -106,6 +106,7 @@
 
     <aside class="side">
       <app-ticket-side-panel [ticket]="tk" [categories]="categories()" (updated)="onUpdated($event)" />
+      <app-ticket-kb-suggestions [ticketId]="tk.id" [canInsert]="editable()" (linkInserted)="insertReply($event)" />
       @if (canUseAi) {
         <app-ticket-ai-panel
           [ticketId]="tk.id"

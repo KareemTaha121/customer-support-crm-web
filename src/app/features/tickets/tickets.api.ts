@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { ApiService, DownloadedFile } from '../../core/http/api.service';
 import { AttachmentResponse, Paged } from '../../core/http/api.models';
+import { KbArticleListItem } from '../knowledge-base/knowledge-base.models';
 import {
   AddTicketMessageRequest,
   BranchOption,
@@ -118,5 +119,12 @@ export class TicketsApi {
 
   branches(): Observable<BranchOption[]> {
     return this.api.get<BranchOption[]>('/branches').pipe(map((items) => items ?? []));
+  }
+
+  /** Published knowledge articles that match the ticket (`GET /kb/suggestions`, needs `tickets.view`). */
+  suggestArticles(ticketId: string, limit = 5): Observable<KbArticleListItem[]> {
+    return this.api
+      .get<KbArticleListItem[]>('/kb/suggestions', { params: { ticketId, limit }, silent: true })
+      .pipe(map((items) => items ?? []));
   }
 }

@@ -27,6 +27,7 @@ import { TicketAttachmentsComponent } from './ticket-attachments.component';
 import { TicketConversationComponent } from './ticket-conversation.component';
 import { TicketEditDialog, TicketEscalateDialog, TicketTransferDialog } from './ticket-dialogs';
 import { TicketHistoryComponent } from './ticket-history.component';
+import { TicketKbSuggestionsComponent } from './ticket-kb-suggestions.component';
 import { TicketSidePanelComponent } from './ticket-side-panel.component';
 import { TicketsApi } from './tickets.api';
 import {
@@ -71,6 +72,7 @@ const HISTORY_TAB = 2;
     TicketHistoryComponent,
     TicketSidePanelComponent,
     TicketAiPanelComponent,
+    TicketKbSuggestionsComponent,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './ticket-details.page.html',

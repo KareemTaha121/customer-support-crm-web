@@ -226,5 +226,17 @@
       "Closed": "Ticket closed.",
       "Reopen": "Ticket reopened."
     }
+  },
+  "kbSuggestions": {
+    "title": "Suggested articles",
+    "empty": "No matching articles.",
+    "error": "Could not load suggestions.",
+    "noCategory": "Uncategorized",
+    "insertLink": "Insert link in reply",
+    "linkText": "{{title}}: {{url}}",
+    "visibility": {
+      "Public": "Public",
+      "Internal": "Internal"
+    }
   }
 }
