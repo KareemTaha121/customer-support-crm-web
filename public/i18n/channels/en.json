@@ -1,0 +1,99 @@
+{
+  "chat": {
+    "title": "Live chat",
+    "subtitle": "Accept waiting visitors and reply in real time.",
+    "offline": "Live updates offline",
+    "queue": "Conversation queue",
+    "filterLabel": "Filter conversations",
+    "filters": {
+      "waiting": "Waiting",
+      "mine": "Mine",
+      "active": "Active",
+      "closed": "Closed"
+    },
+    "emptyQueue": {
+      "waiting": "No visitors are waiting.",
+      "mine": "You have no active chats.",
+      "active": "There are no active chats.",
+      "closed": "No closed chats yet."
+    },
+    "conversation": "Conversation",
+    "selectConversation": "Select a conversation from the queue.",
+    "handledBy": "Handled by {{name}}",
+    "openTicket": "Open ticket",
+    "accept": "Accept",
+    "accepted": "Chat accepted.",
+    "close": "Close chat",
+    "closeTitle": "Close this chat?",
+    "closeMessage": "The visitor will be told the chat has ended and its ticket will be resolved.",
+    "closed": "Chat closed.",
+    "closedNotice": "This chat is closed.",
+    "noMessages": "No messages yet.",
+    "replyLabel": "Type your reply",
+    "sendHint": "Press Ctrl+Enter to send",
+    "transcriptForbidden": "You need permission to view tickets to see this transcript. You can still reply."
+  },
+  "chatStatus": {
+    "Waiting": "Waiting",
+    "Active": "Active",
+    "Closed": "Closed"
+  },
+  "authorType": {
+    "Agent": "Agent",
+    "Customer": "Visitor",
+    "System": "System"
+  },
+  "errors": {
+    "chatClosed": "This chat has already been closed.",
+    "chatNotFound": "This chat no longer exists."
+  },
+  "channel": {
+    "Email": "Email",
+    "WhatsApp": "WhatsApp",
+    "Sms": "SMS",
+    "Chat": "Live chat",
+    "Agent": "Agent",
+    "Portal": "Portal",
+    "WebForm": "Web form",
+    "Phone": "Phone",
+    "Api": "API"
+  },
+  "outboxStatus": {
+    "Pending": "Pending",
+    "Sent": "Sent",
+    "Failed": "Failed"
+  },
+  "admin": {
+    "title": "Channels",
+    "subtitle": "Delivery providers, test messages and the outgoing message queue.",
+    "status": {
+      "title": "Provider status",
+      "configured": "Configured",
+      "notConfigured": "Not configured",
+      "empty": "No delivery providers are registered.",
+      "hint": "Providers are configured on the server. Messages for an unconfigured channel fail without retrying."
+    },
+    "test": {
+      "title": "Send a test message",
+      "hint": "Queues a short test message so you can check that a provider delivers.",
+      "channel": "Channel",
+      "to": "Recipient",
+      "toHintEmail": "An email address",
+      "toHintPhone": "A phone number in international format, e.g. +9665XXXXXXXX",
+      "submit": "Send test",
+      "queued": "Test message queued. Check the outbox for the result."
+    },
+    "outbox": {
+      "title": "Outbox",
+      "createdAt": "Queued",
+      "channel": "Channel",
+      "to": "To",
+      "subject": "Subject",
+      "attempts": "Attempts",
+      "lastError": "Last error",
+      "retry": "Retry",
+      "retried": "The message will be sent again shortly.",
+      "empty": "No outgoing messages."
+    }
+  }
+}

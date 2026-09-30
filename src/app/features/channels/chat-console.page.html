@@ -1,0 +1,160 @@
+<app-page-header [title]="'channels.chat.title' | t" [subtitle]="'channels.chat.subtitle' | t">
+  @if (offline()) {
+    <span class="crm-pill crm-pill--warning offline" role="status">
+      <mat-icon>cloud_off</mat-icon>{{ 'channels.chat.offline' | t }}
+    </span>
+  }
+  <button mat-stroked-button type="button" (click)="loadQueue()">
+    <mat-icon>refresh</mat-icon>{{ 'core.actions.refresh' | t }}
+  </button>
+</app-page-header>
+
+<div class="console" [class.console--detail]="!!current()">
+  <!-- Queue -->
+  <section class="crm-card queue" [attr.aria-label]="'channels.chat.queue' | t">
+    <mat-button-toggle-group
+      class="queue__filters"
+      [value]="filter()"
+      (change)="setFilter($event.value)"
+      [attr.aria-label]="'channels.chat.filterLabel' | t"
+      hideSingleSelectionIndicator
+    >
+      @for (item of filters; track item) {
+        <mat-button-toggle [value]="item">{{ 'channels.chat.filters.' + item | t }}</mat-button-toggle>
+      }
+    </mat-button-toggle-group>
+
+    @if (loading()) {
+      <app-loading [diameter]="32" />
+    } @else if (error()) {
+      <app-error-state [message]="error()" (retry)="loadQueue()" />
+    } @else {
+      <ul class="queue__list" role="list">
+        @for (conversation of conversations(); track conversation.id) {
+          <li>
+            <button
+              type="button"
+              class="queue__item"
+              [class.queue__item--selected]="current()?.id === conversation.id"
+              [attr.aria-current]="current()?.id === conversation.id ? 'true' : null"
+              (click)="open(conversation)"
+            >
+              <span class="queue__avatar" aria-hidden="true">{{ conversation.visitorName.charAt(0) }}</span>
+              <span class="queue__body">
+                <span class="queue__row">
+                  <strong class="queue__name">{{ conversation.visitorName }}</strong>
+                  <span class="crm-muted queue__time">{{ conversation.lastMessageAt | localDate: 'relative' }}</span>
+                </span>
+                <span class="queue__row">
+                  <span class="crm-muted">{{ conversation.ticketNumber }}</span>
+                  <span [class]="statusClass(conversation.status)">{{ 'channels.chatStatus.' + conversation.status | t }}</span>
+                </span>
+                @if (conversation.agentName) {
+                  <span class="crm-muted queue__agent">
+                    <mat-icon inline>support_agent</mat-icon>{{ conversation.agentName }}
+                  </span>
+                }
+              </span>
+            </button>
+          </li>
+        } @empty {
+          <li><app-empty-state icon="forum" [message]="'channels.chat.emptyQueue.' + filter() | t" /></li>
+        }
+      </ul>
+    }
+  </section>
+
+  <!-- Conversation -->
+  <section class="crm-card conversation" [attr.aria-label]="'channels.chat.conversation' | t">
+    @if (current(); as conversation) {
+      <header class="conversation__header">
+        <button mat-icon-button type="button" class="conversation__back" (click)="back()" [attr.aria-label]="'core.actions.back' | t">
+          <mat-icon class="rtl-flip">arrow_back</mat-icon>
+        </button>
+        <div class="conversation__title">
+          <h2>{{ conversation.visitorName }}</h2>
+          <p class="crm-muted">
+            {{ conversation.ticketNumber }} ·
+            <span [class]="statusClass(conversation.status)">{{ 'channels.chatStatus.' + conversation.status | t }}</span>
+            @if (conversation.agentName) {
+              · {{ 'channels.chat.handledBy' | t: { name: conversation.agentName } }}
+            }
+          </p>
+        </div>
+        <div class="conversation__actions">
+          <a
+            *appHasPermission="'tickets.view'"
+            mat-icon-button
+            [routerLink]="['/tickets', conversation.ticketId]"
+            [matTooltip]="'channels.chat.openTicket' | t"
+            [attr.aria-label]="'channels.chat.openTicket' | t"
+          >
+            <mat-icon>confirmation_number</mat-icon>
+          </a>
+          @if (conversation.status === 'Waiting' || (conversation.status === 'Active' && !isMine())) {
+            <button mat-flat-button type="button" [disabled]="busy()" (click)="accept()">
+              <mat-icon>how_to_reg</mat-icon>{{ 'channels.chat.accept' | t }}
+            </button>
+          }
+          @if (!isClosed()) {
+            <button mat-stroked-button type="button" [disabled]="busy()" (click)="close()">
+              <mat-icon>check_circle</mat-icon>{{ 'channels.chat.close' | t }}
+            </button>
+          }
+        </div>
+      </header>
+      @if (busy()) {
+        <mat-progress-bar mode="indeterminate" />
+      }
+
+      <div class="conversation__messages" #scroller role="log" aria-live="polite">
+        @if (messagesLoading()) {
+          <app-loading [diameter]="32" />
+        } @else if (messagesError()) {
+          <app-error-state [message]="messagesError()" (retry)="loadMessages()" />
+        } @else {
+          @for (message of messages(); track message.id) {
+            <div [class]="'message message--' + message.authorType">
+              <div class="message__meta">
+                <strong>{{ message.authorName }}</strong>
+                <span class="crm-muted">{{ message.createdAt | localDate: 'shortTime' }}</span>
+              </div>
+              <div class="message__body">{{ message.body }}</div>
+            </div>
+          } @empty {
+            <app-empty-state icon="chat_bubble_outline" [message]="'channels.chat.noMessages' | t" />
+          }
+        }
+      </div>
+
+      @if (isClosed()) {
+        <p class="conversation__closed crm-muted" role="status">
+          <mat-icon inline>lock</mat-icon>{{ 'channels.chat.closedNotice' | t }}
+        </p>
+      } @else {
+        <form class="composer" [formGroup]="composer" (ngSubmit)="send()" novalidate>
+          <mat-form-field class="composer__field" subscriptSizing="dynamic">
+            <mat-label>{{ 'channels.chat.replyLabel' | t }}</mat-label>
+            <textarea
+              matInput
+              formControlName="body"
+              rows="3"
+              [attr.maxlength]="maxLength"
+              (keydown)="onComposerKeydown($event)"
+            ></textarea>
+            <mat-hint>{{ 'channels.chat.sendHint' | t }}</mat-hint>
+            <mat-error>{{ composer.controls.body | formError }}</mat-error>
+          </mat-form-field>
+          <div class="composer__actions">
+            <app-quick-reply-picker (selected)="insertQuickReply($event)" />
+            <button mat-flat-button type="submit" [disabled]="sending()">
+              <mat-icon class="rtl-flip">send</mat-icon>{{ 'core.actions.send' | t }}
+            </button>
+          </div>
+        </form>
+      }
+    } @else {
+      <app-empty-state icon="forum" [message]="'channels.chat.selectConversation' | t" />
+    }
+  </section>
+</div>

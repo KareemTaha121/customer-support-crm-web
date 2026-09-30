@@ -1,0 +1,153 @@
+<app-page-header [title]="'channels.admin.title' | t" [subtitle]="'channels.admin.subtitle' | t" />
+
+<div class="top-grid">
+  <!-- Provider status -->
+  <section class="crm-card">
+    <div class="section-head">
+      <h2>{{ 'channels.admin.status.title' | t }}</h2>
+      <button mat-icon-button type="button" (click)="loadStatus()" [matTooltip]="'core.actions.refresh' | t" [attr.aria-label]="'core.actions.refresh' | t">
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </div>
+    @if (statusLoading()) {
+      <app-loading [diameter]="32" />
+    } @else if (statusError()) {
+      <app-error-state [message]="statusError()" (retry)="loadStatus()" />
+    } @else {
+      <ul class="status-list" role="list">
+        @for (item of statuses(); track item.channel) {
+          <li class="status-card" [class.status-card--off]="!item.configured">
+            <mat-icon class="status-card__icon">{{ channelIcon(item.channel) }}</mat-icon>
+            <div class="status-card__text">
+              <strong>{{ 'channels.channel.' + item.channel | t }}</strong>
+              <span [class]="item.configured ? 'crm-pill crm-pill--success' : 'crm-pill crm-pill--warning'">
+                {{ (item.configured ? 'channels.admin.status.configured' : 'channels.admin.status.notConfigured') | t }}
+              </span>
+            </div>
+          </li>
+        } @empty {
+          <li><app-empty-state icon="hub" [message]="'channels.admin.status.empty' | t" /></li>
+        }
+      </ul>
+      <p class="crm-muted hint">{{ 'channels.admin.status.hint' | t }}</p>
+    }
+  </section>
+
+  <!-- Test message -->
+  <section class="crm-card">
+    <h2>{{ 'channels.admin.test.title' | t }}</h2>
+    <p class="crm-muted">{{ 'channels.admin.test.hint' | t }}</p>
+    <form [formGroup]="testForm" (ngSubmit)="sendTest(formDirective)" #formDirective="ngForm" novalidate class="test-form">
+      <mat-form-field>
+        <mat-label>{{ 'channels.admin.test.channel' | t }}</mat-label>
+        <mat-select formControlName="channel">
+          @for (channel of testChannels; track channel) {
+            <mat-option [value]="channel">{{ 'channels.channel.' + channel | t }}</mat-option>
+          }
+        </mat-select>
+        <mat-error>{{ testForm.controls.channel | formError }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ 'channels.admin.test.to' | t }}</mat-label>
+        <input matInput formControlName="to" dir="auto" autocomplete="off" />
+        <mat-hint>{{ (testForm.controls.channel.value === 'Email' ? 'channels.admin.test.toHintEmail' : 'channels.admin.test.toHintPhone') | t }}</mat-hint>
+        <mat-error>{{ testForm.controls.to | formError }}</mat-error>
+      </mat-form-field>
+      <div class="crm-actions">
+        <button mat-flat-button type="submit" [disabled]="sendingTest()">
+          <mat-icon class="rtl-flip">send</mat-icon>{{ 'channels.admin.test.submit' | t }}
+        </button>
+      </div>
+    </form>
+  </section>
+</div>
+
+<!-- Outbox -->
+<section class="outbox">
+  <div class="crm-toolbar">
+    <h2>{{ 'channels.admin.outbox.title' | t }}</h2>
+    <span class="crm-spacer"></span>
+    <mat-form-field subscriptSizing="dynamic" class="filter">
+      <mat-label>{{ 'core.fields.status' | t }}</mat-label>
+      <mat-select [value]="statusFilter()" (selectionChange)="setStatusFilter($event.value)">
+        <mat-option [value]="null">{{ 'core.states.all' | t }}</mat-option>
+        @for (status of outboundStatuses; track status) {
+          <mat-option [value]="status">{{ 'channels.outboxStatus.' + status | t }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    <button mat-stroked-button type="button" (click)="loadOutbox()">
+      <mat-icon>refresh</mat-icon>{{ 'core.actions.refresh' | t }}
+    </button>
+  </div>
+
+  @if (outboxError()) {
+    <app-error-state [message]="outboxError()" (retry)="loadOutbox()" />
+  } @else {
+    <div class="crm-table-wrap">
+      @if (outboxLoading()) {
+        <mat-progress-bar mode="indeterminate" />
+      }
+      <table mat-table [dataSource]="outbox().items">
+        <ng-container matColumnDef="createdAt">
+          <th mat-header-cell *matHeaderCellDef>{{ 'channels.admin.outbox.createdAt' | t }}</th>
+          <td mat-cell *matCellDef="let row">{{ row.createdAt | localDate: 'short' }}</td>
+        </ng-container>
+        <ng-container matColumnDef="channel">
+          <th mat-header-cell *matHeaderCellDef>{{ 'channels.admin.outbox.channel' | t }}</th>
+          <td mat-cell *matCellDef="let row">
+            <span class="channel-cell"><mat-icon inline>{{ channelIcon(row.channel) }}</mat-icon>{{ 'channels.channel.' + row.channel | t }}</span>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="to">
+          <th mat-header-cell *matHeaderCellDef>{{ 'channels.admin.outbox.to' | t }}</th>
+          <td mat-cell *matCellDef="let row"><bdi>{{ row.to }}</bdi></td>
+        </ng-container>
+        <ng-container matColumnDef="subject">
+          <th mat-header-cell *matHeaderCellDef>{{ 'channels.admin.outbox.subject' | t }}</th>
+          <td mat-cell *matCellDef="let row" class="clip">{{ row.subject || '—' }}</td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>{{ 'core.fields.status' | t }}</th>
+          <td mat-cell *matCellDef="let row">
+            <span [class]="statusClass(row.status)">{{ 'channels.outboxStatus.' + row.status | t }}</span>
+            @if (row.sentAt) {
+              <div class="crm-muted small">{{ row.sentAt | localDate: 'short' }}</div>
+            }
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="attempts">
+          <th mat-header-cell *matHeaderCellDef>{{ 'channels.admin.outbox.attempts' | t }}</th>
+          <td mat-cell *matCellDef="let row">{{ row.attempts }}</td>
+        </ng-container>
+        <ng-container matColumnDef="lastError">
+          <th mat-header-cell *matHeaderCellDef>{{ 'channels.admin.outbox.lastError' | t }}</th>
+          <td mat-cell *matCellDef="let row" class="clip error-cell" [matTooltip]="row.lastError ?? ''">{{ row.lastError || '—' }}</td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef><span class="cdk-visually-hidden">{{ 'core.actions.more' | t }}</span></th>
+          <td mat-cell *matCellDef="let row">
+            @if (canRetry(row)) {
+              <button mat-stroked-button type="button" [disabled]="retrying() === row.id" (click)="retry(row)">
+                <mat-icon>replay</mat-icon>{{ 'channels.admin.outbox.retry' | t }}
+              </button>
+            }
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns"></tr>
+      </table>
+      @if (!outboxLoading() && outbox().items.length === 0) {
+        <app-empty-state icon="outbox" [message]="'channels.admin.outbox.empty' | t" />
+      }
+      <mat-paginator
+        [length]="outbox().meta.totalCount"
+        [pageIndex]="page() - 1"
+        [pageSize]="pageSize"
+        [hidePageSize]="true"
+        (page)="onPage($event)"
+      />
+    </div>
+  }
+</section>
