@@ -1,0 +1,175 @@
+{
+  "fields": {
+    "number": "Number",
+    "name": "Name",
+    "type": "Type",
+    "companyName": "Company",
+    "preferredLanguage": "Preferred language",
+    "status": "Status",
+    "branch": "Branch",
+    "department": "Department",
+    "tag": "Tag",
+    "tags": "Tags",
+    "contactType": "Contact type",
+    "value": "Value",
+    "label": "Label",
+    "external": "External reference",
+    "portal": "Portal access",
+    "createdAt": "Created",
+    "updatedAt": "Updated"
+  },
+  "type": {
+    "Individual": "Individual",
+    "Company": "Company"
+  },
+  "status": {
+    "Active": "Active",
+    "Inactive": "Inactive"
+  },
+  "language": {
+    "en": "English",
+    "ar": "Arabic"
+  },
+  "contactType": {
+    "Email": "Email",
+    "Phone": "Phone",
+    "WhatsApp": "WhatsApp",
+    "Address": "Address",
+    "Other": "Other"
+  },
+  "list": {
+    "title": "Customers",
+    "subtitle": "Search and manage customer profiles.",
+    "new": "New customer",
+    "search": "Search by name, number, email or phone",
+    "contact": "Contact",
+    "openTickets": "Open tickets",
+    "clearFilters": "Clear filters",
+    "empty": "No customers yet.",
+    "noMatches": "No customers match these filters."
+  },
+  "form": {
+    "createTitle": "New customer",
+    "editTitle": "Edit customer",
+    "profile": "Profile",
+    "tagsPlaceholder": "Type a tag and press Enter",
+    "tagsHint": "Up to {{max}} tags.",
+    "created": "Customer created."
+  },
+  "duplicates": {
+    "title": "Possible duplicates: these customers share a contact detail.",
+    "matchedOn": "same {{field}}: {{value}}",
+    "field": {
+      "Email": "email",
+      "Phone": "phone"
+    },
+    "confirmTitle": "Possible duplicate customer",
+    "createAnyway": "Create anyway"
+  },
+  "details": {
+    "title": "Customer",
+    "delete": "Delete customer",
+    "deleteTitle": "Delete this customer?",
+    "deleteMessage": "{{name}} will be removed from lists and searches. Customers with active tickets cannot be deleted.",
+    "deleted": "Customer deleted."
+  },
+  "tabs": {
+    "profile": "Profile",
+    "contacts": "Contacts",
+    "notes": "Notes",
+    "attachments": "Attachments",
+    "history": "History"
+  },
+  "stats": {
+    "openTickets": "Open tickets",
+    "totalTickets": "Total tickets",
+    "lastInteraction": "Last interaction",
+    "satisfaction": "Average satisfaction"
+  },
+  "contacts": {
+    "title": "Contacts",
+    "hint": "The primary contact of each type is used for notifications.",
+    "add": "Add contact",
+    "addTitle": "Add contact",
+    "editTitle": "Edit contact",
+    "remove": "Remove contact",
+    "removeTitle": "Remove this contact?",
+    "removeMessage": "{{value}} will be removed from the customer.",
+    "primary": "Primary",
+    "makePrimary": "Make primary",
+    "typeLocked": "The type cannot be changed after the contact is created.",
+    "phoneHint": "International format, e.g. +966501234567",
+    "noneYet": "No contacts added. You can add them later.",
+    "empty": "This customer has no contacts."
+  },
+  "notes": {
+    "new": "Add an internal note",
+    "body": "Note",
+    "internalHint": "Notes are visible to staff only.",
+    "add": "Add note",
+    "added": "Note added.",
+    "pin": "Pin note",
+    "unpin": "Unpin note",
+    "pinned": "Pinned",
+    "edited": "edited",
+    "unknownAuthor": "Unknown author",
+    "empty": "No notes yet.",
+    "deleteTitle": "Delete this note?",
+    "deleteMessage": "The note will be permanently removed."
+  },
+  "attachments": {
+    "upload": "Upload files",
+    "uploaded": "{{count}} file(s) uploaded.",
+    "empty": "No attachments yet.",
+    "deleteTitle": "Delete this attachment?",
+    "deleteMessage": "{{name}} will be permanently removed."
+  },
+  "history": {
+    "filter": "Activity types",
+    "by": "by {{name}}",
+    "openTicket": "Open ticket",
+    "empty": "No activity recorded yet."
+  },
+  "activity": {
+    "customer": {
+      "created": "Customer created",
+      "updated": "Profile updated"
+    },
+    "note": {
+      "added": "Note added"
+    },
+    "attachment": {
+      "added": "Attachment added"
+    },
+    "ticket": {
+      "created": "Ticket created",
+      "status_changed": "Ticket status changed",
+      "message": "Ticket message",
+      "feedback": "Ticket feedback"
+    },
+    "portal": {
+      "sign_in": "Portal sign-in"
+    },
+    "chat": {
+      "started": "Chat started"
+    }
+  },
+  "portal": {
+    "hasAccess": "Portal access",
+    "noAccess": "No portal access",
+    "grant": "Grant portal access",
+    "grantTitle": "Grant portal access",
+    "grantHint": "Create a customer portal account. Share the password with the customer through a secure channel.",
+    "email": "Sign-in email",
+    "password": "Initial password",
+    "passwordHint": "At least {{min}} characters.",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "granted": "Portal access granted.",
+    "accountExists": "A portal account with this email already exists.",
+    "revoke": "Revoke portal access",
+    "revokeTitle": "Revoke portal access?",
+    "revokeMessage": "{{name}} will no longer be able to sign in to the customer portal.",
+    "revoked": "Portal access revoked."
+  }
+}
