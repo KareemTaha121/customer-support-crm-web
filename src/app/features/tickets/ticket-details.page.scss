@@ -1,0 +1,64 @@
+:host {
+  display: block;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-block-end: 12px;
+}
+
+.badge-icon {
+  font-size: 16px;
+  inline-size: 16px;
+  block-size: 16px;
+  vertical-align: middle;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+  gap: 16px;
+  align-items: start;
+  margin-block-start: 8px;
+}
+
+@media (max-width: 1024px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.main {
+  min-inline-size: 0;
+}
+
+.side {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-inline-size: 0;
+}
+
+.tab-body {
+  padding-block: 12px;
+}
+
+.tab-body.crm-card {
+  margin-block-start: 12px;
+}
+
+.tab-icon {
+  margin-inline-end: 6px;
+}
+
+.danger-item,
+.danger-item mat-icon {
+  color: var(--crm-danger);
+}
+
+.back {
+  margin-block-start: 12px;
+}

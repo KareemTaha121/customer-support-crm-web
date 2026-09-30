@@ -1,0 +1,230 @@
+{
+  "list": {
+    "title": "Tickets",
+    "subtitle": "Browse, filter and work on support tickets",
+    "new": "New ticket",
+    "empty": "No tickets match the current filters."
+  },
+  "filters": {
+    "search": "Search",
+    "searchHint": "Number, subject or customer",
+    "active": "Active (not resolved or closed)",
+    "assignedToMe": "Assigned to me",
+    "unassigned": "Unassigned",
+    "specificAgent": "Specific agent",
+    "agent": "Agent",
+    "createdFrom": "Created from",
+    "createdTo": "Created to"
+  },
+  "columns": {
+    "number": "Number",
+    "subject": "Subject",
+    "sla": "SLA / due"
+  },
+  "fields": {
+    "customer": "Customer",
+    "subject": "Subject",
+    "description": "Description",
+    "status": "Status",
+    "priority": "Priority",
+    "category": "Category",
+    "channel": "Channel",
+    "assignee": "Assignee",
+    "branch": "Branch",
+    "department": "Department",
+    "tags": "Tags",
+    "tagsHint": "Type a tag and press Enter"
+  },
+  "status": {
+    "New": "New",
+    "Open": "Open",
+    "PendingCustomer": "Pending customer",
+    "PendingInternal": "Pending internal",
+    "Escalated": "Escalated",
+    "Resolved": "Resolved",
+    "Closed": "Closed",
+    "Reopen": "Reopen"
+  },
+  "priority": {
+    "Low": "Low",
+    "Medium": "Medium",
+    "High": "High",
+    "Urgent": "Urgent"
+  },
+  "channel": {
+    "Agent": "Agent",
+    "Portal": "Portal",
+    "WebForm": "Web form",
+    "Email": "Email",
+    "WhatsApp": "WhatsApp",
+    "Sms": "SMS",
+    "Chat": "Live chat",
+    "Phone": "Phone",
+    "Api": "API"
+  },
+  "authorType": {
+    "Agent": "Agent",
+    "Customer": "Customer",
+    "System": "System"
+  },
+  "sla": {
+    "title": "SLA",
+    "policy": "Policy",
+    "firstResponse": "First response",
+    "resolution": "Resolution",
+    "dueAt": "Due {{date}}",
+    "respondedAt": "Responded {{date}}",
+    "resolvedAt": "Resolved {{date}}",
+    "breached": "Breached",
+    "none": "No SLA policy applies to this ticket.",
+    "state": {
+      "none": "No SLA",
+      "ok": "On track",
+      "warning": "At risk",
+      "breached": "Breached"
+    },
+    "target": {
+      "FirstResponse": "First response",
+      "Resolution": "Resolution"
+    }
+  },
+  "actions": {
+    "resolve": "Resolve",
+    "close": "Close",
+    "reopen": "Reopen",
+    "escalate": "Escalate",
+    "transfer": "Transfer",
+    "assignToMe": "Assign to me",
+    "unassign": "Unassign",
+    "more": "Actions",
+    "moveTo": {
+      "New": "Move to New",
+      "Open": "Move to Open",
+      "PendingCustomer": "Move to Pending customer",
+      "PendingInternal": "Move to Pending internal",
+      "Escalated": "Move to Escalated",
+      "Resolved": "Move to Resolved",
+      "Closed": "Move to Closed"
+    }
+  },
+  "details": {
+    "title": "Ticket",
+    "notFound": "This ticket does not exist or you no longer have access to it.",
+    "backToList": "Back to tickets",
+    "conversation": "Conversation",
+    "noDescription": "No description provided.",
+    "noMessages": "No messages yet.",
+    "customerNumber": "Customer no.",
+    "language": "Language",
+    "assignTo": "Assign to",
+    "classification": "Classification",
+    "info": "Details",
+    "replyAddress": "Reply address",
+    "escalation": "Escalation",
+    "escalationLevel": "Escalation level {{level}}",
+    "satisfaction": "Satisfaction",
+    "closedAt": "Closed at",
+    "tabs": {
+      "conversation": "Conversation",
+      "attachments": "Attachments",
+      "history": "History"
+    }
+  },
+  "reply": {
+    "mode": "Reply type",
+    "publicReply": "Public reply",
+    "internalNote": "Internal note",
+    "replyPlaceholder": "Write a reply to the customer",
+    "notePlaceholder": "Write an internal note",
+    "noteHint": "Internal notes are visible to staff only.",
+    "closedHint": "This ticket is closed. Replying does not reopen it.",
+    "attach": "Attach files",
+    "send": "Send reply",
+    "addNote": "Add note",
+    "sent": "Reply sent.",
+    "noteAdded": "Internal note added.",
+    "tooManyFiles": "At most {{max}} files can be attached to a message; extra files were ignored."
+  },
+  "attachments": {
+    "title": "Attachments",
+    "empty": "No attachments on this ticket.",
+    "public": "Public",
+    "internal": "Internal",
+    "unknownUploader": "Unknown",
+    "deleteTitle": "Delete attachment",
+    "deleteMessage": "Delete \"{{name}}\"? This cannot be undone."
+  },
+  "history": {
+    "empty": "No history yet.",
+    "system": "System",
+    "actions": {
+      "created": "Ticket created",
+      "status": "Status changed",
+      "assignee": "Assignee changed",
+      "priority": "Priority changed",
+      "category": "Category changed",
+      "department": "Transferred",
+      "escalated": "Escalated",
+      "sla_warning": "SLA warning",
+      "sla_breached": "SLA breached",
+      "feedback": "Customer feedback"
+    }
+  },
+  "dialogs": {
+    "closeTitle": "Close ticket",
+    "closeMessage": "Close this ticket? It can be reopened later.",
+    "deleteTitle": "Delete ticket",
+    "deleteMessage": "Delete ticket {{number}}? This cannot be undone.",
+    "escalateTitle": "Escalate ticket",
+    "escalateMessage": "Explain why this ticket needs to be escalated.",
+    "reason": "Reason",
+    "editTitle": "Edit ticket {{number}}",
+    "transferTitle": "Transfer ticket",
+    "transferMessage": "Move the ticket to another branch or department.",
+    "wholeBranch": "Whole branch (no department)"
+  },
+  "pickers": {
+    "noUsers": "No matching agents",
+    "noCustomers": "No matching customers"
+  },
+  "create": {
+    "title": "New ticket",
+    "customerHint": "Type at least 2 characters to search",
+    "submit": "Create ticket",
+    "created": "Ticket {{number}} created."
+  },
+  "categories": {
+    "title": "Ticket categories",
+    "subtitle": "Organize tickets and set routing defaults",
+    "new": "New category",
+    "empty": "No categories yet.",
+    "showInactive": "Show inactive",
+    "createTitle": "New category",
+    "editTitle": "Edit category",
+    "name": "Name",
+    "nameAr": "Arabic name",
+    "parent": "Parent",
+    "noParent": "None (top level)",
+    "defaultDepartment": "Default department",
+    "defaultPriority": "Default priority",
+    "sortOrder": "Sort order"
+  },
+  "messages": {
+    "assigned": "Ticket assigned.",
+    "unassigned": "Ticket unassigned.",
+    "transferred": "Ticket transferred.",
+    "escalated": "Ticket escalated.",
+    "deleted": "Ticket {{number}} deleted.",
+    "suggestionApplied": "AI suggestion applied.",
+    "status": {
+      "New": "Ticket moved to New.",
+      "Open": "Ticket moved to Open.",
+      "PendingCustomer": "Ticket is now pending the customer.",
+      "PendingInternal": "Ticket is now pending internally.",
+      "Escalated": "Ticket moved to Escalated.",
+      "Resolved": "Ticket resolved.",
+      "Closed": "Ticket closed.",
+      "Reopen": "Ticket reopened."
+    }
+  }
+}

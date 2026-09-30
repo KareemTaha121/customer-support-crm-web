@@ -1,0 +1,131 @@
+@if (ticket(); as tk) {
+  <app-page-header [title]="tk.number + ' · ' + tk.subject" backLink="/tickets">
+    @if (primaryAction(); as action) {
+      <button mat-flat-button type="button" (click)="changeStatus(action)" [disabled]="busy()">
+        <mat-icon>{{ action.icon }}</mat-icon>
+        {{ action.label | t }}
+      </button>
+    }
+    @if (hasMenu()) {
+      <button mat-stroked-button type="button" [matMenuTriggerFor]="actionsMenu" [disabled]="busy()">
+        <mat-icon>more_vert</mat-icon>
+        {{ 'tickets.actions.more' | t }}
+      </button>
+      <mat-menu #actionsMenu="matMenu">
+        @for (action of otherActions(); track action.target) {
+          <button mat-menu-item type="button" (click)="changeStatus(action)">
+            <mat-icon>{{ action.icon }}</mat-icon>
+            <span>{{ action.label | t }}</span>
+          </button>
+        }
+        @if (escalatable()) {
+          <button mat-menu-item type="button" (click)="escalate()">
+            <mat-icon>priority_high</mat-icon>
+            <span>{{ 'tickets.actions.escalate' | t }}</span>
+          </button>
+        }
+        @if (otherActions().length > 0 || escalatable()) {
+          <mat-divider />
+        }
+        @if (editable()) {
+          <button mat-menu-item type="button" (click)="edit()">
+            <mat-icon>edit</mat-icon>
+            <span>{{ 'core.actions.edit' | t }}</span>
+          </button>
+        }
+        @if (canTransfer) {
+          <button mat-menu-item type="button" (click)="transfer()">
+            <mat-icon>move_up</mat-icon>
+            <span>{{ 'tickets.actions.transfer' | t }}</span>
+          </button>
+        }
+        @if (canDelete) {
+          <button mat-menu-item type="button" class="danger-item" (click)="remove()">
+            <mat-icon>delete</mat-icon>
+            <span>{{ 'core.actions.delete' | t }}</span>
+          </button>
+        }
+      </mat-menu>
+    }
+  </app-page-header>
+
+  <div class="badges">
+    <span [class]="'crm-pill crm-pill--' + statusTone(tk.status)">{{ 'tickets.status.' + tk.status | t }}</span>
+    <span [class]="'crm-pill crm-pill--' + priorityTone(tk.priority)">{{ 'tickets.priority.' + tk.priority | t }}</span>
+    @if (tk.escalationLevel > 0) {
+      <span class="crm-pill crm-pill--danger" [matTooltip]="'tickets.details.escalation' | t">
+        <mat-icon class="badge-icon">priority_high</mat-icon>
+        {{ 'tickets.details.escalationLevel' | t: { level: tk.escalationLevel } }}
+      </span>
+    }
+    @if (tk.categoryName) {
+      <span class="crm-pill">{{ tk.categoryName }}</span>
+    }
+  </div>
+
+  @if (busy()) {
+    <mat-progress-bar mode="indeterminate" />
+  }
+
+  <div class="layout">
+    <div class="main">
+      <mat-tab-group [selectedIndex]="tabIndex()" (selectedTabChange)="onTab($event)" mat-stretch-tabs="false" animationDuration="0ms">
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="tab-icon">forum</mat-icon>
+            {{ 'tickets.details.tabs.conversation' | t }} ({{ messages().length }})
+          </ng-template>
+          <div class="tab-body">
+            <app-ticket-conversation [ticket]="tk" [messages]="messages()" (changed)="refresh()" />
+          </div>
+        </mat-tab>
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="tab-icon">attach_file</mat-icon>
+            {{ 'tickets.details.tabs.attachments' | t }} ({{ attachments().length }})
+          </ng-template>
+          <div class="tab-body crm-card">
+            <app-ticket-attachments [ticketId]="tk.id" [attachments]="attachments()" (changed)="refresh()" />
+          </div>
+        </mat-tab>
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="tab-icon">history</mat-icon>
+            {{ 'tickets.details.tabs.history' | t }}
+          </ng-template>
+          <div class="tab-body crm-card">
+            @if (history(); as entries) {
+              <app-ticket-history [entries]="entries" />
+            } @else {
+              <app-loading />
+            }
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+
+    <aside class="side">
+      <app-ticket-side-panel [ticket]="tk" [categories]="categories()" (updated)="onUpdated($event)" />
+      @if (canUseAi) {
+        <app-ticket-ai-panel
+          [ticketId]="tk.id"
+          [canInsertReply]="canUpdate"
+          [canApplyCategory]="editable()"
+          (replySuggested)="insertReply($event)"
+          (categorySuggested)="applySuggestion($event)"
+        />
+      }
+    </aside>
+  </div>
+} @else if (error(); as message) {
+  <app-page-header [title]="'tickets.details.title' | t" backLink="/tickets" />
+  <app-error-state [message]="message" (retry)="load()" />
+  <p class="back">
+    <a mat-button routerLink="/tickets">
+      <mat-icon class="rtl-flip">arrow_back</mat-icon>
+      {{ 'tickets.details.backToList' | t }}
+    </a>
+  </p>
+} @else if (loading()) {
+  <app-loading />
+}

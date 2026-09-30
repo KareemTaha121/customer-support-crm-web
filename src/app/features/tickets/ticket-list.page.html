@@ -1,0 +1,188 @@
+<app-page-header [title]="'tickets.list.title' | t" [subtitle]="'tickets.list.subtitle' | t">
+  <button mat-stroked-button type="button" (click)="load()">
+    <mat-icon>refresh</mat-icon>
+    {{ 'core.actions.refresh' | t }}
+  </button>
+  <a mat-flat-button routerLink="/tickets/new" *appHasPermission="'tickets.create'">
+    <mat-icon>add</mat-icon>
+    {{ 'tickets.list.new' | t }}
+  </a>
+</app-page-header>
+
+<form class="filters" [formGroup]="filters" role="search" (ngSubmit)="load()">
+  <mat-form-field class="search">
+    <mat-label>{{ 'tickets.filters.search' | t }}</mat-label>
+    <mat-icon matPrefix>search</mat-icon>
+    <input matInput formControlName="search" [placeholder]="'tickets.filters.searchHint' | t" autocomplete="off" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>{{ 'tickets.fields.status' | t }}</mat-label>
+    <mat-select formControlName="statuses" multiple>
+      <mat-option value="active">{{ 'tickets.filters.active' | t }}</mat-option>
+      @for (status of statuses; track status) {
+        <mat-option [value]="status">{{ 'tickets.status.' + status | t }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>{{ 'tickets.fields.priority' | t }}</mat-label>
+    <mat-select formControlName="priorities" multiple>
+      @for (priority of priorities; track priority) {
+        <mat-option [value]="priority">{{ 'tickets.priority.' + priority | t }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>{{ 'tickets.fields.category' | t }}</mat-label>
+    <mat-select formControlName="categoryId">
+      <mat-option value="">{{ 'core.states.all' | t }}</mat-option>
+      @for (category of categoryTree(); track category.id) {
+        <mat-option [value]="category.id">
+          <span class="indent" [style.inline-size.px]="category.depth * 16"></span>{{ categoryName(category) }}
+        </mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>{{ 'tickets.fields.assignee' | t }}</mat-label>
+    <mat-select formControlName="assignee">
+      <mat-option value="">{{ 'core.states.all' | t }}</mat-option>
+      <mat-option value="me">{{ 'tickets.filters.assignedToMe' | t }}</mat-option>
+      <mat-option value="unassigned">{{ 'tickets.filters.unassigned' | t }}</mat-option>
+      <mat-option value="agent">{{ 'tickets.filters.specificAgent' | t }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  @if (filters.controls.assignee.value === 'agent') {
+    <app-ticket-agent-picker [label]="'tickets.filters.agent' | t" [value]="agentName()" (picked)="onAgentPicked($event)" />
+  }
+
+  <mat-form-field>
+    <mat-label>{{ 'tickets.filters.createdFrom' | t }}</mat-label>
+    <input matInput type="date" formControlName="createdFrom" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>{{ 'tickets.filters.createdTo' | t }}</mat-label>
+    <input matInput type="date" formControlName="createdTo" />
+  </mat-form-field>
+
+  <div class="filters-actions">
+    <button mat-button type="button" (click)="resetFilters()">
+      <mat-icon>filter_alt_off</mat-icon>
+      {{ 'core.actions.reset' | t }}
+    </button>
+  </div>
+</form>
+
+@if (error(); as message) {
+  <app-error-state [message]="message" (retry)="load()" />
+} @else {
+  <div class="crm-table-wrap">
+    @if (loading()) {
+      <mat-progress-bar mode="indeterminate" />
+    }
+    <table
+      mat-table
+      [dataSource]="page().items"
+      matSort
+      [matSortActive]="sortBy()"
+      [matSortDirection]="sortDirection()"
+      matSortDisableClear
+      (matSortChange)="onSort($event)"
+    >
+      <ng-container matColumnDef="number">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'tickets.columns.number' | t }}</th>
+        <td mat-cell *matCellDef="let row" class="number">
+          {{ row.number }}
+          @if (row.escalationLevel > 0) {
+            <mat-icon class="escalated" [matTooltip]="'tickets.details.escalationLevel' | t: { level: row.escalationLevel }">priority_high</mat-icon>
+          }
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="subject">
+        <th mat-header-cell *matHeaderCellDef>{{ 'tickets.columns.subject' | t }}</th>
+        <td mat-cell *matCellDef="let row">
+          <div class="subject">
+            <a [routerLink]="['/tickets', row.id]" (click)="$event.stopPropagation()">{{ row.subject }}</a>
+            <small>{{ row.customerName }} · {{ 'tickets.channel.' + row.channel | t }}</small>
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>{{ 'tickets.fields.status' | t }}</th>
+        <td mat-cell *matCellDef="let row">
+          <span [class]="'crm-pill crm-pill--' + statusTone(row.status)">{{ 'tickets.status.' + row.status | t }}</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="priority">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'tickets.fields.priority' | t }}</th>
+        <td mat-cell *matCellDef="let row">
+          <span [class]="'crm-pill crm-pill--' + priorityTone(row.priority)">{{ 'tickets.priority.' + row.priority | t }}</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="category">
+        <th mat-header-cell *matHeaderCellDef>{{ 'tickets.fields.category' | t }}</th>
+        <td mat-cell *matCellDef="let row">{{ row.categoryName ?? '—' }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="assignee">
+        <th mat-header-cell *matHeaderCellDef>{{ 'tickets.fields.assignee' | t }}</th>
+        <td mat-cell *matCellDef="let row">
+          @if (row.assignedAgentName) {
+            {{ row.assignedAgentName }}
+          } @else {
+            <span class="crm-muted">{{ 'tickets.filters.unassigned' | t }}</span>
+          }
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="dueAt">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'tickets.columns.sla' | t }}</th>
+        <td mat-cell *matCellDef="let row">
+          <div class="sla">
+            @if (row.slaState !== 'none') {
+              <span [class]="'crm-pill crm-pill--' + slaTone(row.slaState)">{{ 'tickets.sla.state.' + row.slaState | t }}</span>
+            }
+            @if (row.resolutionDueAt) {
+              <small>{{ row.resolutionDueAt | localDate: 'short' }}</small>
+            } @else if (row.slaState === 'none') {
+              <span class="crm-muted">—</span>
+            }
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="createdAt">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'core.fields.createdAt' | t }}</th>
+        <td mat-cell *matCellDef="let row">
+          <span [matTooltip]="row.createdAt | localDate">{{ row.createdAt | localDate: 'relative' }}</span>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columns"></tr>
+      <tr mat-row *matRowDef="let row; columns: columns" class="crm-row-link" (click)="open(row)"></tr>
+    </table>
+
+    @if (!loading() && page().items.length === 0) {
+      <app-empty-state icon="confirmation_number" [message]="'tickets.list.empty' | t" />
+    }
+
+    <mat-paginator
+      [length]="page().meta.totalCount"
+      [pageIndex]="pageIndex()"
+      [pageSize]="pageSize()"
+      [pageSizeOptions]="[10, 25, 50, 100]"
+      (page)="onPage($event)"
+      showFirstLastButtons
+    />
+  </div>
+}

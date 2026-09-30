@@ -1,0 +1,230 @@
+{
+  "list": {
+    "title": "التذاكر",
+    "subtitle": "استعرض تذاكر الدعم وصفّها واعمل عليها",
+    "new": "تذكرة جديدة",
+    "empty": "لا توجد تذاكر تطابق عوامل التصفية الحالية."
+  },
+  "filters": {
+    "search": "بحث",
+    "searchHint": "الرقم أو الموضوع أو العميل",
+    "active": "النشطة (غير المحلولة أو المغلقة)",
+    "assignedToMe": "المسندة إليّ",
+    "unassigned": "غير مسندة",
+    "specificAgent": "موظف محدد",
+    "agent": "الموظف",
+    "createdFrom": "تاريخ الإنشاء من",
+    "createdTo": "تاريخ الإنشاء إلى"
+  },
+  "columns": {
+    "number": "الرقم",
+    "subject": "الموضوع",
+    "sla": "اتفاقية الخدمة / الاستحقاق"
+  },
+  "fields": {
+    "customer": "العميل",
+    "subject": "الموضوع",
+    "description": "الوصف",
+    "status": "الحالة",
+    "priority": "الأولوية",
+    "category": "التصنيف",
+    "channel": "القناة",
+    "assignee": "المسؤول",
+    "branch": "الفرع",
+    "department": "القسم",
+    "tags": "الوسوم",
+    "tagsHint": "اكتب وسمًا واضغط Enter"
+  },
+  "status": {
+    "New": "جديدة",
+    "Open": "مفتوحة",
+    "PendingCustomer": "بانتظار العميل",
+    "PendingInternal": "بانتظار داخلي",
+    "Escalated": "مصعّدة",
+    "Resolved": "محلولة",
+    "Closed": "مغلقة",
+    "Reopen": "إعادة فتح"
+  },
+  "priority": {
+    "Low": "منخفضة",
+    "Medium": "متوسطة",
+    "High": "عالية",
+    "Urgent": "عاجلة"
+  },
+  "channel": {
+    "Agent": "موظف",
+    "Portal": "البوابة",
+    "WebForm": "نموذج ويب",
+    "Email": "البريد الإلكتروني",
+    "WhatsApp": "واتساب",
+    "Sms": "رسائل SMS",
+    "Chat": "المحادثة المباشرة",
+    "Phone": "الهاتف",
+    "Api": "واجهة برمجية"
+  },
+  "authorType": {
+    "Agent": "موظف",
+    "Customer": "عميل",
+    "System": "النظام"
+  },
+  "sla": {
+    "title": "اتفاقية مستوى الخدمة",
+    "policy": "السياسة",
+    "firstResponse": "الرد الأول",
+    "resolution": "الحل",
+    "dueAt": "مستحق في {{date}}",
+    "respondedAt": "تم الرد في {{date}}",
+    "resolvedAt": "تم الحل في {{date}}",
+    "breached": "متجاوزة",
+    "none": "لا تنطبق أي سياسة مستوى خدمة على هذه التذكرة.",
+    "state": {
+      "none": "بدون اتفاقية",
+      "ok": "ضمن المسار",
+      "warning": "معرضة للخطر",
+      "breached": "متجاوزة"
+    },
+    "target": {
+      "FirstResponse": "الرد الأول",
+      "Resolution": "الحل"
+    }
+  },
+  "actions": {
+    "resolve": "حل",
+    "close": "إغلاق",
+    "reopen": "إعادة فتح",
+    "escalate": "تصعيد",
+    "transfer": "تحويل",
+    "assignToMe": "إسناد إليّ",
+    "unassign": "إلغاء الإسناد",
+    "more": "إجراءات",
+    "moveTo": {
+      "New": "نقل إلى جديدة",
+      "Open": "نقل إلى مفتوحة",
+      "PendingCustomer": "نقل إلى بانتظار العميل",
+      "PendingInternal": "نقل إلى بانتظار داخلي",
+      "Escalated": "نقل إلى مصعّدة",
+      "Resolved": "نقل إلى محلولة",
+      "Closed": "نقل إلى مغلقة"
+    }
+  },
+  "details": {
+    "title": "التذكرة",
+    "notFound": "هذه التذكرة غير موجودة أو لم يعد لديك صلاحية الوصول إليها.",
+    "backToList": "العودة إلى التذاكر",
+    "conversation": "المحادثة",
+    "noDescription": "لم يتم تقديم وصف.",
+    "noMessages": "لا توجد رسائل بعد.",
+    "customerNumber": "رقم العميل",
+    "language": "اللغة",
+    "assignTo": "إسناد إلى",
+    "classification": "التصنيف",
+    "info": "التفاصيل",
+    "replyAddress": "عنوان الرد",
+    "escalation": "التصعيد",
+    "escalationLevel": "مستوى التصعيد {{level}}",
+    "satisfaction": "الرضا",
+    "closedAt": "تاريخ الإغلاق",
+    "tabs": {
+      "conversation": "المحادثة",
+      "attachments": "المرفقات",
+      "history": "السجل"
+    }
+  },
+  "reply": {
+    "mode": "نوع الرد",
+    "publicReply": "رد عام",
+    "internalNote": "ملاحظة داخلية",
+    "replyPlaceholder": "اكتب ردًا للعميل",
+    "notePlaceholder": "اكتب ملاحظة داخلية",
+    "noteHint": "الملاحظات الداخلية مرئية للموظفين فقط.",
+    "closedHint": "هذه التذكرة مغلقة. الرد عليها لا يعيد فتحها.",
+    "attach": "إرفاق ملفات",
+    "send": "إرسال الرد",
+    "addNote": "إضافة ملاحظة",
+    "sent": "تم إرسال الرد.",
+    "noteAdded": "تمت إضافة الملاحظة الداخلية.",
+    "tooManyFiles": "يمكن إرفاق {{max}} ملفات كحد أقصى بالرسالة؛ تم تجاهل الملفات الزائدة."
+  },
+  "attachments": {
+    "title": "المرفقات",
+    "empty": "لا توجد مرفقات على هذه التذكرة.",
+    "public": "عام",
+    "internal": "داخلي",
+    "unknownUploader": "غير معروف",
+    "deleteTitle": "حذف المرفق",
+    "deleteMessage": "حذف \"{{name}}\"؟ لا يمكن التراجع عن ذلك."
+  },
+  "history": {
+    "empty": "لا يوجد سجل بعد.",
+    "system": "النظام",
+    "actions": {
+      "created": "تم إنشاء التذكرة",
+      "status": "تغيرت الحالة",
+      "assignee": "تغير المسؤول",
+      "priority": "تغيرت الأولوية",
+      "category": "تغير التصنيف",
+      "department": "تم التحويل",
+      "escalated": "تم التصعيد",
+      "sla_warning": "تحذير اتفاقية الخدمة",
+      "sla_breached": "تجاوز اتفاقية الخدمة",
+      "feedback": "تقييم العميل"
+    }
+  },
+  "dialogs": {
+    "closeTitle": "إغلاق التذكرة",
+    "closeMessage": "هل تريد إغلاق هذه التذكرة؟ يمكن إعادة فتحها لاحقًا.",
+    "deleteTitle": "حذف التذكرة",
+    "deleteMessage": "حذف التذكرة {{number}}؟ لا يمكن التراجع عن ذلك.",
+    "escalateTitle": "تصعيد التذكرة",
+    "escalateMessage": "وضّح سبب الحاجة إلى تصعيد هذه التذكرة.",
+    "reason": "السبب",
+    "editTitle": "تعديل التذكرة {{number}}",
+    "transferTitle": "تحويل التذكرة",
+    "transferMessage": "انقل التذكرة إلى فرع أو قسم آخر.",
+    "wholeBranch": "الفرع بالكامل (بدون قسم)"
+  },
+  "pickers": {
+    "noUsers": "لا يوجد موظفون مطابقون",
+    "noCustomers": "لا يوجد عملاء مطابقون"
+  },
+  "create": {
+    "title": "تذكرة جديدة",
+    "customerHint": "اكتب حرفين على الأقل للبحث",
+    "submit": "إنشاء التذكرة",
+    "created": "تم إنشاء التذكرة {{number}}."
+  },
+  "categories": {
+    "title": "تصنيفات التذاكر",
+    "subtitle": "نظّم التذاكر واضبط إعدادات التوجيه الافتراضية",
+    "new": "تصنيف جديد",
+    "empty": "لا توجد تصنيفات بعد.",
+    "showInactive": "إظهار غير النشطة",
+    "createTitle": "تصنيف جديد",
+    "editTitle": "تعديل التصنيف",
+    "name": "الاسم",
+    "nameAr": "الاسم بالعربية",
+    "parent": "التصنيف الأب",
+    "noParent": "لا يوجد (مستوى أعلى)",
+    "defaultDepartment": "القسم الافتراضي",
+    "defaultPriority": "الأولوية الافتراضية",
+    "sortOrder": "ترتيب العرض"
+  },
+  "messages": {
+    "assigned": "تم إسناد التذكرة.",
+    "unassigned": "تم إلغاء إسناد التذكرة.",
+    "transferred": "تم تحويل التذكرة.",
+    "escalated": "تم تصعيد التذكرة.",
+    "deleted": "تم حذف التذكرة {{number}}.",
+    "suggestionApplied": "تم تطبيق اقتراح الذكاء الاصطناعي.",
+    "status": {
+      "New": "تم نقل التذكرة إلى جديدة.",
+      "Open": "تم نقل التذكرة إلى مفتوحة.",
+      "PendingCustomer": "التذكرة الآن بانتظار العميل.",
+      "PendingInternal": "التذكرة الآن بانتظار إجراء داخلي.",
+      "Escalated": "تم نقل التذكرة إلى مصعّدة.",
+      "Resolved": "تم حل التذكرة.",
+      "Closed": "تم إغلاق التذكرة.",
+      "Reopen": "تمت إعادة فتح التذكرة."
+    }
+  }
+}
