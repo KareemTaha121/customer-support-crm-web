@@ -96,6 +96,8 @@
       "dueAt": "Due date",
       "remindAt": "Reminder",
       "remindHint": "You will get a notification at this time.",
+      "dueInPastHint": "This date is already past, so the task will be overdue right away.",
+      "remindInPastHint": "This time is already past, so the reminder will be sent right away.",
       "relatedTicket": "Related ticket"
     }
   },

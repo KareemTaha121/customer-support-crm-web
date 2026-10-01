@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
@@ -8,7 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { catchError, debounceTime, distinctUntilChanged, filter, of, switchMap } from 'rxjs';
+import { catchError, debounceTime, distinctUntilChanged, filter, map, of, startWith, switchMap } from 'rxjs';
 import { ApiError } from '../../core/http/api-error';
 import { describeError } from '../../core/interceptors/error.interceptor';
 import { NotificationToastService } from '../../core/layout/notification-toast.service';
@@ -65,12 +65,15 @@ interface LinkedTicket {
           <mat-form-field>
             <mat-label>{{ 'dashboard.tasks.fields.dueAt' | t }}</mat-label>
             <input matInput type="datetime-local" formControlName="dueAt" />
+            @if (dueInPast()) {
+              <mat-hint class="past-hint">{{ 'dashboard.tasks.fields.dueInPastHint' | t }}</mat-hint>
+            }
             <mat-error>{{ form.controls.dueAt | formError }}</mat-error>
           </mat-form-field>
           <mat-form-field>
             <mat-label>{{ 'dashboard.tasks.fields.remindAt' | t }}</mat-label>
             <input matInput type="datetime-local" formControlName="remindAt" />
-            <mat-hint>{{ 'dashboard.tasks.fields.remindHint' | t }}</mat-hint>
+            <mat-hint [class.past-hint]="remindInPast()">{{ (remindInPast() ? 'dashboard.tasks.fields.remindInPastHint' : 'dashboard.tasks.fields.remindHint') | t }}</mat-hint>
             <mat-error>{{ form.controls.remindAt | formError }}</mat-error>
           </mat-form-field>
           <div class="crm-span-all ticket-field">
@@ -109,6 +112,7 @@ interface LinkedTicket {
     .linked { display: flex; align-items: center; gap: 8px; min-height: 56px; }
     .ticket-field mat-form-field { width: 100%; }
     mat-progress-bar { margin-bottom: 8px; }
+    .past-hint { color: var(--crm-warning); }
   `,
 })
 export class TaskDialogComponent {
@@ -133,6 +137,10 @@ export class TaskDialogComponent {
     dueAt: [isoToLocalInput(this.data.task?.dueAt)],
     remindAt: [isoToLocalInput(this.data.task?.remindAt)],
   });
+
+  /** Warn (without blocking) when a date is already past: the task is overdue at once, the reminder fires within a minute. */
+  readonly dueInPast = toSignal(this.form.controls.dueAt.valueChanges.pipe(startWith(this.form.controls.dueAt.value), map(isPast)), { initialValue: false });
+  readonly remindInPast = toSignal(this.form.controls.remindAt.valueChanges.pipe(startWith(this.form.controls.remindAt.value), map(isPast)), { initialValue: false });
 
   readonly ticketSearch = this.fb.control<string | DashboardTicket>('');
 
@@ -192,4 +200,9 @@ export class TaskDialogComponent {
       },
     });
   }
+}
+
+function isPast(value: string): boolean {
+  const iso = localInputToIso(value);
+  return iso !== null && new Date(iso).getTime() < Date.now();
 }
