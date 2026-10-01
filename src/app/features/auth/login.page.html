@@ -45,6 +45,7 @@
         </button>
         <mat-error>{{ form.controls.password | formError }}</mat-error>
       </mat-form-field>
+      <a class="auth-card__forgot" routerLink="/login/forgot-password">{{ 'auth.login.forgotPassword' | t }}</a>
 
       <button mat-flat-button type="submit" class="auth-card__submit" [disabled]="busy()">
         {{ 'auth.login.submit' | t }}

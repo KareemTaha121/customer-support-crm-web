@@ -104,3 +104,9 @@
   gap: 8px;
   margin-top: 16px;
 }
+
+.auth-card__forgot {
+  align-self: flex-end;
+  margin-top: -4px;
+  font: var(--mat-sys-body-small);
+}

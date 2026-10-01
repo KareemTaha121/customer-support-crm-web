@@ -43,6 +43,7 @@ import { applyServerErrors } from '../../../shared/form-errors';
         @if (registrationEnabled()) {
           <a routerLink="/portal/register">{{ 'portal.auth.noAccount' | t }}</a>
         }
+        <a routerLink="/portal/forgot-password">{{ 'portal.auth.forgotPassword' | t }}</a>
         <a routerLink="/portal/verify">{{ 'portal.auth.haveCode' | t }}</a>
       </div>
     </section>

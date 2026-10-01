@@ -14,7 +14,8 @@
     "showPassword": "Show password",
     "hidePassword": "Hide password",
     "customerHint": "Are you a customer?",
-    "customerLink": "Go to the customer portal"
+    "customerLink": "Go to the customer portal",
+    "forgotPassword": "Forgot password?"
   },
   "profile": {
     "title": "My profile",
@@ -38,6 +39,22 @@
     "invalidCredentials": "The email or password is incorrect.",
     "accountLocked": "Too many failed attempts. Your account is temporarily locked; try again later.",
     "accountDisabled": "Your account is disabled. Contact your administrator.",
-    "invalidCurrentPassword": "The current password is incorrect."
+    "invalidCurrentPassword": "The current password is incorrect.",
+    "invalidResetToken": "This reset link is invalid or has expired."
+  },
+  "forgot": {
+    "title": "Reset your password",
+    "subtitle": "Enter your work email and we'll send you a link to choose a new password.",
+    "submit": "Send reset link",
+    "sent": "If the address belongs to an account, we've sent a reset link. It expires in 30 minutes.",
+    "backToLogin": "Back to sign in"
+  },
+  "reset": {
+    "title": "Choose a new password",
+    "subtitle": "Use at least 12 characters. You'll be signed out on every device.",
+    "submit": "Set new password",
+    "done": "Your password has been reset. You can sign in now.",
+    "signIn": "Sign in",
+    "requestNew": "Request a new link"
   }
 }

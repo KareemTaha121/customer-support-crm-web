@@ -14,6 +14,9 @@ export const PORTAL_ROUTES: Routes = [
       { path: 'login', canActivate: [portalGuestGuard], loadComponent: () => import('./auth/portal-login.page').then((m) => m.PortalLoginPage) },
       { path: 'register', canActivate: [portalGuestGuard], loadComponent: () => import('./auth/portal-register.page').then((m) => m.PortalRegisterPage) },
       { path: 'verify', loadComponent: () => import('./auth/portal-verify.page').then((m) => m.PortalVerifyPage) },
+      { path: 'forgot-password', canActivate: [portalGuestGuard], loadComponent: () => import('./auth/portal-forgot-password.page').then((m) => m.PortalForgotPasswordPage) },
+      // Like verify, no guard: the emailed link may be opened while signed in.
+      { path: 'reset-password', loadComponent: () => import('./auth/portal-reset-password.page').then((m) => m.PortalResetPasswordPage) },
       { path: 'profile', canActivate: [portalAuthGuard], loadComponent: () => import('./auth/portal-profile.page').then((m) => m.PortalProfilePage) },
 
       // Signed-in customer: tickets and activity history.

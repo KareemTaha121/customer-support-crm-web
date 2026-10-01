@@ -53,7 +53,18 @@
     "verified": "Your email is verified. Welcome!",
     "resend": "Resend code",
     "codeSent": "If the address is registered, a new code has been sent.",
-    "backToLogin": "Back to sign in"
+    "backToLogin": "Back to sign in",
+    "forgotPassword": "Forgot password?",
+    "forgotTitle": "Reset your password",
+    "forgotSubtitle": "Enter the email you use to sign in and we'll send you a reset link.",
+    "sendResetLink": "Send reset link",
+    "resetLinkSent": "If the address belongs to an account, we've sent a reset link. It expires in 30 minutes.",
+    "resetTitle": "Choose a new password",
+    "resetSubtitle": "At least 12 characters. You'll be signed out on other devices.",
+    "resetSubmit": "Set new password",
+    "resetDone": "Your password has been reset. You can sign in now.",
+    "invalidResetToken": "This reset link is invalid or has expired.",
+    "requestNewLink": "Request a new link"
   },
   "profile": {
     "title": "My profile",
