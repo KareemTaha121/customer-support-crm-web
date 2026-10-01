@@ -9,6 +9,8 @@ import { BrandingService } from '../../../core/branding/branding.service';
 import { NotificationToastService } from '../../../core/layout/notification-toast.service';
 import { TranslatePipe } from '../../../core/localization/translate.pipe';
 import { TranslationService } from '../../../core/localization/translation.service';
+import { PermissionService } from '../../../core/permissions/permission.service';
+import { Permissions } from '../../../core/permissions/permissions';
 import { PageHeaderComponent } from '../../../shared/page-header.component';
 import { EmptyStateComponent, ErrorStateComponent, LoadingComponent } from '../../../shared/state.components';
 import { adminErrorMessage } from '../admin-errors';
@@ -53,6 +55,9 @@ const TEXT_MAX = 2000;
               @if (help(setting.key); as text) {
                 <div class="crm-muted setting__help">{{ text }}</div>
               }
+              @if (setting.key === registrationKey && values()[setting.key] === 'true' && emailConfigured() === false) {
+                <div class="setting__warning" role="status"><mat-icon aria-hidden="true">warning</mat-icon>{{ 'admin.settings.registrationNeedsEmail' | t }}</div>
+              }
               <div class="setting__meta crm-muted">
                 <span class="admin-mono" dir="ltr">{{ setting.key }}</span>
                 · {{ 'admin.settings.default' | t: { value: displayDefault(setting) } }}
@@ -95,6 +100,8 @@ const TEXT_MAX = 2000;
     .setting__text { flex: 1 1 320px; min-width: 0; }
     .setting__label { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font: var(--mat-sys-title-small); }
     .setting__help { margin-top: 2px; }
+    .setting__warning { display: flex; align-items: center; gap: 6px; margin-top: 4px; color: var(--crm-warning); font: var(--mat-sys-body-small); }
+    .setting__warning mat-icon { font-size: 18px; inline-size: 18px; block-size: 18px; flex: none; }
     .setting__meta { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin-top: 4px; font: var(--mat-sys-body-small); }
     .reset { min-height: 28px; height: 28px; }
     .number { width: 140px; }
@@ -110,6 +117,9 @@ export class SettingsPage {
 
   readonly numberMax = NUMBER_MAX;
   readonly textMax = TEXT_MAX;
+  readonly registrationKey = 'portal.registration_enabled';
+  /** null = unknown (no channels.manage, or the call failed): no warning is shown. */
+  readonly emailConfigured = signal<boolean | null>(null);
   readonly settings = signal<SettingResponse[]>([]);
   readonly values = signal<Record<string, string>>({});
   readonly loading = signal(true);
@@ -145,6 +155,9 @@ export class SettingsPage {
 
   constructor() {
     this.load();
+    if (inject(PermissionService).has(Permissions.channelsManage)) {
+      this.api.emailConfigured().subscribe({ next: (configured) => this.emailConfigured.set(configured), error: () => undefined });
+    }
   }
 
   label(key: string): string {

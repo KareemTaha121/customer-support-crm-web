@@ -143,7 +143,8 @@
     "addNote": "Add note",
     "sent": "Reply sent.",
     "noteAdded": "Internal note added.",
-    "tooManyFiles": "At most {{max}} files can be attached to a message; extra files were ignored."
+    "tooManyFiles": "At most {{max}} files can be attached to a message; extra files were ignored.",
+    "sentNotDelivered": "Reply saved, but the {{channel}} channel is not configured: the customer will not receive it."
   },
   "attachments": {
     "title": "Attachments",
@@ -238,5 +239,14 @@
       "Public": "Public",
       "Internal": "Internal"
     }
+  },
+  "delivery": {
+    "Pending": "Queued",
+    "Sent": "Sent",
+    "Failed": "Not delivered",
+    "notConfigured": "The {{channel}} channel is not configured, so the customer has not received this reply.",
+    "failedHint": "Delivery failed. Ask an administrator to check the Channels page.",
+    "retry": "Retry delivery",
+    "retried": "The reply will be sent again shortly."
   }
 }

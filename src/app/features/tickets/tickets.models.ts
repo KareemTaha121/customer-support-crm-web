@@ -100,6 +100,20 @@ export interface TicketMessage {
   channel: string;
   createdAt: string;
   attachments: AttachmentResponse[];
+  /** Outbox delivery of an agent reply (staff lists only; null for notes, chat and customer messages). */
+  delivery: TicketMessageDelivery | null;
+}
+
+/** TicketContracts.cs `TicketMessageDeliveryResponse`. `lastError` only for `channels.manage`. */
+export interface TicketMessageDelivery {
+  outboundMessageId: string;
+  /** Delivery channel; can differ from the message channel (a portal reply is emailed). */
+  channel: string;
+  status: 'Pending' | 'Sent' | 'Failed';
+  attempts: number;
+  sentAt: string | null;
+  channelConfigured: boolean;
+  lastError: string | null;
 }
 
 export interface TicketHistoryEntry {

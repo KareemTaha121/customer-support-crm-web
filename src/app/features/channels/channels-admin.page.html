@@ -63,6 +63,15 @@
 </div>
 
 <!-- Outbox -->
+@if (failedCount() > 0) {
+  <div class="failed-banner crm-card" role="status">
+    <mat-icon aria-hidden="true">error_outline</mat-icon>
+    <span>{{ 'channels.admin.failedBanner' | t: { count: failedCount() } }}</span>
+    @if (statusFilter() !== 'Failed') {
+      <button mat-button type="button" (click)="setStatusFilter('Failed')">{{ 'channels.admin.showFailed' | t }}</button>
+    }
+  </div>
+}
 <section class="outbox">
   <div class="crm-toolbar">
     <h2>{{ 'channels.admin.outbox.title' | t }}</h2>

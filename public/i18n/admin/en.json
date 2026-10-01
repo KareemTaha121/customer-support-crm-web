@@ -248,7 +248,8 @@
       "tickets": {
         "auto_close_resolved_days": "0 turns auto-close off."
       }
-    }
+    },
+    "registrationNeedsEmail": "Outgoing email is not configured, so new customers cannot receive their verification code and cannot finish signing up."
   },
   "integrations": {
     "title": "Integrations",

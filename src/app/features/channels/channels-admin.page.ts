@@ -85,6 +85,7 @@ export class ChannelsAdminPage {
   readonly outboxError = signal<string | null>(null);
   readonly statusFilter = signal<OutboundStatus | null>(null);
   readonly page = signal(1);
+  readonly failedCount = signal(0);
   readonly retrying = signal<string | null>(null);
 
   constructor() {
@@ -107,7 +108,16 @@ export class ChannelsAdminPage {
     });
   }
 
+  /** Failed deliveries across all pages, for the banner; refreshed with the table. */
+  private loadFailedCount(): void {
+    this.api.outbox('Failed', 1).subscribe({
+      next: (result) => this.failedCount.set(result.meta.totalCount),
+      error: () => this.failedCount.set(0),
+    });
+  }
+
   loadOutbox(): void {
+    this.loadFailedCount();
     this.outboxRequest?.unsubscribe();
     this.outboxLoading.set(true);
     this.outboxError.set(null);

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, computed, inject, input, output, signal, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, computed, effect, inject, input, output, signal, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
@@ -22,7 +22,7 @@ import { saveBlob } from '../../shared/file-utils';
 import { EmptyStateComponent } from '../../shared/state.components';
 import { QuickReplyPickerComponent } from '../dashboard/quick-reply-picker.component';
 import { TicketsApi } from './tickets.api';
-import { Ticket, TicketLimits, TicketMessage } from './tickets.models';
+import { Ticket, TicketLimits, TicketMessage, TicketMessageDelivery } from './tickets.models';
 
 /**
  * Ticket conversation: public replies and internal notes (visually distinct), plus the reply box
@@ -72,6 +72,16 @@ import { Ticket, TicketLimits, TicketMessage } from './tickets.models';
               <span class="crm-pill crm-pill--warning">{{ 'tickets.reply.internalNote' | t }}</span>
             } @else if (message.channel) {
               <span class="crm-pill">{{ 'tickets.channel.' + message.channel | t }}</span>
+            }
+            @if (!message.isInternal && message.delivery; as d) {
+              <span [class]="deliveryClass(d)" [matTooltip]="d.status === 'Sent' && d.sentAt ? (d.sentAt | localDate) : deliveryTooltip(d)">
+                <mat-icon class="delivery-icon" aria-hidden="true">{{ deliveryIcon(d) }}</mat-icon>{{ deliveryLabel(d) | t }}
+              </span>
+              @if (canRetryDelivery && d.status === 'Failed') {
+                <button mat-button type="button" class="delivery-retry" (click)="retryDelivery(d)" [disabled]="retrying() === d.outboundMessageId">
+                  <mat-icon>replay</mat-icon>{{ 'tickets.delivery.retry' | t }}
+                </button>
+              }
             }
             <span class="time crm-muted" [matTooltip]="message.createdAt | localDate">{{ message.createdAt | localDate: 'relative' }}</span>
           </header>
@@ -160,6 +170,8 @@ import { Ticket, TicketLimits, TicketMessage } from './tickets.models';
     .full { inline-size: 100%; }
     .hint { display: flex; align-items: center; gap: 6px; margin: 0; }
     .crm-spacer { flex: 1 1 auto; }
+    .delivery-icon { font-size: 14px; inline-size: 14px; block-size: 14px; margin-inline-end: 2px; vertical-align: -2px; }
+    .delivery-retry { min-height: 28px; }
   `,
 })
 export class TicketConversationComponent {
@@ -181,6 +193,59 @@ export class TicketConversationComponent {
   readonly uploading = signal(false);
   readonly sending = signal(false);
   readonly canSend = computed(() => !!this.body().trim() && !this.sending() && !this.uploading());
+  readonly canRetryDelivery = inject(PermissionService).has(Permissions.channelsManage);
+  readonly retrying = signal<string | null>(null);
+
+  constructor() {
+    // The outbox dispatcher runs every 15 s: reload once so a "Queued" chip turns into Sent / Not delivered.
+    effect((onCleanup) => {
+      const waiting = this.messages().some((m) => m.delivery?.status === 'Pending' && m.delivery.channelConfigured);
+      if (waiting) {
+        const timer = setTimeout(() => this.changed.emit(), 20_000);
+        onCleanup(() => clearTimeout(timer));
+      }
+    });
+  }
+
+  /** "Not delivered" also covers a queued reply whose channel is not configured: it can only fail. */
+  private deliveryFailed(d: TicketMessageDelivery): boolean {
+    return d.status === 'Failed' || (d.status === 'Pending' && !d.channelConfigured);
+  }
+
+  deliveryLabel(d: TicketMessageDelivery): string {
+    return d.status === 'Sent' ? 'tickets.delivery.Sent' : this.deliveryFailed(d) ? 'tickets.delivery.Failed' : 'tickets.delivery.Pending';
+  }
+
+  deliveryClass(d: TicketMessageDelivery): string {
+    return d.status === 'Sent' ? 'crm-pill crm-pill--success' : this.deliveryFailed(d) ? 'crm-pill crm-pill--danger' : 'crm-pill crm-pill--info';
+  }
+
+  deliveryIcon(d: TicketMessageDelivery): string {
+    return d.status === 'Sent' ? 'done_all' : this.deliveryFailed(d) ? 'error_outline' : 'schedule';
+  }
+
+  deliveryTooltip(d: TicketMessageDelivery): string {
+    if (!d.channelConfigured && d.status !== 'Sent') {
+      return this.translations.t('tickets.delivery.notConfigured', { channel: this.translations.t('tickets.channel.' + d.channel) });
+    }
+    if (d.status === 'Failed') {
+      return d.lastError ?? this.translations.t('tickets.delivery.failedHint');
+    }
+    return '';
+  }
+
+  retryDelivery(d: TicketMessageDelivery): void {
+    this.retrying.set(d.outboundMessageId);
+    this.api.retryDelivery(d.outboundMessageId).subscribe({
+      next: () => {
+        this.retrying.set(null);
+        this.toast.success('tickets.delivery.retried');
+        this.changed.emit();
+      },
+      // The global error snackbar explains the failure.
+      error: () => this.retrying.set(null),
+    });
+  }
 
   /** Appends text to the reply box (quick replies, AI suggestions). */
   insert(text: string): void {
@@ -220,11 +285,16 @@ export class TicketConversationComponent {
     this.api
       .addMessage(this.ticket().id, { body, isInternal: this.internal(), mentionedUserIds: [], attachmentIds: this.pending().map((f) => f.id) })
       .subscribe({
-        next: () => {
+        next: (message) => {
           this.sending.set(false);
           this.body.set('');
           this.pending.set([]);
-          this.toast.success(this.internal() ? 'tickets.reply.noteAdded' : 'tickets.reply.sent');
+          const delivery = message?.delivery;
+          if (!this.internal() && delivery && !delivery.channelConfigured) {
+            this.toast.error('tickets.reply.sentNotDelivered', { channel: this.translations.t('tickets.channel.' + delivery.channel) });
+          } else {
+            this.toast.success(this.internal() ? 'tickets.reply.noteAdded' : 'tickets.reply.sent');
+          }
           this.changed.emit();
         },
         error: (error: unknown) => {

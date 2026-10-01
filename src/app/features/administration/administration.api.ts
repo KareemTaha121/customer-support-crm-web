@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { DownloadedFile, ApiService } from '../../core/http/api.service';
 import { Paged, SortDirection } from '../../core/http/api.models';
 import {
@@ -48,6 +48,13 @@ const SILENT = { silent: true } as const;
 @Injectable({ providedIn: 'root' })
 export class AdministrationApi {
   private readonly api = inject(ApiService);
+
+  /** Whether outgoing email works (`GET /channels/status`, needs `channels.manage`). Portal sign-up codes go by email. */
+  emailConfigured(): Observable<boolean> {
+    return this.api
+      .get<{ channel: string; configured: boolean }[]>('/channels/status', SILENT)
+      .pipe(map((items) => (items ?? []).some((s) => s.channel === 'Email' && s.configured)));
+  }
 
   // ---------- Users ----------
 

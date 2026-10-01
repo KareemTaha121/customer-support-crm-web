@@ -74,6 +74,11 @@ export class TicketsApi {
     return this.api.delete(`/tickets/${id}`);
   }
 
+  /** Re-queues a failed reply delivery (`channels.manage`). */
+  retryDelivery(outboundMessageId: string): Observable<null> {
+    return this.api.post<null>(`/channels/outbox/${outboundMessageId}/retry`);
+  }
+
   addMessage(id: string, body: AddTicketMessageRequest): Observable<TicketMessage> {
     return this.api.post<TicketMessage>(`/tickets/${id}/messages`, body, { silent: true });
   }

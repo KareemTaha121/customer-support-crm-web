@@ -93,6 +93,11 @@
       "retry": "Retry",
       "retried": "The message will be sent again shortly.",
       "empty": "No outgoing messages."
-    }
+    },
+    "failedBanner": {
+      "one": "1 outgoing message could not be delivered.",
+      "other": "{{count}} outgoing messages could not be delivered."
+    },
+    "showFailed": "Show failed"
   }
 }
