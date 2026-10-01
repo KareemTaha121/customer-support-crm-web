@@ -5,6 +5,8 @@ export interface CurrentUser {
   displayName: string;
   roles: string[];
   permissions: string[];
+  /** False when no role grants `data.all_branches` and the user has no branch scope: ticket and customer lists are empty. */
+  hasDataAccess: boolean;
 }
 
 export interface AccessTokenResponse {

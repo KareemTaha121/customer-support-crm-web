@@ -79,6 +79,8 @@ export class DashboardPage {
   readonly lastUpdated = signal<Date | null>(null);
 
   readonly userName = computed(() => this.auth.currentUser()?.displayName ?? '');
+  /** No branch scope and no all-branches permission: say why every list is empty. */
+  readonly noDataScope = computed(() => this.auth.currentUser()?.hasDataAccess === false);
   readonly greetingKey = computed(() => {
     // Re-evaluated on every refresh so the greeting follows the time of day.
     this.lastUpdated();

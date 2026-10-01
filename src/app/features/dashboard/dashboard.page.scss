@@ -106,3 +106,13 @@
 .notice__actions { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
 
 .updated { margin: 16px 0 0; text-align: end; font: var(--mat-sys-body-small); }
+
+.scope-warning {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  border-inline-start: 4px solid var(--crm-warning);
+  mat-icon { color: var(--crm-warning); flex: none; }
+  p { margin: 0; }
+}

@@ -23,6 +23,7 @@
     "lockedOut": "Locked out",
     "scopes": "Branch and department access",
     "scopesHint": "Limits the tickets and customers the user sees. Leave empty when a role grants access to all branches.",
+    "noScopeWarning": "None of the selected roles grants access to all branches. Without a scope this user will see no tickets or customers.",
     "addScope": "Add scope",
     "wholeBranch": "Whole branch",
     "resetPassword": "Reset password",

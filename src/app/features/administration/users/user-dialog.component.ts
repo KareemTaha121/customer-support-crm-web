@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { FormControl, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -14,6 +14,7 @@ import { AuthService } from '../../../core/auth/auth.service';
 import { ApiError } from '../../../core/http/api-error';
 import { NotificationToastService } from '../../../core/layout/notification-toast.service';
 import { LocalizedDatePipe } from '../../../core/localization/localized-date.pipe';
+import { Permissions } from '../../../core/permissions/permissions';
 import { TranslatePipe } from '../../../core/localization/translate.pipe';
 import { TranslationService } from '../../../core/localization/translation.service';
 import { ConfirmService } from '../../../shared/confirm-dialog.component';
@@ -111,6 +112,9 @@ export interface UserDialogData {
 
       <h3>{{ 'admin.users.scopes' | t }}</h3>
       <p class="admin-hint">{{ 'admin.users.scopesHint' | t }}</p>
+      @if (noDataAccess()) {
+        <p class="scope-warning" role="status"><mat-icon aria-hidden="true">warning</mat-icon>{{ 'admin.users.noScopeWarning' | t }}</p>
+      }
       @for (scope of scopes(); track $index; let i = $index) {
         <div class="scope-row">
           <mat-form-field>
@@ -162,6 +166,8 @@ export interface UserDialogData {
     </mat-dialog-actions>
   `,
   styles: `
+    .scope-warning { display: flex; align-items: center; gap: 8px; margin: 0 0 12px; color: var(--crm-warning); }
+    .scope-warning mat-icon { flex: none; }
     h3 { margin: 16px 0 8px; font: var(--mat-sys-title-small); }
     .status-line { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 0 12px; }
     .role-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 4px 12px; }
@@ -202,6 +208,13 @@ export class UserDialogComponent {
 
   private readonly initialScopes: UserScopeRequest[] = this.user?.scopes.map((s) => ({ branchId: s.branchId, departmentId: s.departmentId })) ?? [];
   readonly scopes = signal<UserScopeRequest[]>([...this.initialScopes]);
+
+  /** No selected role grants all branches and no scope is set: the user would see no tickets or customers. */
+  readonly noDataAccess = computed(() => {
+    const selected = this.selectedRoles();
+    const allBranches = this.data.roles.some((role) => selected.has(role.id) && role.permissions.includes(Permissions.dataAllBranches));
+    return selected.size > 0 && !allBranches && this.scopes().length === 0;
+  });
 
   constructor() {
     this.dialogRef.disableClose = true;

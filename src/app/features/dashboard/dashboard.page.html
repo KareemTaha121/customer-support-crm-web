@@ -37,6 +37,12 @@
 } @else if (error()) {
   <app-error-state [message]="error()" (retry)="load()" />
 } @else if (data(); as dashboard) {
+  @if (noDataScope()) {
+    <section class="crm-card scope-warning" role="status">
+      <mat-icon aria-hidden="true">domain_disabled</mat-icon>
+      <p>{{ 'dashboard.home.noDataScope' | t }}</p>
+    </section>
+  }
   <div class="kpis">
     @for (kpi of kpis; track kpi.key) {
       <ng-template #kpiBody>
