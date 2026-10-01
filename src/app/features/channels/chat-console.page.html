@@ -146,7 +146,7 @@
             <mat-error>{{ composer.controls.body | formError }}</mat-error>
           </mat-form-field>
           <div class="composer__actions">
-            <app-quick-reply-picker (selected)="insertQuickReply($event)" />
+            <app-quick-reply-picker [ticketId]="current()?.ticketId ?? null" (selected)="insertQuickReply($event)" />
             <button mat-flat-button type="submit" [disabled]="sending()">
               <mat-icon class="rtl-flip">send</mat-icon>{{ 'core.actions.send' | t }}
             </button>

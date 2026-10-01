@@ -100,7 +100,7 @@ import { Ticket, TicketLimits, TicketMessage } from './tickets.models';
             <mat-button-toggle value="note"><mat-icon>lock</mat-icon> {{ 'tickets.reply.internalNote' | t }}</mat-button-toggle>
           </mat-button-toggle-group>
           <span class="crm-spacer"></span>
-          <app-quick-reply-picker (selected)="insert($event)" />
+          <app-quick-reply-picker [ticketId]="ticket().id" (selected)="insert($event)" />
         </div>
         @if (ticket().status === 'Closed') {
           <p class="hint crm-muted"><mat-icon>info</mat-icon> {{ 'tickets.reply.closedHint' | t }}</p>
