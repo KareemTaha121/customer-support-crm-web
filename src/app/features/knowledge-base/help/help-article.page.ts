@@ -222,8 +222,16 @@ export class HelpArticlePage {
         writeVote(article.id, helpful);
       },
       error: (error: unknown) => {
+        const apiError = ApiError.from(error);
+        // The API allows a few votes per visitor and article a day; past that the vote is already counted.
+        if (apiError.code === 'RATE_LIMITED') {
+          this.lastVote.set(helpful);
+          this.feedback.set('sent');
+          writeVote(article.id, helpful);
+          return;
+        }
         this.feedback.set('error');
-        this.feedbackError.set(describeError(ApiError.from(error), this.translations));
+        this.feedbackError.set(describeError(apiError, this.translations));
       },
     });
   }
