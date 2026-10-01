@@ -69,7 +69,8 @@ body {
 
 .crm-form-grid {
   display: grid;
-  gap: 4px 16px;
+  /* 16px rows: a floated outline label is drawn above its field and would cover the row above. */
+  gap: 16px;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
 
   .crm-span-all {

@@ -17,6 +17,9 @@ export interface PublicBranding {
 /** Public feature flags (`GET /public/features`), e.g. `portal.registration_enabled` = "true". */
 export type PublicFeatures = Record<string, string>;
 
+/** Read by an inline script in index.html, so the tab shows the organization name before Angular starts. */
+const TITLE_KEY = 'crm.brandName';
+
 const FALLBACK: PublicBranding = {
   name: 'Customer Support CRM',
   defaultCulture: 'en',
@@ -55,6 +58,14 @@ export class BrandingService {
   apply(branding: PublicBranding): void {
     this.branding.set(branding);
     this.title.setTitle(branding.name);
+    // The fallback is never stored, so a failed branding call keeps the last real name.
+    if (branding !== FALLBACK) {
+      try {
+        localStorage.setItem(TITLE_KEY, branding.name);
+      } catch {
+        // Storage disabled (private mode): the title just flips on load as before.
+      }
+    }
     const root = this.document.documentElement.style;
     const primary = safeColor(branding.primaryColor, FALLBACK.primaryColor);
     const accent = safeColor(branding.accentColor, FALLBACK.accentColor);

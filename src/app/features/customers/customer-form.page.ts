@@ -227,7 +227,8 @@ import {
     form { display: flex; flex-direction: column; gap: 16px; }
     h2 { margin: 0 0 12px; font: var(--mat-sys-title-medium); }
     .section-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-block-end: 8px; }
-    .contact-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
+    .contact-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 16px 12px; }
+    .contact-row + .contact-row { margin-block-start: 16px; }
     .contact-row .value { flex: 1 1 240px; }
     .duplicates { margin-block-start: 12px; padding: 12px 16px; border-radius: var(--crm-radius); background: #fff3e0; color: #6d4c00; }
     .duplicates__title { display: flex; align-items: center; gap: 8px; font-weight: 500; }

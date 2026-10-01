@@ -66,7 +66,8 @@ import { PORTAL_NAV } from './portal-navigation';
     .portal-bar__brand { display: flex; align-items: center; gap: 10px; color: inherit; text-decoration: none; font: var(--mat-sys-title-medium); margin-inline-end: 12px; }
     .portal-bar__brand img { max-height: 36px; max-width: 120px; object-fit: contain; }
     .portal-bar__brand mat-icon { color: var(--mat-sys-primary); }
-    .portal-bar__nav { display: flex; gap: 4px; overflow-x: auto; }
+    /* Full toolbar height so the 48px touch targets fit: no vertical scroll container. */
+    .portal-bar__nav { display: flex; align-self: stretch; align-items: center; gap: 4px; overflow-x: auto; overflow-y: hidden; }
     .portal-bar__link--active { background: var(--mat-sys-secondary-container); }
     .portal-main { max-width: 1100px; margin-inline: auto; padding: 24px 16px; }
     @media (max-width: 719.98px) {

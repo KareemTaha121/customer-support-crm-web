@@ -3,6 +3,8 @@
 <head>
   <meta charset="utf-8">
   <title>Customer Support CRM</title>
+  <!-- Last organization name (BrandingService) so the tab title does not flip on load. A future CSP needs this script's hash in script-src. -->
+  <script>try { var n = localStorage.getItem('crm.brandName'); if (n) { document.title = n; } } catch (e) {}</script>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">

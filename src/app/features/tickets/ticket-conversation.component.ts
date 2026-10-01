@@ -70,7 +70,7 @@ import { Ticket, TicketLimits, TicketMessage, TicketMessageDelivery } from './ti
             <span class="crm-muted">{{ 'tickets.authorType.' + message.authorType | t }}</span>
             @if (message.isInternal) {
               <span class="crm-pill crm-pill--warning">{{ 'tickets.reply.internalNote' | t }}</span>
-            } @else if (message.channel) {
+            } @else if (message.channel && message.channel !== 'Agent') {
               <span class="crm-pill">{{ 'tickets.channel.' + message.channel | t }}</span>
             }
             @if (!message.isInternal && message.delivery; as d) {
