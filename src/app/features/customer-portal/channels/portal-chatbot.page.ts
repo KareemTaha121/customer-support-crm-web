@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ElementRef, afterRenderEffect, computed, inject, signal, viewChild } from '@angular/core';
-import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormGroupDirective, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -68,6 +68,9 @@ export class PortalChatbotPage {
   readonly entries = signal<BotEntry[]>([]);
   readonly thinking = signal(false);
 
+  /** Resetting through the directive also clears `submitted`, so the emptied field is not shown as invalid. */
+  private readonly composerRef = viewChild<FormGroupDirective>('composerRef');
+
   readonly form = this.fb.group({
     content: ['', [Validators.required, Validators.maxLength(2000)]],
   });
@@ -88,7 +91,7 @@ export class PortalChatbotPage {
     if (!content || this.form.invalid || this.thinking()) {
       return;
     }
-    this.form.reset();
+    this.resetComposer();
     this.entries.update((list) => [...list, this.entry('user', content)]);
     this.send();
   }
@@ -106,7 +109,7 @@ export class PortalChatbotPage {
 
   reset(): void {
     this.entries.set([]);
-    this.form.reset();
+    this.resetComposer();
   }
 
   onKey(event: KeyboardEvent): void {
@@ -150,5 +153,14 @@ export class PortalChatbotPage {
 
   private entry(role: 'user' | 'assistant', content: string): BotEntry {
     return { id: this.nextId++, role, content, sources: [], handoff: false, failed: false };
+  }
+
+  private resetComposer(): void {
+    const directive = this.composerRef();
+    if (directive) {
+      directive.resetForm();
+    } else {
+      this.form.reset();
+    }
   }
 }

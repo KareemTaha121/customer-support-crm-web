@@ -80,7 +80,7 @@
         <button mat-flat-button type="button" (click)="newChat()">{{ 'portal.chat.newChat' | t }}</button>
       </div>
     } @else {
-      <form class="window__composer" [formGroup]="messageForm" (ngSubmit)="send()" novalidate>
+      <form class="window__composer" #messageFormRef="ngForm" [formGroup]="messageForm" (ngSubmit)="send()" novalidate>
         <mat-form-field subscriptSizing="dynamic">
           <mat-label>{{ 'portal.chat.placeholder' | t }}</mat-label>
           <textarea matInput formControlName="body" rows="2" maxlength="5000" (keydown)="onComposerKey($event)"></textarea>

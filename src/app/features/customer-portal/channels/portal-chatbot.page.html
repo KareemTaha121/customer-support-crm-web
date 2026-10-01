@@ -86,7 +86,7 @@
       }
     </div>
 
-    <form class="bot__composer" [formGroup]="form" (ngSubmit)="ask()" novalidate>
+    <form class="bot__composer" #composerRef="ngForm" [formGroup]="form" (ngSubmit)="ask()" novalidate>
       <mat-form-field subscriptSizing="dynamic">
         <mat-label>{{ 'portal.chatbot.placeholder' | t }}</mat-label>
         <textarea matInput formControlName="content" rows="2" maxlength="2000" (keydown)="onKey($event)"></textarea>

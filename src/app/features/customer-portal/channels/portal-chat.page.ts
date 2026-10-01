@@ -10,7 +10,7 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
-import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormGroupDirective, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -93,6 +93,9 @@ export class PortalChatPage implements OnInit {
     email: ['', [Validators.required, Validators.email]],
     message: ['', [Validators.required, Validators.maxLength(5000)]],
   });
+
+  /** Resetting through the directive also clears `submitted`, so the emptied field is not shown as invalid. */
+  private readonly messageFormRef = viewChild<FormGroupDirective>('messageFormRef');
 
   readonly messageForm = this.fb.group({
     body: ['', [Validators.required, Validators.maxLength(5000)]],
@@ -192,7 +195,7 @@ export class PortalChatPage implements OnInit {
     this.api.sendChatMessage(stored.conversationId, stored.accessToken, body).subscribe({
       next: () => {
         this.sending.set(false);
-        this.messageForm.reset();
+        this.resetMessage();
         this.refresh();
       },
       error: (error: unknown) => {
@@ -337,6 +340,15 @@ export class PortalChatPage implements OnInit {
     const profile = this.portal.profile();
     if (profile && !this.startForm.controls.name.value) {
       this.startForm.patchValue({ name: profile.name, email: profile.email });
+    }
+  }
+
+  private resetMessage(): void {
+    const directive = this.messageFormRef();
+    if (directive) {
+      directive.resetForm();
+    } else {
+      this.messageForm.reset();
     }
   }
 }

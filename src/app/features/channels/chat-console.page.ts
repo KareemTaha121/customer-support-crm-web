@@ -10,7 +10,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormGroupDirective, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -112,6 +112,9 @@ export class ChatConsolePage {
     return !!conversation && conversation.agentId === this.auth.currentUser()?.id;
   });
 
+  /** Resetting through the directive also clears `submitted`, so the emptied field is not shown as invalid. */
+  private readonly composerRef = viewChild<FormGroupDirective>('composerRef');
+
   readonly composer = inject(NonNullableFormBuilder).group({
     body: ['', [Validators.required, Validators.maxLength(CHAT_MESSAGE_MAX_LENGTH)]],
   });
@@ -192,7 +195,7 @@ export class ChatConsolePage {
     }
     this.leave();
     this.current.set(conversation);
-    this.composer.reset();
+    this.resetComposer();
     this.joinedId = conversation.id;
     this.hub.invoke('JoinConversation', conversation.id).catch(() => undefined);
     this.loadMessages();
@@ -291,7 +294,7 @@ export class ChatConsolePage {
     this.api.send(conversation.id, body).subscribe({
       next: () => {
         this.sending.set(false);
-        this.composer.reset();
+        this.resetComposer();
         if (conversation.status === 'Waiting') {
           this.markMine(conversation.id);
           this.loadQueue(true);
@@ -383,5 +386,14 @@ export class ChatConsolePage {
       return;
     }
     this.toast.error(fallback ?? describeError(apiError, this.translations));
+  }
+
+  private resetComposer(): void {
+    const directive = this.composerRef();
+    if (directive) {
+      directive.resetForm();
+    } else {
+      this.composer.reset();
+    }
   }
 }

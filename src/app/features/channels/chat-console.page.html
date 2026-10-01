@@ -132,7 +132,7 @@
           <mat-icon inline>lock</mat-icon>{{ 'channels.chat.closedNotice' | t }}
         </p>
       } @else {
-        <form class="composer" [formGroup]="composer" (ngSubmit)="send()" novalidate>
+        <form class="composer" #composerRef="ngForm" [formGroup]="composer" (ngSubmit)="send()" novalidate>
           <mat-form-field class="composer__field" subscriptSizing="dynamic">
             <mat-label>{{ 'channels.chat.replyLabel' | t }}</mat-label>
             <textarea

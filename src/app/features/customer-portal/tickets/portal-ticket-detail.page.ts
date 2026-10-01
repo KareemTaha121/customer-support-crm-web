@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, computed, effect, inject, input, signal, untracked } from '@angular/core';
-import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, input, signal, untracked, viewChild } from '@angular/core';
+import { FormGroupDirective, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -77,6 +77,9 @@ export class PortalTicketDetailPage {
     return !!ticket && ticket.canGiveFeedback && (ticket.satisfactionRating === null || this.editingFeedback());
   });
 
+  /** Resetting through the directive also clears `submitted`, so the emptied field is not shown as invalid. */
+  private readonly replyFormRef = viewChild<FormGroupDirective>('replyFormRef');
+
   readonly replyForm = this.fb.group({
     body: ['', [Validators.required, Validators.maxLength(10000)]],
   });
@@ -149,7 +152,7 @@ export class PortalTicketDetailPage {
       .subscribe({
         next: () => {
           this.sending.set(false);
-          this.replyForm.reset();
+          this.resetReply();
           this.files.set([]);
           this.toast.success('portal.ticket.replySent');
           this.refresh();
@@ -250,6 +253,15 @@ export class PortalTicketDetailPage {
     const unmatched = applyServerErrors(form, apiError);
     if (!apiError.isValidation || unmatched.length) {
       this.toast.error(unmatched[0] ?? describeError(apiError, this.translations));
+    }
+  }
+
+  private resetReply(): void {
+    const directive = this.replyFormRef();
+    if (directive) {
+      directive.resetForm();
+    } else {
+      this.replyForm.reset();
     }
   }
 }

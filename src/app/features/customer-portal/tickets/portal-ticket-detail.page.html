@@ -49,7 +49,7 @@
       </section>
 
       @if (t.canReply) {
-        <form class="crm-card reply" [formGroup]="replyForm" (ngSubmit)="reply()" novalidate>
+        <form class="crm-card reply" #replyFormRef="ngForm" [formGroup]="replyForm" (ngSubmit)="reply()" novalidate>
           <h2>{{ 'portal.ticket.replyTitle' | t }}</h2>
           <mat-form-field>
             <mat-label>{{ 'portal.fields.message' | t }}</mat-label>
