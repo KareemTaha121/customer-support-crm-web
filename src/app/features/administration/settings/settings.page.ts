@@ -9,16 +9,16 @@ import { BrandingService } from '../../../core/branding/branding.service';
 import { NotificationToastService } from '../../../core/layout/notification-toast.service';
 import { TranslatePipe } from '../../../core/localization/translate.pipe';
 import { TranslationService } from '../../../core/localization/translation.service';
-import { PermissionService } from '../../../core/permissions/permission.service';
-import { Permissions } from '../../../core/permissions/permissions';
 import { PageHeaderComponent } from '../../../shared/page-header.component';
 import { EmptyStateComponent, ErrorStateComponent, LoadingComponent } from '../../../shared/state.components';
 import { adminErrorMessage } from '../admin-errors';
 import { AdministrationApi } from '../administration.api';
-import { SettingResponse } from '../administration.models';
+import { SettingResponse, SettingsStatus } from '../administration.models';
 
 const NUMBER_MAX = 3650;
 const TEXT_MAX = 2000;
+/** Settings that need an AI provider on the server. */
+const AI_SETTING_KEYS = new Set(['chatbot.enabled', 'ai.agent_assist_enabled']);
 
 /** `/admin/settings`: feature toggles and tunables, one control per `SettingResponse.kind`. */
 @Component({
@@ -42,6 +42,9 @@ const TEXT_MAX = 2000;
       @if (saveError(); as message) {
         <div class="admin-banner" role="alert"><mat-icon>error_outline</mat-icon><span>{{ message }}</span></div>
       }
+      @if (status()?.aiProviderConfigured === false) {
+        <div class="admin-banner admin-banner--info" role="status"><mat-icon>warning_amber</mat-icon><span>{{ 'admin.settings.aiMissing' | t }}</span></div>
+      }
       <div class="crm-card settings">
         @for (setting of settings(); track setting.key) {
           <div class="setting">
@@ -51,11 +54,14 @@ const TEXT_MAX = 2000;
                 @if (setting.isPublic) {
                   <span class="crm-pill crm-pill--info" [matTooltip]="'admin.settings.publicHint' | t">{{ 'admin.settings.public' | t }}</span>
                 }
+                @if (aiKeys.has(setting.key) && status()?.aiProviderConfigured === false) {
+                  <span class="crm-pill crm-pill--warning" [matTooltip]="'admin.settings.aiMissing' | t">{{ 'admin.settings.aiUnavailable' | t }}</span>
+                }
               </div>
               @if (help(setting.key); as text) {
                 <div class="crm-muted setting__help">{{ text }}</div>
               }
-              @if (setting.key === registrationKey && values()[setting.key] === 'true' && emailConfigured() === false) {
+              @if (setting.key === registrationKey && values()[setting.key] === 'true' && status()?.emailConfigured === false) {
                 <div class="setting__warning" role="status"><mat-icon aria-hidden="true">warning</mat-icon>{{ 'admin.settings.registrationNeedsEmail' | t }}</div>
               }
               <div class="setting__meta crm-muted">
@@ -118,8 +124,9 @@ export class SettingsPage {
   readonly numberMax = NUMBER_MAX;
   readonly textMax = TEXT_MAX;
   readonly registrationKey = 'portal.registration_enabled';
-  /** null = unknown (no channels.manage, or the call failed): no warning is shown. */
-  readonly emailConfigured = signal<boolean | null>(null);
+  readonly aiKeys = AI_SETTING_KEYS;
+  /** Server prerequisites (AI provider, email). null = unknown (call failed): no warnings are shown. */
+  readonly status = signal<SettingsStatus | null>(null);
   readonly settings = signal<SettingResponse[]>([]);
   readonly values = signal<Record<string, string>>({});
   readonly loading = signal(true);
@@ -155,9 +162,6 @@ export class SettingsPage {
 
   constructor() {
     this.load();
-    if (inject(PermissionService).has(Permissions.channelsManage)) {
-      this.api.emailConfigured().subscribe({ next: (configured) => this.emailConfigured.set(configured), error: () => undefined });
-    }
   }
 
   label(key: string): string {
@@ -180,6 +184,8 @@ export class SettingsPage {
   load(): void {
     this.loading.set(true);
     this.error.set(null);
+    // Advisory only: on error keep null, so no warning and no error state.
+    this.api.settingsStatus().subscribe({ next: (status) => this.status.set(status), error: () => undefined });
     this.api.listSettings().subscribe({
       next: (settings) => {
         this.apply(settings);
@@ -215,8 +221,9 @@ export class SettingsPage {
       next: (settings) => {
         this.saving.set(false);
         this.apply(settings);
-        // Public flags drive the login page and portal: refresh the cached copy.
-        this.branding.features.set(Object.fromEntries(settings.filter((s) => s.isPublic).map((s) => [s.key, s.value])));
+        // Public flags drive the login page and portal. Re-read them from the server, which also
+        // applies server rules (no AI provider means no chatbot) that the raw setting values lack.
+        void this.branding.load();
         this.toast.success('core.states.saved');
       },
       error: (error: unknown) => {

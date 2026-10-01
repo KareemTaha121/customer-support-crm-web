@@ -249,7 +249,9 @@
         "auto_close_resolved_days": "0 turns auto-close off."
       }
     },
-    "registrationNeedsEmail": "Outgoing email is not configured, so new customers cannot receive their verification code and cannot finish signing up."
+    "registrationNeedsEmail": "Outgoing email is not configured, so new customers cannot receive their verification code and cannot finish signing up.",
+    "aiMissing": "No AI provider is configured on the server. The chatbot and AI agent assist stay off for everyone until one is set up, even when their toggles are on.",
+    "aiUnavailable": "No AI provider"
   },
   "integrations": {
     "title": "Integrations",

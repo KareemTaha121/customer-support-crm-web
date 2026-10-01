@@ -59,7 +59,9 @@ export class PortalChatbotPage {
 
   private readonly thread = viewChild<ElementRef<HTMLElement>>('thread');
 
-  readonly enabled = computed(() => this.branding.isEnabled(FeatureFlags.chatbot));
+  /** The server said the chatbot is off or has no AI provider (the cached features were stale). */
+  private readonly serverUnavailable = signal(false);
+  readonly enabled = computed(() => this.branding.isEnabled(FeatureFlags.chatbot) && !this.serverUnavailable());
   readonly liveChatEnabled = computed(() => this.branding.isEnabled(FeatureFlags.liveChat));
   readonly webFormEnabled = computed(() => this.branding.isEnabled(FeatureFlags.webForm));
   readonly signedIn = this.portal.isAuthenticated;
@@ -134,7 +136,13 @@ export class PortalChatbotPage {
       },
       error: (error: unknown) => {
         this.thinking.set(false);
-        const message = describeError(ApiError.from(error), this.translations);
+        const apiError = ApiError.from(error);
+        // Provider removed or toggle turned off since the features were loaded: show the unavailable view, not server text.
+        if (apiError.hasCode('AI_NOT_CONFIGURED') || apiError.hasCode('FEATURE_DISABLED')) {
+          this.serverUnavailable.set(true);
+          return;
+        }
+        const message = describeError(apiError, this.translations);
         this.entries.update((list) => [...list, { ...this.entry('assistant', message), failed: true, handoff: true }]);
       },
     });

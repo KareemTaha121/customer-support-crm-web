@@ -253,3 +253,9 @@ export const SUPPORTED_CULTURES = ['en', 'ar'] as const;
 
 /** Domain AuditEntityTypes plus the entity names recorded by admin slices. */
 export const AUDIT_ENTITY_TYPES = ['User', 'Role', 'Organization', 'Branch', 'Department', 'Setting', 'ApiKey', 'Webhook', 'Ticket', 'Customer', 'SlaPolicy'] as const;
+
+/** SettingsSlices.cs SettingsStatusResponse: server-side prerequisites of some settings. */
+export interface SettingsStatus {
+  aiProviderConfigured: boolean;
+  emailConfigured: boolean;
+}

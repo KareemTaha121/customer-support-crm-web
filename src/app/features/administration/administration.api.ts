@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable } from 'rxjs';
 import { DownloadedFile, ApiService } from '../../core/http/api.service';
 import { Paged, SortDirection } from '../../core/http/api.models';
 import {
@@ -9,8 +9,8 @@ import {
   BranchRequest,
   BranchResponse,
   CreateApiKeyRequest,
-  CreateUserRequest,
   CreatedApiKeyResponse,
+  CreateUserRequest,
   DepartmentRequest,
   DepartmentResponse,
   IntegrationCatalog,
@@ -19,6 +19,7 @@ import {
   RoleRequest,
   RoleResponse,
   SettingResponse,
+  SettingsStatus,
   UpdateBrandingRequest,
   UpdateOrganizationRequest,
   UserDetail,
@@ -49,11 +50,9 @@ const SILENT = { silent: true } as const;
 export class AdministrationApi {
   private readonly api = inject(ApiService);
 
-  /** Whether outgoing email works (`GET /channels/status`, needs `channels.manage`). Portal sign-up codes go by email. */
-  emailConfigured(): Observable<boolean> {
-    return this.api
-      .get<{ channel: string; configured: boolean }[]>('/channels/status', SILENT)
-      .pipe(map((items) => (items ?? []).some((s) => s.channel === 'Email' && s.configured)));
+  /** GET /settings/status (settings.manage): is an AI provider / outgoing email configured on the server. */
+  settingsStatus(): Observable<SettingsStatus> {
+    return this.api.get<SettingsStatus>('/settings/status', SILENT);
   }
 
   // ---------- Users ----------
