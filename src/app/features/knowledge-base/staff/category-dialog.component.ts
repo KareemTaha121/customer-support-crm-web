@@ -54,6 +54,7 @@ export interface CategoryDialogData {
                 <mat-option [value]="option.id">{{ label(option) }}</mat-option>
               }
             </mat-select>
+            <mat-error>{{ form.controls.parentId | formError }}</mat-error>
           </mat-form-field>
           <mat-form-field>
             <mat-label>{{ 'kb.categories.sortOrder' | t }}</mat-label>
@@ -83,8 +84,8 @@ export class CategoryDialogComponent {
   private readonly translations = inject(TranslationService);
 
   readonly saving = signal(false);
-  /** Any category except this one (the API rejects a category as its own parent). */
-  readonly parents = this.data.categories.filter((c) => c.id !== this.data.category?.id);
+  /** Every category except this one and its subcategories (the API rejects cycles with CATEGORY_CYCLE). */
+  readonly parents = excludeSubtree(this.data.categories, this.data.category?.id);
 
   readonly form = inject(NonNullableFormBuilder).group({
     name: [this.data.category?.name ?? '', [Validators.required, Validators.maxLength(150)]],
@@ -134,4 +135,23 @@ export class CategoryDialogComponent {
         },
       });
   }
+}
+
+/** The categories that are not `rootId` or one of its descendants. */
+function excludeSubtree(categories: KbCategory[], rootId: string | undefined): KbCategory[] {
+  if (!rootId) {
+    return categories;
+  }
+  const excluded = new Set<string>([rootId]);
+  let grew = true;
+  while (grew) {
+    grew = false;
+    for (const category of categories) {
+      if (category.parentId && excluded.has(category.parentId) && !excluded.has(category.id)) {
+        excluded.add(category.id);
+        grew = true;
+      }
+    }
+  }
+  return categories.filter((c) => !excluded.has(c.id));
 }
